@@ -135,7 +135,7 @@ export default function Home() {
     </div>
 
     <FlexCenter className="block lg:hidden h-full font-bold text-2xl">
-      <p className="text-gradient">Please open this webpage on a computer.</p>
+      <p className="text-gradient text-center">Please open this webpage on a computer.</p>
     </FlexCenter>
   </>);
 }
