@@ -28,45 +28,43 @@ export default function Home() {
 
       <main>
 
-        <div className="flex flex-col px-20">
+        <div className="flex flex-col">
 
-          <FlexRow className="justify-between h-screen pt-24">
+          <FlexRow className="justify-between h-screen pt-24 px-20">
             <FlexCol className="font-bold text-6xl justify-center items-start gap-y-10">
               <h1>Hello!</h1>
               <h1>I'm <span className="text-gradient">Rafael Cavalinhos</span>,</h1>
               <h1>a Full-Stack Developer</h1>
-              <button onClick={() => window.open("/cv.pdf", "_blank")} className="group bg-blue-400 border-3 border-blue-200 text-white rounded-2xl text-xl py-2 px-10 transition duration-200 hover:scale-120">
+              <button onClick={() => window.open("/cv.pdf", "_blank")} className="cursor-pointer group bg-blue-400 border-3 border-blue-200 text-white rounded-2xl text-xl py-2 px-10 transition duration-200 hover:scale-120">
                 <span className="inline-flex items-center gap-2 transition duration-300 group-hover:scale-125">
                   Download CV <FontAwesomeIcon icon={faDownload} />
                 </span>
               </button>
 
               <FlexRow>
-                <button onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
+                <button onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="cursor-pointer group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
                   <FontAwesomeIcon className="inline-flex items-center transition duration-300 group-hover:scale-120" icon={faLinkedin} />
                 </button>
        
-                <button onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
+                <button onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="cursor-pointer group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
                   <FontAwesomeIcon className="inline-flex items-center transition duration-300 group-hover:scale-120" icon={faGithub} />
                 </button>
        
-                <button onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
+                <button onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="cursor-pointer group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
                   <FontAwesomeIcon className="inline-flex items-center transition duration-300 group-hover:scale-120" icon={faEnvelope} />
                 </button>
        
               </FlexRow>
 
             </FlexCol>
-            <Image src="/cat.gif" alt="cat" width={606} height={407} unoptimized/>
+            <Image src="/cat.gif" alt="cat" width={700} height={600}/>
           </FlexRow>
 
-          <FlexCol id="about" className="items-center gap-y-4 mt-50">
+          <FlexCol id="about" className="items-center gap-y-4 mt-50 bg-gray-50 w-full py-20">
             <h1 className="title">About</h1>
             
-            <FlexRow>
-
               <FlexCol className="gap-y-4 w-[50%] items-center text-lg font-medium">
-                <h2 className="text-3xl text-blue-500">Bio</h2>
+                <h2 className="text-3xl text-gradient">Professional Bio</h2>
                 <FlexCol>
                   <p>I am Computer Engineering graduate with a growing focus on full-stack web development.</p>
                   <p>I enjoy turning ideas into real applications and I spend a lot of my free time building personal projects to sharpen my skills and explore new technologies.</p>
@@ -76,9 +74,9 @@ export default function Home() {
                 </FlexCol>
               </FlexCol>
             
-              <FlexCol className="gap-y-4 w-[50%] items-center text-lg font-medium">
+              <FlexCol className="gap-y-4 w-[40%] items-center text-lg font-medium">
 
-                <h2 className="text-3xl text-blue-500">Tech Interests</h2>
+                <h2 style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-3xl text-gradient mt-10">Tech Interests</h2>
                 <FlexRow className="flex-wrap gap-y-2 gap-x-1">
                   {techInterests.map((interest, i) => {
                     return (
@@ -89,7 +87,7 @@ export default function Home() {
                   })}
                 </FlexRow>
 
-                <h2 className="text-3xl text-blue-500 mt-10">Soft Skills</h2>
+                <h2 style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-3xl text-gradient mt-10">Soft Skills</h2>
                 <FlexRow className="flex-wrap gap-y-2 gap-x-1">
                   {softSkills.map((skill, i) => {
                     return (
@@ -100,7 +98,7 @@ export default function Home() {
                   })}
                 </FlexRow>
 
-                <h2 className="text-3xl text-blue-500 mt-10">Hobbies</h2>
+                <h2 style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-3xl text-gradient mt-10">Hobbies</h2>
                 <FlexRow className="flex-wrap gap-y-2 gap-x-1">
                   {hobbies.map((hobby, i) => {
                     return (
@@ -115,10 +113,9 @@ export default function Home() {
 
 
 
-            </FlexRow>
           </FlexCol>
 
-          <FlexCol id="projects" className="items-center gap-y-4 mt-50">
+          <FlexCol id="projects" className="items-center gap-y-4 py-20">
             <h1 className="title">Projects</h1>
     
           </FlexCol>

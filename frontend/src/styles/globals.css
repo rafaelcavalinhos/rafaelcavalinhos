@@ -15,5 +15,5 @@ body {
 }
 
 .title {
-  @apply text-6xl font-semibold mb-10
+  @apply text-6xl font-bold mb-10
 }
