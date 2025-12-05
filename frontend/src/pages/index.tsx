@@ -52,7 +52,29 @@ export default function Home() {
             <Image src="/cat.gif" alt="cat" width={1000} height={500} unoptimized/>
           </FlexRow>
 
+          <FlexCol id="about" className="items-center gap-y-4 mt-50">
+            <h1 className="title">About</h1>
+            <FlexRow>
+              <p className="w-[50%]">
+                I am Computer Engineering graduate with a growing focus on full-stack web development.
+                I enjoy turning ideas into real applications and I spend a lot of my free time building personal projects to sharpen my skills and explore new technologies.
+                I’m comfortable working across the stack and I like understanding how everything connects, from the database to the UI.
+                Recently, I’ve been diving deeper into modern web frameworks, such as Next.js.
+                What motivates me is learning and solving practical problems. I'm always looking for opportunities to grow, collaborate, and contribute to real-world projects.
+                Tech interests: JavaScript/TypeScript, React, Next.js, Node.js, Fastify, PostgreSQL, Kysely, web performance, full-stack architectures, automation.
+              </p>
+            </FlexRow>
+          </FlexCol>
 
+          <FlexCol id="projects" className="items-center gap-y-4 mt-50">
+            <h1 className="title">Projects</h1>
+    
+          </FlexCol>
+
+          <FlexCol id="contact" className="items-center gap-y-4 mt-50">
+            <h1 className="title">Contact</h1>
+    
+          </FlexCol>
 
         </div>
 
