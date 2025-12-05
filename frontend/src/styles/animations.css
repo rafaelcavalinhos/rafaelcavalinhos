@@ -1,0 +1,28 @@
+.text-scale {
+  @apply cursor-pointer transition-transform duration-100;
+}
+
+.text-scale:hover {
+  @apply scale-125;
+}
+
+.text-gradient {
+  background: radial-gradient(
+    circle at 100%,
+    #5440f1,
+    #4079f3 50%,
+    #11bbe6 75%,
+    #165fe6 75%
+  );
+  background-size: 200% auto;
+  color: #000;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animatedTextGradient 3s linear infinite;
+}
+
+@keyframes animatedTextGradient {
+  to {
+    background-position: 200% center;
+  }
+}

@@ -13,3 +13,7 @@ body {
 #__next {
   height: 100%;
 }
+
+.title {
+  @apply text-6xl font-semibold mb-10
+}
