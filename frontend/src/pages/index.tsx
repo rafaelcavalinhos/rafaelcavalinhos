@@ -1,4 +1,4 @@
-import { FlexCol, FlexRow } from "@/components/utils/flex";
+import { FlexCenter, FlexCol, FlexRow } from "@/components/utils/flex";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faEnvelope, faMailBulk, faMailForward, faMailReply, faVoicemail } from "@fortawesome/free-solid-svg-icons";
@@ -13,8 +13,8 @@ export default function Home() {
 
   const hobbies = ["Playing Guitar", "Gaming", "Programming", ];
 
-  return (
-    <div id="home" className="bg-white">
+  return (<>
+    <div id="home" className="hidden lg:block bg-white">
 
       <header className="fixed flex flex-row justify-between items-center w-full py-4 px-10 border-b-2 border-gray-200 bg-white">
         <h1 className="font-semibold text-2xl text-scale"><a href="#home">Rafael Cavalinhos</a></h1>
@@ -57,7 +57,7 @@ export default function Home() {
               </FlexRow>
 
             </FlexCol>
-            <Image src="/cat.gif" alt="cat" width={1000} height={500} unoptimized/>
+            <Image src="/cat.gif" alt="cat" width={606} height={407} unoptimized/>
           </FlexRow>
 
           <FlexCol id="about" className="items-center gap-y-4 mt-50">
@@ -133,5 +133,9 @@ export default function Home() {
       </main>
 
     </div>
-  );
+
+    <FlexCenter className="block lg:hidden h-full font-bold text-2xl">
+      <p className="text-gradient">Please open this webpage on a computer.</p>
+    </FlexCenter>
+  </>);
 }
