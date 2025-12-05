@@ -1,9 +1,5 @@
 .text-scale {
-  @apply cursor-pointer transition-transform duration-100;
-}
-
-.text-scale:hover {
-  @apply scale-125;
+  @apply cursor-pointer transition-transform duration-100 hover:scale-125;
 }
 
 .text-gradient {

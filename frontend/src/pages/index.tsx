@@ -6,6 +6,13 @@ import { faGit, faGithub, faInstagram, faLetterboxd, faLinkedin, faMailchimp } f
 
 export default function Home() {
 
+  const techInterests = ["Next.js", "Node.js", "PostgreSQL", "TypeScript", "Fastify", "Kysely", "Web Design", "Tailwind CSS",
+    "Automation", "Full-Stack", "Web Performance", "Web Security", "Docker", "Game Development", "Unity", "C#", ];
+
+  const softSkills = ["Problem Solving", ];
+
+  const hobbies = ["Playing Guitar", "Gaming", "Programming", ];
+
   return (
     <div id="home" className="bg-white">
 
@@ -13,6 +20,7 @@ export default function Home() {
         <h1 className="font-semibold text-2xl text-scale"><a href="#home">Rafael Cavalinhos</a></h1>
         <FlexRow className="font-semibold text-xl gap-x-4">
           <a href="#about" className="text-scale">About</a>
+          <a href="#about" className="text-scale">Education</a>
           <a href="#projects" className="text-scale">Projects</a>
           <a href="#contact" className="text-scale">Contact</a>
         </FlexRow>
@@ -54,15 +62,59 @@ export default function Home() {
 
           <FlexCol id="about" className="items-center gap-y-4 mt-50">
             <h1 className="title">About</h1>
+            
             <FlexRow>
-              <p className="w-[50%]">
-                I am Computer Engineering graduate with a growing focus on full-stack web development.
-                I enjoy turning ideas into real applications and I spend a lot of my free time building personal projects to sharpen my skills and explore new technologies.
-                I’m comfortable working across the stack and I like understanding how everything connects, from the database to the UI.
-                Recently, I’ve been diving deeper into modern web frameworks, such as Next.js.
-                What motivates me is learning and solving practical problems. I'm always looking for opportunities to grow, collaborate, and contribute to real-world projects.
-                Tech interests: JavaScript/TypeScript, React, Next.js, Node.js, Fastify, PostgreSQL, Kysely, web performance, full-stack architectures, automation.
-              </p>
+
+              <FlexCol className="gap-y-4 w-[50%] items-center text-lg font-medium">
+                <h2 className="text-3xl text-blue-500">Bio</h2>
+                <FlexCol>
+                  <p>I am Computer Engineering graduate with a growing focus on full-stack web development.</p>
+                  <p>I enjoy turning ideas into real applications and I spend a lot of my free time building personal projects to sharpen my skills and explore new technologies.</p>
+                  <p>I’m comfortable working across the stack and I like understanding how everything connects, from the database to the UI.</p>
+                  <p>Recently, I’ve been diving deeper into modern web frameworks, such as Next.js.</p>
+                  <p>What motivates me is learning and solving practical problems. I'm always looking for opportunities to grow, collaborate, and contribute to real-world projects.</p>
+                </FlexCol>
+              </FlexCol>
+            
+              <FlexCol className="gap-y-4 w-[50%] items-center text-lg font-medium">
+
+                <h2 className="text-3xl text-blue-500">Tech Interests</h2>
+                <FlexRow className="flex-wrap gap-y-2 gap-x-1">
+                  {techInterests.map((interest, i) => {
+                    return (
+                      <div key={i} className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                        <p className="group-hover:scale-120 transition duration-200">{interest}</p>
+                      </div>
+                    );
+                  })}
+                </FlexRow>
+
+                <h2 className="text-3xl text-blue-500 mt-10">Soft Skills</h2>
+                <FlexRow className="flex-wrap gap-y-2 gap-x-1">
+                  {softSkills.map((skill, i) => {
+                    return (
+                      <div key={i} className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                        <p className="group-hover:scale-120 transition duration-200">{skill}</p>
+                      </div>
+                    );
+                  })}
+                </FlexRow>
+
+                <h2 className="text-3xl text-blue-500 mt-10">Hobbies</h2>
+                <FlexRow className="flex-wrap gap-y-2 gap-x-1">
+                  {hobbies.map((hobby, i) => {
+                    return (
+                      <div key={i} className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                        <p className="group-hover:scale-120 transition duration-200">{hobby}</p>
+                      </div>
+                    );
+                  })}
+                </FlexRow>
+
+              </FlexCol>
+
+
+
             </FlexRow>
           </FlexCol>
 
