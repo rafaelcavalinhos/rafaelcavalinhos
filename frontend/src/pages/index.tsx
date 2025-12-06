@@ -14,7 +14,13 @@ export default function Home() {
   const hobbies = ["Playing Guitar", "Gaming", "Programming", ];
 
   return (<>
-    <div id="home" className="hidden lg:block bg-white">
+    <FlexRow className="justify-center z-50 fixed top-20 w-full pointer-events-none">
+      <div className="pointer-events-auto px-6 py-2 bg-yellow-300 text-black font-semibold rounded-2xl shadow-md border-2 border-yellow-100">
+        🚧 Under Construction 🚧  
+      </div>
+    </FlexRow>
+
+    <div id="home" className=" bg-white">
 
       <header className="fixed flex flex-row justify-between items-center w-full py-4 px-10 border-b-2 border-gray-200 bg-white">
         <h1 className="font-semibold text-2xl text-scale"><a href="#home">Rafael Cavalinhos</a></h1>
@@ -131,8 +137,8 @@ export default function Home() {
 
     </div>
 
-    <FlexCenter className="block lg:hidden h-full font-bold text-2xl">
+    {/* <FlexCenter className="block lg:hidden h-full font-bold text-2xl">
       <p className="text-gradient text-center">Please open this webpage on a computer.</p>
-    </FlexCenter>
+    </FlexCenter> */}
   </>);
 }
