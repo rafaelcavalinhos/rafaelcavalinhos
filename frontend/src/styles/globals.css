@@ -17,3 +17,16 @@ body {
 .title {
   @apply text-6xl font-bold mb-10
 }
+
+
+.area {
+  @apply bg-red-500
+}
+
+.area-red {
+  @apply bg-red-500
+}
+
+.area-yellow {
+  @apply bg-yellow-500
+}
