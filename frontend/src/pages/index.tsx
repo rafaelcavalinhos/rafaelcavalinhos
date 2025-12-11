@@ -2,7 +2,7 @@ import { FlexCenter, FlexCol, FlexRow } from "@/components/utils/flex";
 import { SlideUp } from "@/components/utils/animations";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faDownload, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faCalendar, faDownload, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function Home() {
@@ -91,7 +91,7 @@ export default function Home() {
 
 
           {/* About Section*/}
-          <FlexCol id="about" className="items-center gap-y-4 mt-50 bg-gray-50 w-full py-20 px-20">
+          <FlexCol id="about" className="items-center gap-y-4 bg-gray-50 w-full py-20 px-20">
             
             <SlideUp>
               <h1 className="title">About</h1>
@@ -122,8 +122,8 @@ export default function Home() {
                 <FlexRow className="flex-wrap gap-y-2 gap-x-1 justify-center">
                   {techInterests.map((interest, i) => {
                     return (
-                      <SlideUp delay={0.05 * i}>
-                        <div key={i} className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                      <SlideUp key={i} delay={0.05 * i}>
+                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
                           <p className="group-hover:scale-120 transition duration-200">{interest}</p>
                         </div>
                       </SlideUp>
@@ -135,8 +135,8 @@ export default function Home() {
                 <FlexRow className="flex-wrap gap-y-2 gap-x-1 justify-center">
                   {softSkills.map((skill, i) => {
                     return (
-                      <SlideUp delay={0.05 * i}>
-                        <div key={i} className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                      <SlideUp key={i} delay={0.05 * i}>
+                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
                           <p className="group-hover:scale-120 transition duration-200">{skill}</p>
                         </div>
                       </SlideUp>
@@ -148,8 +148,8 @@ export default function Home() {
                 <FlexRow className="flex-wrap gap-y-2 gap-x-1 justify-center">
                   {hobbies.map((hobby, i) => {
                     return (
-                      <SlideUp delay={0.05 * i}>
-                        <div key={i} className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                      <SlideUp key={i} delay={0.05 * i}>
+                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
                           <p className="group-hover:scale-120 transition duration-200">{hobby}</p>
                         </div>
                       </SlideUp>
@@ -165,101 +165,136 @@ export default function Home() {
 
           {/* Education Section */}
           <FlexCol id="education" className="items-center gap-y-4 py-20 px-20">
-            <h1 className="title">Education</h1>
+            <SlideUp>
+              <h1 className="title">Education</h1>
+            </SlideUp>
 
-            <FlexCol className="w-full gap-y-4">
+            <FlexRow className="w-full justify-between px-[15%]">
 
-              <FlexCol className="group w-[70%] justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
-                <span className="group-hover:scale-102 transition">
-                  <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Licenciatura em Engenharia Informática</p>
-                  <p className="text-base">Instituto Politécnico de Setúbal</p>
-                  <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
-                    <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2023 - 10/2025</p>
-                    <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Setúbal - Portugal</p>
-                  </FlexRow>
+              <SlideUp delay={0.1}>
+                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                    <p className="group-hover:scale-125 transition">1</p>
+                </FlexCenter>
+              </SlideUp>
 
-                  <p>
-                    Bachelor’s degree focused on developing technical and scientific skills in the field of computer science.
-                    It covers programming, databases, networks, software development, and technology integration.
-                    The program combines theory and practice through laboratory projects and teamwork, preparing professionals for the design, analysis,
-                    and implementation of modern IT solutions.
-                  </p>
-                </span>
-              </FlexCol>
+              <SlideUp delay={0.2}>
+                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                  <p className="group-hover:scale-125 transition">2</p>
+                </FlexCenter>
+              </SlideUp>
 
-              <FlexCol className="group w-[70%] justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
-                <span className="group-hover:scale-102 transition">
-                  <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Desenvolvimento de Videojogos e Aplicações Multimédia</p>
-                  <p className="text-base">Instituto Politécnico de Setúbal</p>
-                  <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
-                    <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2020 - 06/2023</p>
-                    <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Setúbal - Portugal</p>
-                  </FlexRow>
+              <SlideUp delay={0.3}>
+                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                    <p className="group-hover:scale-125 transition">3</p>
+                </FlexCenter>
+              </SlideUp>
 
-                  <p>
-                    Programme focused on game development and multimedia applications, covering game design techniques, interface design and core programming concepts.
-                    It includes work with graphic APIs and game engines, as well as the creation and editing of multimedia assets such as audio, video, textures and 3D models.
-                    The curriculum also explores serious games, gamification, virtual and augmented reality, and technologies for cross-platform development on PC, Web,
-                    mobile and console. This provides a practical and well-rounded foundation for building modern interactive digital experiences.
-                  </p>
-                </span>
-              </FlexCol>
+            </FlexRow>
 
-              <FlexCol className="group w-[70%] justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
-                <span className="group-hover:scale-102 transition">
-                  <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Técnico de Informática de Gestão</p>
-                  <p className="text-base">Escola Tecnológica do Litoral Alentejano</p>
-                  <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
-                    <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 09/2017 - 07/2020</p>
-                    <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Sines - Portugal</p>
-                  </FlexRow>
+            <SlideUp delay={0.1}>
+              <FlexRow className="w-full gap-x-4">
 
-                  <p>
-                    Focused on the development and maintenance of IT solutions for business environments.
-                    Experience includes creating websites and company portals, installing and configuring operating systems and application software,
-                    and managing relational databases. Responsibilities also covered developing automated data-processing routines using programming or
-                    scripting languages, collaborating in system analysis and development teams, and building management-oriented software applications.
-                    Additional competencies include handling administrative office tasks and working with business software for invoicing, inventory, accounting,
-                    payroll and financial management, as well as proficient use of word processing tools, spreadsheets and other productivity applications.
-                  </p>
-                </span>
-              </FlexCol>
+                <FlexCol className="group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                  <span className="group-hover:scale-102 transition">
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Técnico de Informática de Gestão</p>
+                    <p className="text-base">Escola Tecnológica do Litoral Alentejano</p>
+                    <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
+                      <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 09/2017 - 07/2020</p>
+                      <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Sines - Portugal</p>
+                    </FlexRow>
 
-            </FlexCol>
+                    <p>
+                      Focused on the development and maintenance of IT solutions for business environments.
+                      Experience includes creating websites and company portals, installing and configuring operating systems and application software,
+                      and managing relational databases. Responsibilities also covered developing automated data-processing routines using programming or
+                      scripting languages, collaborating in system analysis and development teams, and building management-oriented software applications.
+                      Additional competencies include handling administrative office tasks and working with business software for invoicing, inventory, accounting,
+                      payroll and financial management, as well as proficient use of word processing tools, spreadsheets and other productivity applications.
+                    </p>
+                  </span>
+                </FlexCol>
+
+
+                <FlexCol className="group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                  <span className="group-hover:scale-102 transition">
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Desenvolvimento de Videojogos e Aplicações Multimédia</p>
+                    <p className="text-base">Instituto Politécnico de Setúbal</p>
+                    <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
+                      <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2020 - 06/2023</p>
+                      <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Setúbal - Portugal</p>
+                    </FlexRow>
+
+                    <p>
+                      Programme focused on game development and multimedia applications, covering game design techniques, interface design and core programming concepts.
+                      It includes work with graphic APIs and game engines, as well as the creation and editing of multimedia assets such as audio, video, textures and 3D models.
+                      The curriculum also explores serious games, gamification, virtual and augmented reality, and technologies for cross-platform development on PC, Web,
+                      mobile and console. This provides a practical and well-rounded foundation for building modern interactive digital experiences.
+                    </p>
+                  </span>
+                </FlexCol>
+
+                <FlexCol className="group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                  <span className="group-hover:scale-102 transition">
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Licenciatura em Engenharia Informática</p>
+                    <p className="text-base">Instituto Politécnico de Setúbal</p>
+                    <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
+                      <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2023 - 10/2025</p>
+                      <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Setúbal - Portugal</p>
+                    </FlexRow>
+
+                    <p>
+                      Bachelor’s degree focused on developing technical and scientific skills in the field of computer science.
+                      It covers programming, databases, networks, software development, and technology integration.
+                      The program combines theory and practice through laboratory projects and teamwork, preparing professionals for the design, analysis,
+                      and implementation of modern IT solutions.
+                    </p>
+                  </span>
+                </FlexCol>
+
+              </FlexRow>
+            </SlideUp>
     
           </FlexCol>
 
           <FlexCol id="projects" className="items-center gap-y-4 mt-25 bg-gray-50 w-full py-20 px-20">
-            <h1 className="title">Projects</h1>
-
-            <p className="text-center text-6xl text-gradient py-6">Work in progress...</p>
+            <SlideUp delay={0.1}>
+              <h1 className="title">Projects</h1>
+            </SlideUp>
+            
+            <SlideUp delay={0.2}>
+              <p className="text-center text-6xl text-gradient py-6">Work in progress...</p>
+            </SlideUp>
     
           </FlexCol>
 
           <FlexCol id="work" className="items-center gap-y-4 w-full py-20 px-20">
-            <h1 className="title">Work Experience</h1>
+            <SlideUp delay={0.1}>
+              <h1 className="title">Work Experience</h1>
+            </SlideUp>
 
-            <p className="text-center text-6xl text-gradient py-6">Under construction</p>
+            <SlideUp delay={0.2}>
+              <p className="text-center text-6xl text-gradient py-6">Under construction</p>
+            </SlideUp>
     
           </FlexCol>
 
           <FlexCol id="contact" className="items-center gap-y-4 bg-blue-800 w-full py-20 px-20 m-0 selection:bg-blue-500 selection:text-white">
             <h1 className="title text-white">Contact</h1>
 
-            <FlexRow className="justify-center gap-x-10 w-full items-start">
+            <FlexRow className="w-full items-start justify-between">
 
-              <FlexCol className="justify-center text-center text-white w-[33%]">
-                <p className="text-gradient text-xl font-semibold">Contact</p>
+              <FlexCol className="items-center text-center text-white w-[33%]">
+                <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient text-xl font-semibold">Email</p>
                 <p>rafaelcavalinhos2002@gmail.com</p>
-                <FlexRow className="justify-center gap-x-10">
-                  <FontAwesomeIcon onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faLinkedin} />
-                  <FontAwesomeIcon onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faGithub} />
-                  <FontAwesomeIcon onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faEnvelope} />
-                </FlexRow>
+                <button onClick={() => window.open("/cv.pdf", "_blank")} className="w-[45%] font-semibold cursor-pointer group bg-inherit border-2 border-white text-white rounded-2xl text-lg transition duration-200 hover:scale-110">
+                  <span className="inline-flex items-center gap-2 transition duration-300 group-hover:scale-115">
+                    Download CV <FontAwesomeIcon icon={faDownload} />
+                  </span>
+                </button>
               </FlexCol>
 
-              <FlexCol className="justify-center text-center text-white w-[33%]">
-                <p className="text-gradient text-xl font-semibold">Overview</p>
+              <FlexCol className="items-center text-center text-white w-[33%]">
+                <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient text-xl font-semibold">Overview</p>
                 <a href="#about" className="text-scale">About</a>
                 <a href="#education" className="text-scale">Education</a>
                 <a href="#projects" className="text-scale">Projects</a>
@@ -267,10 +302,13 @@ export default function Home() {
                 <a href="#contact" className="text-scale">Contact</a>
               </FlexCol>
 
-              <FlexCol className="justify-between items-center text-white w-[33%]">
-                <p className="text-4xl">something</p>
-                <input className="p-2 w-96 text-white border-2 bg-inherit"></input>
-                <button className="w-96 bg-white text-blue-800 p-2 hover:scale-110 transition">...</button>
+              <FlexCol className="text-center text-white w-[33%]">
+                <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient text-xl font-semibold">Socials</p>
+                <FlexRow className="justify-center gap-x-10">
+                  <FontAwesomeIcon onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faLinkedin} />
+                  <FontAwesomeIcon onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faGithub} />
+                  <FontAwesomeIcon onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faEnvelope} />
+                </FlexRow>
               </FlexCol>
 
             </FlexRow>
