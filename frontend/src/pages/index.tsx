@@ -2,7 +2,7 @@ import { FlexCenter, FlexCol, FlexRow } from "@/components/utils/flex";
 import { SlideUp } from "@/components/utils/animations";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faCalendar, faDownload, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleRight, faArrowRight, faCalendar, faDownload, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function Home() {
@@ -104,12 +104,15 @@ export default function Home() {
                   <h2 className="text-3xl text-gradient">Professional Bio</h2>
                 </SlideUp>
 
-                <FlexCol>
-                  <SlideUp delay={0.2}><p>I am Computer Engineering graduate with a growing focus on full-stack web development.</p></SlideUp>
-                  <SlideUp delay={0.3}><p>I enjoy turning ideas into real applications and I spend a lot of my free time building personal projects to sharpen my skills and explore new technologies.</p></SlideUp>
-                  <SlideUp delay={0.4}><p>I’m comfortable working across the stack and I like understanding how everything connects, from the database to the UI.</p></SlideUp>
-                  <SlideUp delay={0.5}><p>Recently, I’ve been diving deeper into modern web frameworks, such as Next.js.</p></SlideUp>
-                  <SlideUp delay={0.6}><p>What motivates me is learning and solving practical problems. I'm always looking for opportunities to grow, collaborate, and contribute to real-world projects.</p></SlideUp>
+                <FlexCol className="text-justify">
+                  <SlideUp delay={0.2}>
+                    <p>
+                      I am Computer Engineering graduate with a growing focus on web development, who likes to solve real problems by building applications.
+                      I spend a lot of my free time building personal projects and studying to sharpen my skills and explore new usefull technologies.
+                      I’m comfortable working across the stack as I like understanding how everything connects, from the database to the UI.
+                      I also like video game development and I'm always looking for opportunities to grow, collaborate, and contribute to real-world projects.
+                    </p>
+                  </SlideUp>
                 </FlexCol>
               </FlexCol>
             
@@ -169,16 +172,16 @@ export default function Home() {
               <h1 className="title">Education</h1>
             </SlideUp>
 
-            <FlexRow className="w-full justify-between px-[15%]">
+            {/* <FlexRow className="w-full justify-between px-[18%] absolute pt-12">
 
               <SlideUp delay={0.1}>
-                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                <FlexCenter className="mt-20 group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
                     <p className="group-hover:scale-125 transition">1</p>
                 </FlexCenter>
               </SlideUp>
 
               <SlideUp delay={0.2}>
-                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                <FlexCenter className="mt-10 group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
                   <p className="group-hover:scale-125 transition">2</p>
                 </FlexCenter>
               </SlideUp>
@@ -189,12 +192,12 @@ export default function Home() {
                 </FlexCenter>
               </SlideUp>
 
-            </FlexRow>
+            </FlexRow> */}
 
             <SlideUp delay={0.1}>
               <FlexRow className="w-full gap-x-4">
 
-                <FlexCol className="group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                <FlexCol className="mt-20 group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
                   <span className="group-hover:scale-102 transition">
                     <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Técnico de Informática de Gestão</p>
                     <p className="text-base">Escola Tecnológica do Litoral Alentejano</p>
@@ -203,19 +206,16 @@ export default function Home() {
                       <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Sines - Portugal</p>
                     </FlexRow>
 
-                    <p>
-                      Focused on the development and maintenance of IT solutions for business environments.
-                      Experience includes creating websites and company portals, installing and configuring operating systems and application software,
-                      and managing relational databases. Responsibilities also covered developing automated data-processing routines using programming or
-                      scripting languages, collaborating in system analysis and development teams, and building management-oriented software applications.
-                      Additional competencies include handling administrative office tasks and working with business software for invoicing, inventory, accounting,
-                      payroll and financial management, as well as proficient use of word processing tools, spreadsheets and other productivity applications.
+                    <p className="text-justify">
+                      Focused on the development and maintenance of IT solutions for business environments,
+                      creating websites and company portals, installing and configuring operating systems and application software,
+                      managing relational databases and building management-oriented software applications.
                     </p>
                   </span>
                 </FlexCol>
 
 
-                <FlexCol className="group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                <FlexCol className="mt-10 group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
                   <span className="group-hover:scale-102 transition">
                     <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Desenvolvimento de Videojogos e Aplicações Multimédia</p>
                     <p className="text-base">Instituto Politécnico de Setúbal</p>
@@ -224,11 +224,9 @@ export default function Home() {
                       <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Setúbal - Portugal</p>
                     </FlexRow>
 
-                    <p>
-                      Programme focused on game development and multimedia applications, covering game design techniques, interface design and core programming concepts.
+                    <p className="text-justify">
+                      Focused on game development and multimedia applications, covering game design techniques, interface design and core programming concepts.
                       It includes work with graphic APIs and game engines, as well as the creation and editing of multimedia assets such as audio, video, textures and 3D models.
-                      The curriculum also explores serious games, gamification, virtual and augmented reality, and technologies for cross-platform development on PC, Web,
-                      mobile and console. This provides a practical and well-rounded foundation for building modern interactive digital experiences.
                     </p>
                   </span>
                 </FlexCol>
@@ -242,7 +240,7 @@ export default function Home() {
                       <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Setúbal - Portugal</p>
                     </FlexRow>
 
-                    <p>
+                    <p className="text-justify">
                       Bachelor’s degree focused on developing technical and scientific skills in the field of computer science.
                       It covers programming, databases, networks, software development, and technology integration.
                       The program combines theory and practice through laboratory projects and teamwork, preparing professionals for the design, analysis,
@@ -256,7 +254,8 @@ export default function Home() {
     
           </FlexCol>
 
-          <FlexCol id="projects" className="items-center gap-y-4 mt-25 bg-gray-50 w-full py-20 px-20">
+          {/* Projects Section */}
+          <FlexCol id="projects" className="items-center gap-y-4 bg-gray-50 w-full py-20 px-20">
             <SlideUp delay={0.1}>
               <h1 className="title">Projects</h1>
             </SlideUp>
@@ -267,17 +266,66 @@ export default function Home() {
     
           </FlexCol>
 
+          {/* Work Experience Section */}
           <FlexCol id="work" className="items-center gap-y-4 w-full py-20 px-20">
             <SlideUp delay={0.1}>
               <h1 className="title">Work Experience</h1>
             </SlideUp>
 
-            <SlideUp delay={0.2}>
+            {/* <SlideUp delay={0.2}>
               <p className="text-center text-6xl text-gradient py-6">Under construction</p>
-            </SlideUp>
+            </SlideUp> */}
+
+            <FlexRow className="w-full">
+
+              {/* <FlexCol className="justify-around p-10">
+                <FontAwesomeIcon icon={faArrowCircleRight} className="text-blue-400"></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faArrowCircleRight} className="text-blue-400"></FontAwesomeIcon>
+              </FlexCol> */}
+
+              <FlexCol className="w-full">
+
+                <FlexCol className="group w-full justify-start border-y-4 px-5 py-3 border-blue-200 text-black hover:scale-105 transition duration-300">
+                  <span className="group-hover:scale-102 transition">
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves-black">Internship at Albatroz Digital</p>
+                    <p className="text-base">Albatroz Digital</p>
+                    <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
+                      <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 07/2025 - 09/2025</p>
+                      <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Almada - Portugal</p>
+                    </FlexRow>
+
+                    <p className="text-justify">
+                      Designed and implemented a full interface for creating and managing entities. <br />
+                      Built reusable front-end components to ensure visual consistency and maintainability.  <br />
+                      Developed the backend logic, API endpoints and database communication needed to support the new interface.
+                    </p>
+                  </span>
+                </FlexCol>
+
+                <FlexCol className="group w-full justify-start border-y-4 px-5 py-3 border-blue-200 text-black hover:scale-105 transition duration-300">
+                  <span className="group-hover:scale-102 transition">
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves-black">Internship at Bee Engineering</p>
+                    <p className="text-base">Bee Engineering</p>
+                    <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
+                      <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 04/2022 - 08/2022</p>
+                      <p><FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Remote (Lisbon - Portugal)</p>
+                    </FlexRow>
+
+                    <p className="text-justify">
+                      Developed mobile game prototypes in Unity, handling core gameplay logic, UI flow and level structure. <br />
+                      Designed and tuned levels, integrated animations, audio and gameplay feedback to enhance game feel. <br />
+                      Worked in rapid prototyping cycles, iterating based on internal playtesting and feedback.
+                    </p>
+                  </span>
+                </FlexCol>
+
+              </FlexCol>
+              
+            </FlexRow>
     
           </FlexCol>
 
+          {/* Contact Section */}
           <FlexCol id="contact" className="items-center gap-y-4 bg-blue-800 w-full py-20 px-20 m-0 selection:bg-blue-500 selection:text-white">
             <h1 className="title text-white">Contact</h1>
 
@@ -286,8 +334,8 @@ export default function Home() {
               <FlexCol className="items-center text-center text-white w-[33%]">
                 <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient text-xl font-semibold">Email</p>
                 <p>rafaelcavalinhos2002@gmail.com</p>
-                <button onClick={() => window.open("/cv.pdf", "_blank")} className="w-[45%] font-semibold cursor-pointer group bg-inherit border-2 border-white text-white rounded-2xl text-lg transition duration-200 hover:scale-110">
-                  <span className="inline-flex items-center gap-2 transition duration-300 group-hover:scale-115">
+                <button onClick={() => window.open("/cv.pdf", "_blank")} className="w-[45%] font-semibold cursor-pointer group bg-inherit border-2 border-white text-white rounded-2xl text-base transition duration-200 hover:scale-110">
+                  <span className="inline-flex items-center transition duration-300 group-hover:scale-115">
                     Download CV <FontAwesomeIcon icon={faDownload} />
                   </span>
                 </button>

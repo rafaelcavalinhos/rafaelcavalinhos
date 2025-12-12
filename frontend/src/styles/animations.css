@@ -37,3 +37,18 @@
   -webkit-text-fill-color: transparent;
   animation: animatedTextGradient 3s linear infinite;
 }
+
+.text-gradient-waves-black {
+  background: radial-gradient(
+    circle at 100%,
+    #000000 25%,
+    #0091ff 30%,
+    #000000 35%
+
+  );
+  background-size: 200% auto;
+  color: #000;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animatedTextGradient 3s linear infinite;
+}
