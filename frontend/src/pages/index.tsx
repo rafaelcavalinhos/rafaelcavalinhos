@@ -261,57 +261,51 @@ export default function Home() {
               <h1 className="title">Projects</h1>
             </SlideUp>
             
-            <FlexRow className="flex-wrap">
+            <FlexRow className="flex-wrap justify-center gap-2">
+              <SlideUp delay={0.1}>
+                <Project
+                tags={["College Project", ]}
+                images={["/projects/press-em1.png", "/projects/press-em2.png", "/projects/press-em3.png"]}
+                title="Press 'em"
+                description="In Press 'em you need to defeat robots and solve puzzles by grabbing crates and pressing buttons to complete the levels!"
+                technologies={["Unity", "C#", "Aseprite"]}
+                downloadUrl="https://rafael-cavalinhos.itch.io/press-em"
+                />
+              </SlideUp>
 
-              <Project
-              images={["a", "b", "c"]}
-              title="Factory Dealings"
-              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-              technologies={["Unity", "C#", "Aseprite"]}
-              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-              />
-              <Project
-              images={["a", "b", "c"]}
-              title="Factory Dealings"
-              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-              technologies={["Unity", "C#", "Aseprite"]}
-              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-              />
-              <Project
-              images={["a", "b", "c"]}
-              title="Factory Dealings"
-              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-              technologies={["Unity", "C#", "Aseprite"]}
-              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-              />
-              <Project
-              images={["a", "b", "c"]}
-              title="Factory Dealings"
-              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-              technologies={["Unity", "C#", "Aseprite"]}
-              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-              />
-              <Project
-              images={["a", "b", "c"]}
-              title="Factory Dealings"
-              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-              technologies={["Unity", "C#", "Aseprite"]}
-              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-              />
-              <Project
-              images={["a", "b", "c"]}
-              title="Factory Dealings"
-              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-              technologies={["Unity", "C#", "Aseprite"]}
-              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-              />
-              <Project
-              images={["a", "b", "c"]}
-              title="Factory Dealings"
-              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-              technologies={["Unity", "C#", "Aseprite"]}
-              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-              />
+              <SlideUp delay={0.2}>
+                <Project
+                tags={["College Project", ]}
+                images={["/projects/castaway1.png", "/projects/castaway2.png", "/projects/castaway3.png"]}
+                title="Castaway"
+                description="Castaway is a game where you will try to survive the days and nights in an island whilst fighting enemies and gathering resources to finally fix and escape in your until then wrecked ship."
+                technologies={["Unity", "C#", "Aseprite"]}
+                downloadUrl="https://rafael-cavalinhos.itch.io/castaway"
+                />
+              </SlideUp>
+
+              <SlideUp delay={0.3}>
+                <Project
+                tags={["College Project", "Game Jam", ]}
+                images={["/projects/factory-dealings1.png", "/projects/factory-dealings2.png", "/projects/factory-dealings3.png"]}
+                title="Factory Dealings"
+                description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+                technologies={["Unity", "C#", "Aseprite"]}
+                downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+                />
+              </SlideUp>
+
+              <SlideUp delay={0.4}>
+                <Project
+                tags={["Internship", "Team Project", ]}
+                videos
+                images={["/projects/beach-rolling.mp4", "/projects/spooky-hunt.mp4", "/projects/brawl-fighters.mp4", "/projects/wave-racer.mp4", "/projects/feng-shui.mp4", "/projects/flames-out.mp4", ]}
+                title="Internship Mobile Games"
+                description="These mobile games were developed as demonstration prototypes for advertising purposes, with the objective of evaluating their potential before deciding which concepts would proceed to full development. As a result, only the advertisements are available."
+                technologies={["Unity", "C#"]}
+                downloadUrl="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
+                />
+              </SlideUp>
 
             </FlexRow>
     
@@ -334,7 +328,7 @@ export default function Home() {
                 <FontAwesomeIcon icon={faArrowCircleRight} className="text-blue-400"></FontAwesomeIcon>
               </FlexCol> */}
 
-              <FlexCol className="w-full">
+              <FlexCol className="w-full gap-y-2">
 
                 <FlexCol className="group w-full justify-start border-y-4 px-5 py-3 border-blue-200 text-black hover:scale-105 transition duration-300">
                   <span className="group-hover:scale-102 transition">

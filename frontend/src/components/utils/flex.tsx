@@ -7,7 +7,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 
 export function FlexCol({ children, className = "", ...props }: Props) {
   return (
-    <div className={`flex flex-col gap-y-2 ${className}`} {...props}>
+    <div className={`flex flex-col ${className}`} {...props}>
       {children}
     </div>
   );
@@ -15,7 +15,7 @@ export function FlexCol({ children, className = "", ...props }: Props) {
 
 export function FlexRow({ children, className = "", ...props }: Props) {
   return (
-    <div className={`flex flex-row gap-x-2 ${className}`} {...props}>
+    <div className={`flex flex-row ${className}`} {...props}>
       {children}
     </div>
   );
