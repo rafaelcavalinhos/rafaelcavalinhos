@@ -1,4 +1,5 @@
 import { FlexCenter, FlexCol, FlexRow } from "@/components/utils/flex";
+import Project from "@/components/items/project";
 import { SlideUp } from "@/components/utils/animations";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,11 +9,11 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 export default function Home() {
 
   const techInterests = ["Next.js", "Node.js", "PostgreSQL", "TypeScript", "Fastify", "Kysely", "Web Design", "Tailwind CSS",
-    "Automation", "Full-Stack", "Web Performance", "Web Security", "Docker", "Game Development", "Unity", "C#", ];
+    "Automation", "Full-Stack", "Web Performance", "Web Security", "Docker", "Game Development", "Unity", "C#", "Digital Art", "Aseprite", "Video Editing"];
 
-  const softSkills = ["Problem Solving", ];
+  const softSkills = ["Problem Solving", "Team Collaboration", "Communication", "Time Managment", "Adaptability", "Critical Thinking", ];
 
-  const hobbies = ["Playing Guitar", "Gaming", "Programming", "Petting my cat", "Cars"];
+  const hobbies = ["Guitar", "Gaming", "Programming", "Animals", "Cars"];
 
   return (<>
 
@@ -260,9 +261,59 @@ export default function Home() {
               <h1 className="title">Projects</h1>
             </SlideUp>
             
-            <SlideUp delay={0.2}>
-              <p className="text-center text-6xl text-gradient py-6">Work in progress...</p>
-            </SlideUp>
+            <FlexRow className="flex-wrap">
+
+              <Project
+              images={["a", "b", "c"]}
+              title="Factory Dealings"
+              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+              technologies={["Unity", "C#", "Aseprite"]}
+              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+              />
+              <Project
+              images={["a", "b", "c"]}
+              title="Factory Dealings"
+              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+              technologies={["Unity", "C#", "Aseprite"]}
+              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+              />
+              <Project
+              images={["a", "b", "c"]}
+              title="Factory Dealings"
+              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+              technologies={["Unity", "C#", "Aseprite"]}
+              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+              />
+              <Project
+              images={["a", "b", "c"]}
+              title="Factory Dealings"
+              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+              technologies={["Unity", "C#", "Aseprite"]}
+              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+              />
+              <Project
+              images={["a", "b", "c"]}
+              title="Factory Dealings"
+              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+              technologies={["Unity", "C#", "Aseprite"]}
+              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+              />
+              <Project
+              images={["a", "b", "c"]}
+              title="Factory Dealings"
+              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+              technologies={["Unity", "C#", "Aseprite"]}
+              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+              />
+              <Project
+              images={["a", "b", "c"]}
+              title="Factory Dealings"
+              description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
+              technologies={["Unity", "C#", "Aseprite"]}
+              downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
+              />
+
+            </FlexRow>
     
           </FlexCol>
 
