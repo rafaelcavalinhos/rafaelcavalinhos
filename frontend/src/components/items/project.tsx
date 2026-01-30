@@ -2,7 +2,7 @@ import { FlexCol, FlexRow } from "@/components/utils/flex";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight, faArrowLeft, faArrowRight, faDownload, } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface Props {
   images: string[];
@@ -24,20 +24,20 @@ const Project = (props: Props) => {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const slides = [images[images.length - 1], ...images, images[0]]
+  const slides = useMemo(() => [images[images.length - 1], ...images, images[0]], [images]);
+
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const nextImage = () => {
     if (locked) return;
     setLocked(true);
     setCurrentImage(i => i + 1);
-    console.log(currentImage);
   };
 
   const prevImage = () => {
     if (locked) return;
     setLocked(true);
     setCurrentImage(i => i - 1);
-    console.log(currentImage);
   };
 
   useEffect(() => {
@@ -54,6 +54,28 @@ const Project = (props: Props) => {
     };
   }, [currentImage, locked]);
 
+  useEffect(() => {
+    if (!videos) return;
+
+    const activeIndex = currentImage;
+
+    videoRefs.current.forEach((v, i) => {
+      if (!v) return;
+
+      if (i === activeIndex) {
+        const playPromise = v.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {
+          });
+        }
+      } else {
+        v.pause();
+        try {
+          v.currentTime = 0;
+        } catch {}
+      }
+    });
+  }, [currentImage, videos]);
 
   return (<>
 
@@ -101,24 +123,33 @@ const Project = (props: Props) => {
             }
 
             setLocked(false);
+          
           }}
         >
-          {slides.map((url, i) => (
-             videos ? (<>
-                <video
-                  src={url}
-                  className="object-cover"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                />
-             </>
-             ) : (<>
-                <Image key={i} src={url} alt="" width={350} height={350} className="object-cover" />
-             </>)
-          ))}
+          {slides.map((url, i) =>
+            videos ? (
+              <video
+                key={i}
+                ref={(el) => {
+                  videoRefs.current[i] = el;
+                }}
+                src={url}
+                className="object-cover"
+                muted
+                playsInline
+                preload="auto"
+              />
+            ) : (
+              <Image
+                key={i}
+                src={url}
+                alt=""
+                width={350}
+                height={350}
+                className="object-cover"
+              />
+            )
+          )}
         </FlexRow>
 
       </FlexCol>
