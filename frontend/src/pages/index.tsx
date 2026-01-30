@@ -7,6 +7,7 @@ import { faArrowCircleRight, faArrowRight, faCalendar, faDownload, faEnvelope, f
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useRef, useState } from "react";
 
+
 export default function Home() {
 
   const techInterests = ["Next.js", "Node.js", "PostgreSQL", "TypeScript", "Fastify", "Kysely", "Web Design", "Tailwind CSS",
@@ -19,6 +20,9 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [heroScale, setHeroScale] = useState(1);
   const [windowHeight, setWindowHeight] = useState(0);
+
+  const [unlocked, setUnlocked] = useState(false);
+
   const ticking = useRef(false);
 
   useEffect(() => {
@@ -40,6 +44,22 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const timer = setTimeout(() => {
+      document.body.style.overflow = originalOverflow || "auto";
+      setUnlocked(true);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = originalOverflow || "auto";
+    };
+  }, []);
+
+
   return (<>
 
     {/* Under Construction */}
@@ -54,13 +74,14 @@ export default function Home() {
     <div id="home" className="hidden lg:block bg-white">
 
       {/* Header */}
-      <header className="z-20 fixed flex flex-row justify-between overflow-hidden items-center w-full py-4 border-b-2 border-gray-200 bg-white px-20">
+      <header className="z-20 fixed flex flex-row justify-between overflow-hidden items-center w-full py-4 border-b-2 border-gray-200 bg-white px-20 transition ease-out duration-500"
+      style={{ transform: `translateY(${unlocked ? "0%" : "-100%"})` }}>
         <div className="pointer-events-auto px-6 py-2 bg-yellow-300 text-black font-semibold rounded-2xl shadow-md border-2 border-yellow-100">
           🚧 Under Construction 🚧  
         </div>
 
-        <div className="absolute left-1/2 top-6 -translate-x-1/2 transition-transform" style={{ scale: scrollY >= windowHeight * 0.9 ? 1 : 0}}>
-          Rafael Cavalinhos
+        <div className="absolute left-1/2 top-5 -translate-x-1/2 transition-transform" style={{ scale: scrollY >= windowHeight * 0.9 ? 1 : 0}}>
+          <h1 className="text-gradient font-bold text-3xl">Rafael Cavalinhos</h1>
         </div>
 
         <FlexRow className="font-semibold text-xl gap-x-5">
