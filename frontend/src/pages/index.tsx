@@ -72,7 +72,7 @@ export default function Home() {
       </div>
     </FlexRow> */}
 
-    <div id="home" className="hidden lg:block background-color duration-300">
+    <div id="home" className="background-color duration-300"> {/*hidden lg:block */}
 
       {/* Header */}
       <header className="text-color z-20 fixed flex flex-row justify-between overflow-hidden items-center w-full py-4 border-b-2 border-gray-200 background-color px-20 transition ease-out duration-500"
@@ -494,8 +494,8 @@ export default function Home() {
 
     </div>
 
-    <FlexCenter className="block lg:hidden h-full font-bold text-2xl">
+    {/* <FlexCenter className="block lg:hidden h-full font-bold text-2xl">
       <p className="text-gradient text-center">Please open this webpage on a computer.</p>
-    </FlexCenter>
+    </FlexCenter> */}
   </>);
 }
