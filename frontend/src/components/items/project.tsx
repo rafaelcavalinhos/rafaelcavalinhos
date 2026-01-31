@@ -79,13 +79,13 @@ const Project = (props: Props) => {
 
   return (<>
 
-    <FlexCol className="w-[350px] border-4 border-blue-200 rounded-2xl overflow-hidden h-full bg-blue-400 text-white hover:scale-102 transition duration-300"> {/*  */}
+    <FlexCol className="w-[350px] border-4 border-color rounded-2xl overflow-hidden h-full foreground-color text-white hover:scale-102 transition duration-300"> {/*  */}
 
       <FlexCol className="relative">
 
         <FlexRow className="absolute z-10 gap-x-2 flex-wrap w-full justify-end p-2 gap-y-1">
           {tags?.map((tag, i) => (<>
-            <div key={i} className="text-white text-sm font-semibold border-2 border-blue-200 bg-blue-400 rounded-3xl px-2">{tag}</div>
+            <div key={i} className="text-white text-sm font-semibold border-2 border-color foreground-color rounded-3xl px-2">{tag}</div>
           </>))}
         </FlexRow>
 

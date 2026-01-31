@@ -3,10 +3,9 @@ import Project from "@/components/items/project";
 import { SlideUp } from "@/components/utils/animations";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowCircleRight, faArrowRight, faCalendar, faDownload, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleRight, faArrowRight, faCalendar, faDownload, faEnvelope, faLocationDot, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useRef, useState } from "react";
-
 
 export default function Home() {
 
@@ -22,6 +21,8 @@ export default function Home() {
   const [windowHeight, setWindowHeight] = useState(0);
 
   const [unlocked, setUnlocked] = useState(false);
+
+  const [darkTheme, setDarkTheme] = useState(false);
 
   const ticking = useRef(false);
 
@@ -45,43 +46,45 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const timer = setTimeout(() => {
-      document.body.style.overflow = originalOverflow || "auto";
+      document.body.style.overflow = "auto";
       setUnlocked(true);
     }, 1000);
 
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = originalOverflow || "auto";
+      document.body.style.overflow = "auto";
     };
   }, []);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkTheme);
+  }, [darkTheme]);
 
   return (<>
 
     {/* Under Construction */}
     {/* <FlexRow className="justify-center z-50 fixed top-[90vh] right-[-40vw] w-full pointer-events-none transition-transform">
-      <div className="pointer-events-auto px-6 py-2 bg-yellow-300 text-black font-semibold rounded-2xl shadow-md border-2 border-yellow-100">
+      <div className="pointer-events-auto px-6 py-2 bg-yellow-300 text-color font-semibold rounded-2xl shadow-md border-2 border-yellow-100">
         🚧 Under Construction 🚧  
       </div>
     </FlexRow> */}
 
-
-
-    <div id="home" className="hidden lg:block bg-white">
+    <div id="home" className="hidden lg:block background-color duration-300">
 
       {/* Header */}
-      <header className="z-20 fixed flex flex-row justify-between overflow-hidden items-center w-full py-4 border-b-2 border-gray-200 bg-white px-20 transition ease-out duration-500"
+      <header className="text-color z-20 fixed flex flex-row justify-between overflow-hidden items-center w-full py-4 border-b-2 border-gray-200 background-color px-20 transition ease-out duration-500"
       style={{ transform: `translateY(${unlocked ? "0%" : "-100%"})` }}>
-        <div className="pointer-events-auto px-6 py-2 bg-yellow-300 text-black font-semibold rounded-2xl shadow-md border-2 border-yellow-100">
+        <div className="text-black pointer-events-auto px-6 py-2 bg-yellow-300 font-semibold rounded-2xl shadow-md border-2 border-yellow-100">
           🚧 Under Construction 🚧  
         </div>
 
         <div className="absolute left-1/2 top-5 -translate-x-1/2 transition-transform" style={{ scale: scrollY >= windowHeight * 0.9 ? 1 : 0}}>
-          <h1 className="text-gradient font-bold text-3xl">Rafael Cavalinhos</h1>
+          <h1 onClick={() => {
+            document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+          }} className="text-gradient font-bold text-3xl text-scale">Rafael Cavalinhos</h1>
         </div>
 
         <FlexRow className="font-semibold text-xl gap-x-5">
@@ -90,15 +93,23 @@ export default function Home() {
           <a href="#projects" className="text-scale">Projects</a>
           <a href="#work" className="text-scale">Work Experience</a>
           <a href="#contact" className="text-scale">Contact</a>
+          <div className="text-scale" onClick={() => {
+            setDarkTheme(prev => !prev);
+          }}>
+            <FontAwesomeIcon icon={!darkTheme ? faMoon : faSun} />
+          </div>
         </FlexRow>
       </header>
 
       <main>
 
-        <FlexCol className="w-full">
+        <FlexCol className="w-full text-color">
 
           {/* Hero Section */}
           <FlexRow style={{ transform: `scale(${heroScale})`, transformOrigin: "top" }} className="fixed justify-between w-full h-screen pt-24 px-20 transition-transform duration-100 ease-out">
+            
+            <div className="top-1/2 left-1/2 absolute w-100 h-10"></div>
+            
             <FlexCol className="font-bold text-6xl justify-center items-start gap-y-10">
               <h1>
                 <SlideUp>Hello!<br /></SlideUp>
@@ -106,30 +117,31 @@ export default function Home() {
                 <SlideUp delay={0.2}>a Full-Stack Developer</SlideUp>
               </h1>
 
+
               <SlideUp delay={0.3}>
-                <button onClick={() => window.open("/cv.pdf", "_blank")} className="cursor-pointer group bg-blue-400 border-3 border-blue-200 text-white rounded-2xl text-xl py-2 px-10 transition duration-200 hover:scale-120">
-                  <span className="inline-flex items-center gap-2 transition duration-300 group-hover:scale-125">
+                <button onClick={() => window.open("/cv.pdf", "_blank")} className="cursor-pointer group foreground-color border-3 border-color rounded-2xl text-xl py-2 px-10 transition duration-200 hover:scale-120">
+                  <span className="inline-flex items-center gap-2 transition duration-300 group-hover:scale-125 text-white">
                     Download CV <FontAwesomeIcon icon={faDownload} />
                   </span>
                 </button>
               </SlideUp>
 
-              <FlexRow className="gap-x-2">
+              <FlexRow className="gap-x-2 text-white">
 
                 <SlideUp delay={0.4}>
-                  <button onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="cursor-pointer group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
+                  <button onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="cursor-pointer group transition duration-200 hover:scale-120 rounded-full foreground-color w-10 h-10 text-xl border-3 border-color">
                     <FontAwesomeIcon className="inline-flex items-center transition duration-300 group-hover:scale-120" icon={faLinkedin} />
                   </button>
                 </SlideUp>
                 
                 <SlideUp delay={0.5}>
-                  <button onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="cursor-pointer group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
+                  <button onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="cursor-pointer group transition duration-200 hover:scale-120 rounded-full foreground-color w-10 h-10 text-xl border-3 border-color">
                     <FontAwesomeIcon className="inline-flex items-center transition duration-300 group-hover:scale-120" icon={faGithub} />
                   </button>
                 </SlideUp>
       
                 <SlideUp delay={0.6}>
-                  <button onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="cursor-pointer group transition duration-200 hover:scale-120 text-white rounded-full bg-blue-400 w-10 h-10 text-xl border-3 border-blue-200">
+                  <button onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="cursor-pointer group transition duration-200 hover:scale-120 rounded-full foreground-color w-10 h-10 text-xl border-3 border-color">
                     <FontAwesomeIcon className="inline-flex items-center transition duration-300 group-hover:scale-120" icon={faEnvelope} />
                   </button>
                 </SlideUp>
@@ -145,8 +157,8 @@ export default function Home() {
           </FlexRow>
 
           {/* About Section*/}
-          <FlexCol id="about" className="items-center gap-y-4 bg-gray-50 w-full py-20 px-20 mt-[100vh] z-10">
-            
+          <FlexCol id="about" className="items-center gap-y-4 background-strong-color w-full py-20 px-20 mt-[100vh] z-10">
+
             <SlideUp>
               <h1 className="title">About</h1>
             </SlideUp>
@@ -170,7 +182,7 @@ export default function Home() {
                 </FlexCol>
               </FlexCol>
             
-              <FlexCol className="gap-y-4 w-[50%] items-center text-lg font-medium">
+              <FlexCol className="gap-y-4 w-[50%] items-center text-lg font-medium text-white">
 
                 <SlideUp delay={0.2}>
                   <h2 style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-3xl text-gradient">Tech Interests</h2>
@@ -180,7 +192,7 @@ export default function Home() {
                   {techInterests.map((interest, i) => {
                     return (
                       <SlideUp key={i} delay={0.05 * i}>
-                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-color foreground-color">
                           <p className="group-hover:scale-120 transition duration-200">{interest}</p>
                         </div>
                       </SlideUp>
@@ -193,7 +205,7 @@ export default function Home() {
                   {softSkills.map((skill, i) => {
                     return (
                       <SlideUp key={i} delay={0.05 * i}>
-                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-color foreground-color">
                           <p className="group-hover:scale-120 transition duration-200">{skill}</p>
                         </div>
                       </SlideUp>
@@ -206,7 +218,7 @@ export default function Home() {
                   {hobbies.map((hobby, i) => {
                     return (
                       <SlideUp key={i} delay={0.05 * i}>
-                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-blue-200 bg-blue-400 text-white">
+                        <div className="group hover:scale-125 transition duration-300 border-2 rounded-3xl p-1 px-3 border-color foreground-color">
                           <p className="group-hover:scale-120 transition duration-200">{hobby}</p>
                         </div>
                       </SlideUp>
@@ -221,7 +233,7 @@ export default function Home() {
           </FlexCol>
 
           {/* Education Section */}
-          <FlexCol id="education" className="items-center gap-y-4 bg-white py-20 px-20 z-10">
+          <FlexCol id="education" className="items-center gap-y-4 background-color py-20 px-20 z-10">
             <SlideUp>
               <h1 className="title">Education</h1>
             </SlideUp>
@@ -229,19 +241,19 @@ export default function Home() {
             {/* <FlexRow className="w-full justify-between px-[18%] absolute pt-12">
 
               <SlideUp delay={0.1}>
-                <FlexCenter className="mt-20 group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                <FlexCenter className="mt-20 group hover:scale-110 transition duration-300 w-10 h-10 foreground-color rounded-full text-reverse-color border-3 border-color font-semibold">
                     <p className="group-hover:scale-125 transition">1</p>
                 </FlexCenter>
               </SlideUp>
 
               <SlideUp delay={0.2}>
-                <FlexCenter className="mt-10 group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                <FlexCenter className="mt-10 group hover:scale-110 transition duration-300 w-10 h-10 foreground-color rounded-full text-reverse-color border-3 border-color font-semibold">
                   <p className="group-hover:scale-125 transition">2</p>
                 </FlexCenter>
               </SlideUp>
 
               <SlideUp delay={0.3}>
-                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 bg-blue-400 rounded-full text-white border-3 border-blue-200 font-semibold">
+                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 foreground-color rounded-full text-reverse-color border-3 border-color font-semibold">
                     <p className="group-hover:scale-125 transition">3</p>
                 </FlexCenter>
               </SlideUp>
@@ -249,11 +261,11 @@ export default function Home() {
             </FlexRow> */}
 
             <SlideUp delay={0.1}>
-              <FlexRow className="w-full gap-x-4">
+              <FlexRow className="w-full gap-x-4 text-white">
 
-                <FlexCol className="mt-20 group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                <FlexCol className="mt-20 group w-full justify-start border-4 rounded-2xl px-5 py-3 foreground-color border-color hover:scale-105 transition duration-300">
                   <span className="group-hover:scale-102 transition">
-                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Técnico de Informática de Gestão</p>
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">IT Management Technician</p>
                     <p className="text-base">Escola Tecnológica do Litoral Alentejano</p>
                     <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
                       <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 09/2017 - 07/2020</p>
@@ -269,9 +281,9 @@ export default function Home() {
                 </FlexCol>
 
 
-                <FlexCol className="mt-10 group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                <FlexCol className="mt-10 group w-full justify-start border-4 rounded-2xl px-5 py-3 foreground-color border-color hover:scale-105 transition duration-300">
                   <span className="group-hover:scale-102 transition">
-                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Desenvolvimento de Videojogos e Aplicações Multimédia</p>
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Video Games and Multimedia Applications Development</p>
                     <p className="text-base">Instituto Politécnico de Setúbal</p>
                     <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
                       <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2020 - 06/2023</p>
@@ -285,9 +297,9 @@ export default function Home() {
                   </span>
                 </FlexCol>
 
-                <FlexCol className="group w-full justify-start border-4 rounded-2xl px-5 py-3 bg-blue-400 border-blue-200 text-white hover:scale-105 transition duration-300">
+                <FlexCol className="group w-full justify-start border-4 rounded-2xl px-5 py-3 foreground-color border-color hover:scale-105 transition duration-300">
                   <span className="group-hover:scale-102 transition">
-                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Licenciatura em Engenharia Informática</p>
+                    <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves">Bachelor’s Degree in Computer Science and Engineering</p>
                     <p className="text-base">Instituto Politécnico de Setúbal</p>
                     <FlexRow className="gap-x-4 items-center mt-2 mb-4 font-semibold">
                       <p><FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2023 - 10/2025</p>
@@ -309,7 +321,7 @@ export default function Home() {
           </FlexCol>
 
           {/* Projects Section */}
-          <FlexCol id="projects" className="items-center gap-y-4 bg-gray-50 w-full py-20 px-20 z-10">
+          <FlexCol id="projects" className="items-center gap-y-4 background-strong-color w-full py-20 px-20 z-10">
             <SlideUp delay={0.1}>
               <h1 className="title">Projects</h1>
             </SlideUp>
@@ -376,7 +388,7 @@ export default function Home() {
           </FlexCol>
 
           {/* Work Experience Section */}
-          <FlexCol id="work" className="items-center gap-y-4 w-full bg-white py-20 px-20 z-10">
+          <FlexCol id="work" className="items-center gap-y-4 w-full background-color py-20 px-20 z-10">
             <SlideUp delay={0.1}>
               <h1 className="title">Work Experience</h1>
             </SlideUp>
@@ -395,7 +407,7 @@ export default function Home() {
               <FlexCol className="w-full gap-y-2">
 
                 <SlideUp delay={0.2}>
-                  <FlexCol className="group w-full justify-start border-y-4 px-5 py-3 border-blue-200 text-black hover:scale-105 transition duration-300">
+                  <FlexCol className="group w-full justify-start border-y-4 px-5 py-3 border-color text-color hover:scale-105 transition duration-300">
                     <span className="group-hover:scale-102 transition">
                       <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves-black">Internship at Albatroz Digital</p>
                       <p className="text-base">Albatroz Digital</p>
@@ -414,7 +426,7 @@ export default function Home() {
                 </SlideUp>
 
                 <SlideUp delay={0.3}>
-                  <FlexCol className="group w-full justify-start border-y-4 px-5 py-3 border-blue-200 text-black hover:scale-105 transition duration-300">
+                  <FlexCol className="group w-full justify-start border-y-4 px-5 py-3 border-color text-color hover:scale-105 transition duration-300">
                     <span className="group-hover:scale-102 transition">
                       <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-xl font-bold text-gradient-waves-black">Internship at Bee Engineering</p>
                       <p className="text-base">Bee Engineering</p>
@@ -439,22 +451,22 @@ export default function Home() {
           </FlexCol>
 
           {/* Contact Section */}
-          <FlexCol id="contact" className="items-center gap-y-4 bg-blue-800 w-full py-20 px-20 m-0 selection:bg-blue-500 selection:text-white z-10">
-            <h1 className="title text-white">Contact</h1>
+          <FlexCol id="contact" className="items-center gap-y-4 foreground-strong-color w-full py-20 px-20 m-0 selection:foreground-color z-10 text-white">
+            <h1 className="title">Contact</h1>
 
             <FlexRow className="w-full items-start justify-between">
 
-              <FlexCol className="items-center text-center text-white w-[33%]">
+              <FlexCol className="items-center text-center w-[33%]">
                 <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient text-xl font-semibold">Email</p>
                 <p>rafaelcavalinhos2002@gmail.com</p>
-                <button onClick={() => window.open("/cv.pdf", "_blank")} className="w-[45%] font-semibold cursor-pointer group bg-inherit border-2 border-white text-white rounded-2xl text-base transition duration-200 hover:scale-110">
+                <button onClick={() => window.open("/cv.pdf", "_blank")} className="w-[45%] font-semibold cursor-pointer group bg-inherit border-2 border-white rounded-2xl text-base transition duration-200 hover:scale-110">
                   <span className="inline-flex items-center transition duration-300 group-hover:scale-115">
                     Download CV <FontAwesomeIcon icon={faDownload} />
                   </span>
                 </button>
               </FlexCol>
 
-              <FlexCol className="items-center text-center text-white w-[33%]">
+              <FlexCol className="items-center text-center w-[33%]">
                 <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient text-xl font-semibold">Overview</p>
                 <a href="#about" className="text-scale">About</a>
                 <a href="#education" className="text-scale">Education</a>
@@ -463,12 +475,12 @@ export default function Home() {
                 <a href="#contact" className="text-scale">Contact</a>
               </FlexCol>
 
-              <FlexCol className="text-center text-white w-[33%]">
+              <FlexCol className="text-center w-[33%]">
                 <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient text-xl font-semibold">Socials</p>
                 <FlexRow className="justify-center gap-x-10">
-                  <FontAwesomeIcon onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faLinkedin} />
-                  <FontAwesomeIcon onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faGithub} />
-                  <FontAwesomeIcon onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="text-2xl text-white hover:scale-125 transition cursor-pointer" icon={faEnvelope} />
+                  <FontAwesomeIcon onClick={() => window.open("https://www.linkedin.com/in/rafael-cavalinhos-39937624a/", "_blank")} className="text-2xl hover:scale-125 transition cursor-pointer" icon={faLinkedin} />
+                  <FontAwesomeIcon onClick={() => window.open("https://github.com/rafaelcavalinhos", "_blank")} className="text-2xl hover:scale-125 transition cursor-pointer" icon={faGithub} />
+                  <FontAwesomeIcon onClick={() => window.location.href = "mailto:rafaelcavalinhos2002@gmail.com"} className="text-2xl hover:scale-125 transition cursor-pointer" icon={faEnvelope} />
                 </FlexRow>
               </FlexCol>
 

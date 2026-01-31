@@ -5,10 +5,10 @@
 .text-gradient {
   background: radial-gradient(
     circle at 100%,
-    #5440f1,
-    #4079f3 50%,
-    #11bbe6 75%,
-    #165fe6 75%
+    var(--foreground-strong-color),
+    var(--foreground-color) 50%,
+    var(--border-color) 75%,
+    var(--foreground-color) 75%
   );
   background-size: 200% auto;
   color: #000;
@@ -27,7 +27,7 @@
   background: radial-gradient(
     circle at 100%,
     #ffffff 25%,
-    #00eeff 30%,
+    var(--border-color) 30%,
     #ffffff 35%
 
   );
@@ -41,9 +41,9 @@
 .text-gradient-waves-black {
   background: radial-gradient(
     circle at 100%,
-    #000000 25%,
-    #0091ff 30%,
-    #000000 35%
+    var(--text-color) 25%,
+    var(--foreground-color) 30%,
+    var(--text-color) 35%
 
   );
   background-size: 200% auto;
