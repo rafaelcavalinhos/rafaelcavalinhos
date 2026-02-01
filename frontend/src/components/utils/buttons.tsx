@@ -1,8 +1,8 @@
 import { ReactNode, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
 
-interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
+type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function TextAnchor({ children, className, ...props }: AnchorProps) {
   return (

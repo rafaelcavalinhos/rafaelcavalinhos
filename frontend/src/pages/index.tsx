@@ -55,7 +55,7 @@ export default function Home() {
   const [windowHeight, setWindowHeight] = useState(0);
 
   const [unlocked, setUnlocked] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [darkTheme, setDarkTheme] = useState(false);
 
@@ -86,7 +86,7 @@ export default function Home() {
     const timer = setTimeout(() => {
       document.body.style.overflow = 'auto';
       setUnlocked(true);
-    }, 1000);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
@@ -104,7 +104,7 @@ export default function Home() {
         {/* Header */}
         <header className="text-color fixed z-99 flex h-full flex-row">
           <FlexCol
-            className="background-color gap-y-4 p-4 pt-18 transition duration-400 ease-out"
+            className="background-color gap-y-4 p-4 pt-18 transition duration-400 ease-in-out"
             style={{ transform: `translateX(${unlocked && menuOpen ? '0%' : '-100%'})` }}
           >
             <FlexCol className="gap-y-4 text-2xl font-semibold">
@@ -141,9 +141,12 @@ export default function Home() {
 
           <TextButton
             className="absolute z-100 m-4 text-start text-2xl transition duration-400 ease-out"
-            onClick={() => setMenuOpen((prev) => !prev)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setMenuOpen((prev) => !prev);
+            }}
             style={{
-              transform: `scale(${unlocked ? '100%' : '0%'}) rotate(${menuOpen ? '0deg' : '90deg'})`,
+              transform: `scale(${unlocked ? '100%' : '0%'}) rotate(${menuOpen ? '0deg' : '180deg'})`,
             }}
           >
             <FontAwesomeIcon icon={faBars} />
@@ -152,16 +155,22 @@ export default function Home() {
 
         <main>
           <TextButton
-            style={
-              {
-                //transform: `scale(${scrollY >= windowHeight * 0.9 || !unlocked ? 0 : 1})`,
-              }
-            }
+            style={{
+              //transform: `scale(${scrollY >= windowHeight * 0.9 || !unlocked ? 0 : 1})`,
+              transform: `scale(${unlocked ? '100%' : '0%'})`,
+            }}
             className="text-color fixed right-0 z-100 m-4 text-2xl transition duration-300 ease-out"
             onClick={() => setDarkTheme((prev) => !prev)}
           >
             <FontAwesomeIcon icon={!darkTheme ? faMoon : faSun} />
           </TextButton>
+
+          <div
+            onClick={() => setMenuOpen(false)}
+            className={`fixed inset-0 z-80 bg-black/30 transition duration-500 ease-in-out ${
+              menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+            }`}
+          />
 
           <TextButton
             className="fixed left-1/2 z-99 mt-4 -translate-x-1/2 whitespace-nowrap transition-transform duration-300 ease-out"
