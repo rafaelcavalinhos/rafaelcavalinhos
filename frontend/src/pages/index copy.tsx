@@ -4,7 +4,6 @@ import { SlideUp } from '@/components/utils/animations';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBars,
   faCalendar,
   faDownload,
   faEnvelope,
@@ -14,7 +13,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { useEffect, useRef, useState } from 'react';
-import { TextAnchor, TextButton } from '@/components/utils/buttons';
 
 export default function Home() {
   const techInterests = [
@@ -55,7 +53,6 @@ export default function Home() {
   const [windowHeight, setWindowHeight] = useState(0);
 
   const [unlocked, setUnlocked] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(true);
 
   const [darkTheme, setDarkTheme] = useState(false);
 
@@ -100,105 +97,75 @@ export default function Home() {
 
   return (
     <>
-      <div id="home" className="background-color">
+      {/* Under Construction */}
+      {/* <FlexRow className="justify-center z-50 fixed top-[90vh] right-[-40vw] w-full pointer-events-none transition-transform">
+      <div className="pointer-events-auto px-6 py-2 bg-yellow-300 text-color font-semibold rounded-2xl shadow-md border-2 border-yellow-100">
+        🚧 Under Construction 🚧  
+      </div>
+    </FlexRow> */}
+
+      <div id="home" className="background-color duration-300">
         {/* Header */}
-        <header className="text-color fixed z-99 flex h-full flex-row">
-          <FlexCol
-            className="background-color gap-y-4 p-4 pt-18 transition duration-400 ease-out"
-            style={{ transform: `translateX(${unlocked && menuOpen ? '0%' : '-100%'})` }}
-          >
-            <FlexCol className="gap-y-4 text-2xl font-semibold">
-              {[
-                { href: '#home', text: 'Home' },
-                { href: '#about', text: 'About' },
-                { href: '#education', text: 'Education' },
-                { href: '#projects', text: 'Projects' },
-                { href: '#work-experience', text: 'Work Experience' },
-                { href: '#contact', text: 'Contact' },
-              ].map(({ href, text }, i) => {
-                const fixedOffset = 2;
+        <header
+          className="text-color header-border-color background-color fixed z-100 flex w-full flex-row items-center justify-between overflow-hidden px-20 py-4 transition duration-400 ease-out"
+          style={{ transform: `translateY(${unlocked ? '0%' : '-100%'})` }}
+        >
+          <div className="pointer-events-auto rounded-2xl border-2 border-yellow-100 bg-yellow-300 px-6 py-2 font-semibold text-black shadow-md">
+            🚧 Under Construction 🚧
+          </div>
 
-                return (
-                  <TextAnchor
-                    key={i}
-                    href={href}
-                    onClick={() => setMenuOpen(false)}
-                    style={{
-                      transform: menuOpen ? 'translateX(0)' : `translateX(-${i + fixedOffset}rem)`,
-                      transition: 'transform 500ms ease-out',
-                    }}
-                  >
-                    {text}
-                  </TextAnchor>
-                );
-              })}
-            </FlexCol>
-
-            <div className="pointer-events-auto mb-4 rounded-2xl border-2 border-yellow-100 bg-yellow-300 px-6 py-2 font-semibold text-black shadow-md">
-              🚧 Under Construction 🚧
-            </div>
-          </FlexCol>
-
-          <TextButton
-            className="absolute z-100 m-4 text-start text-2xl transition duration-400 ease-out"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            style={{
-              transform: `scale(${unlocked ? '100%' : '0%'}) rotate(${menuOpen ? '0deg' : '90deg'})`,
-            }}
-          >
-            <FontAwesomeIcon icon={faBars} />
-          </TextButton>
-        </header>
-
-        <main>
-          <TextButton
-            style={
-              {
-                //transform: `scale(${scrollY >= windowHeight * 0.9 || !unlocked ? 0 : 1})`,
-              }
-            }
-            className="text-color fixed right-0 z-100 m-4 text-2xl transition duration-300 ease-out"
-            onClick={() => setDarkTheme((prev) => !prev)}
-          >
-            <FontAwesomeIcon icon={!darkTheme ? faMoon : faSun} />
-          </TextButton>
-
-          <TextButton
-            className="fixed left-1/2 z-99 mt-4 -translate-x-1/2 whitespace-nowrap transition-transform duration-300 ease-out"
+          <div
+            className="absolute top-5 left-1/2 -translate-x-1/2 transition-transform"
             style={{ scale: scrollY >= windowHeight * 0.9 ? 1 : 0 }}
           >
             <h1
               onClick={() => {
                 document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-gradient text-2xl font-bold"
+              className="text-gradient text-scale text-3xl font-bold"
             >
               Rafael Cavalinhos
             </h1>
-          </TextButton>
+          </div>
+
+          <FlexRow className="gap-x-5 text-xl font-semibold">
+            <a href="#about" className="text-scale">
+              About
+            </a>
+            <a href="#education" className="text-scale">
+              Education
+            </a>
+            <a href="#projects" className="text-scale">
+              Projects
+            </a>
+            <a href="#work" className="text-scale">
+              Work Experience
+            </a>
+            <a href="#contact" className="text-scale">
+              Contact
+            </a>
+          </FlexRow>
+        </header>
+        <main>
+          <FlexRow
+            style={{
+              transform: `scale(${scrollY >= windowHeight * 0.9 || !unlocked ? 0 : 1})`,
+            }}
+            className="text-scale background-color text-color header-border-color fixed top-28 right-20 z-99 h-10 w-10 items-center justify-center rounded-full border text-2xl drop-shadow-lg transition duration-300 ease-out"
+            onClick={() => setDarkTheme((prev) => !prev)}
+          >
+            <FontAwesomeIcon icon={!darkTheme ? faMoon : faSun} />
+          </FlexRow>
 
           <FlexCol className="text-color w-full">
             {/* Hero Section */}
-            <FlexCol
+            <FlexRow
               style={{ transform: `scale(${heroScale})`, transformOrigin: 'top' }}
-              className="fixed h-screen w-full items-center justify-start gap-y-10 p-4 pt-14 transition-transform duration-100 ease-out"
+              className="fixed h-screen w-full justify-between px-20 pt-24 transition-transform duration-100 ease-out"
             >
-              <FlexCenter className="">
-                <Image
-                  src="/cat.gif"
-                  alt="me"
-                  width={250}
-                  height={250}
-                  className="rounded-full transition hover:scale-105"
-                />
-                <p className="absolute text-center text-3xl text-yellow-500">
-                  Image not
-                  <br />
-                  available yet...
-                </p>
-              </FlexCenter>
+              <div className="absolute top-1/2 left-1/2 h-10 w-100"></div>
 
-              <FlexCol className="items-center gap-y-4 text-center text-5xl font-bold">
+              <FlexCol className="items-start justify-center gap-y-10 text-6xl font-bold">
                 <h1>
                   <SlideUp>
                     Hello!
@@ -266,12 +233,27 @@ export default function Home() {
                   </SlideUp>
                 </FlexRow>
               </FlexCol>
-            </FlexCol>
+
+              <FlexCenter className="pr-20">
+                <Image
+                  src="/cat.gif"
+                  alt="me"
+                  width={500}
+                  height={500}
+                  className="rounded-full transition hover:scale-105"
+                />
+                <p className="absolute text-center text-6xl text-yellow-500">
+                  Image not
+                  <br />
+                  available yet...
+                </p>
+              </FlexCenter>
+            </FlexRow>
 
             {/* About Section*/}
             <FlexCol
               id="about"
-              className="background-secundary-color z-10 mt-[100vh] w-full items-center gap-y-4 px-20 py-30 shadow-2xl"
+              className="background-secundary-color z-10 mt-[110vh] w-full items-center gap-y-4 px-20 py-30 shadow-2xl"
             >
               <SlideUp>
                 <h1 className="title">About</h1>
@@ -393,7 +375,7 @@ export default function Home() {
             </FlexRow> */}
 
               <SlideUp delay={0.1}>
-                <FlexCol className="w-full gap-x-4 text-white">
+                <FlexRow className="w-full gap-x-4 text-white">
                   <FlexCol className="group foreground-color border-color mt-20 w-full justify-start rounded-2xl border-4 px-5 py-3 transition duration-300 hover:scale-105">
                     <span className="transition group-hover:scale-102">
                       <p
@@ -479,7 +461,7 @@ export default function Home() {
                       </p>
                     </span>
                   </FlexCol>
-                </FlexCol>
+                </FlexRow>
               </SlideUp>
             </FlexCol>
 
@@ -576,7 +558,7 @@ export default function Home() {
 
             {/* Work Experience Section */}
             <FlexCol
-              id="work-experience"
+              id="work"
               className="background-color z-10 w-full items-center gap-y-4 px-20 py-30"
             >
               <SlideUp delay={0.1}>
@@ -694,19 +676,19 @@ export default function Home() {
                   >
                     Overview
                   </p>
-                  <a href="#about" className="">
+                  <a href="#about" className="text-scale">
                     About
                   </a>
-                  <a href="#education" className="">
+                  <a href="#education" className="text-scale">
                     Education
                   </a>
-                  <a href="#projects" className="">
+                  <a href="#projects" className="text-scale">
                     Projects
                   </a>
-                  <a href="#work" className="">
+                  <a href="#work" className="text-scale">
                     Work Experience
                   </a>
-                  <a href="#contact" className="">
+                  <a href="#contact" className="text-scale">
                     Contact
                   </a>
                 </FlexCol>

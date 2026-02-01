@@ -1,7 +1,3 @@
-.text-scale {
-  @apply cursor-pointer transition-transform duration-100 hover:scale-125;
-}
-
 .text-gradient {
   background: radial-gradient(
     circle at 100%,
@@ -24,13 +20,7 @@
 }
 
 .text-gradient-waves {
-  background: radial-gradient(
-    circle at 100%,
-    #ffffff 25%,
-    var(--border-color) 30%,
-    #ffffff 35%
-
-  );
+  background: radial-gradient(circle at 100%, #ffffff 25%, var(--border-color) 30%, #ffffff 35%);
   background-size: 200% auto;
   color: #000;
   background-clip: text;
@@ -44,7 +34,6 @@
     var(--text-color) 25%,
     var(--foreground-color) 30%,
     var(--text-color) 35%
-
   );
   background-size: 200% auto;
   color: #000;
