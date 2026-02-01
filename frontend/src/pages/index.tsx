@@ -153,7 +153,7 @@ export default function Home() {
           </TextButton>
         </header>
 
-        <main>
+        <main className="">
           <TextButton
             style={{
               //transform: `scale(${scrollY >= windowHeight * 0.9 || !unlocked ? 0 : 1})`,
@@ -180,7 +180,7 @@ export default function Home() {
               onClick={() => {
                 document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-gradient text-outline text-2xl font-bold"
+              className="text-gradient text-2xl font-bold"
             >
               Rafael Cavalinhos
             </h1>
@@ -280,19 +280,19 @@ export default function Home() {
             {/* About Section*/}
             <FlexCol
               id="about"
-              className="background-secundary-color z-10 mt-[100vh] w-full items-center gap-y-4 px-20 py-30 shadow-2xl"
+              className="background-secundary-color z-10 mt-[100vh] w-full items-center p-4"
             >
               <SlideUp>
                 <h1 className="title">About</h1>
               </SlideUp>
 
-              <FlexRow className="gap-x-10">
-                <FlexCol className="w-[50%] items-center gap-y-4 text-lg font-medium">
+              <FlexCol className="w-full items-center gap-y-8">
+                <FlexCol className="w-full items-center gap-y-4 text-lg font-medium">
                   <SlideUp delay={0.1}>
-                    <h2 className="text-gradient text-3xl">Professional Bio</h2>
+                    <h2 className="text-gradient text-center text-xl">Professional Bio</h2>
                   </SlideUp>
 
-                  <FlexCol className="text-justify">
+                  <FlexCol className="w-full text-justify">
                     <SlideUp delay={0.2}>
                       <p>
                         I am Computer Engineering graduate with a growing focus on web development,
@@ -307,11 +307,11 @@ export default function Home() {
                   </FlexCol>
                 </FlexCol>
 
-                <FlexCol className="w-[50%] items-center gap-y-4 text-lg font-medium text-white">
+                <FlexCol className="w-full items-center gap-y-4 text-lg font-medium text-white">
                   <SlideUp delay={0.2}>
                     <h2
                       style={{ animationDelay: `${Math.random() * 0.5}s` }}
-                      className="text-gradient text-3xl"
+                      className="text-gradient text-xl"
                     >
                       Tech Interests
                     </h2>
@@ -333,7 +333,7 @@ export default function Home() {
 
                   <h2
                     style={{ animationDelay: `${Math.random() * 0.5}s` }}
-                    className="text-gradient mt-5 text-3xl"
+                    className="text-gradient text-xl"
                   >
                     Soft Skills
                   </h2>
@@ -367,7 +367,7 @@ export default function Home() {
                     })}
                   </FlexRow>
                 </FlexCol>
-              </FlexRow>
+              </FlexCol>
             </FlexCol>
 
             {/* Education Section */}
