@@ -14,6 +14,10 @@ body {
   height: 100%;
 }
 
+.text-outline {
+  -webkit-text-stroke: 0.5px white;
+}
+
 :root {
   --foreground-color: theme(colors.blue.400);
   --foreground-strong-color: theme(colors.blue.800);

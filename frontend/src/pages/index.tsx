@@ -102,9 +102,9 @@ export default function Home() {
     <>
       <div id="home" className="background-color">
         {/* Header */}
-        <header className="text-color fixed z-99 flex h-full flex-row">
+        <header className="text-color fixed z-100">
           <FlexCol
-            className="background-color gap-y-4 p-4 pt-18 transition duration-400 ease-in-out"
+            className="background-color fixed z-99 h-full gap-y-4 p-4 py-18 transition duration-400 ease-in-out"
             style={{ transform: `translateX(${unlocked && menuOpen ? '0%' : '-100%'})` }}
           >
             <FlexCol className="gap-y-4 text-2xl font-semibold">
@@ -180,7 +180,7 @@ export default function Home() {
               onClick={() => {
                 document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-gradient text-2xl font-bold"
+              className="text-gradient text-outline text-2xl font-bold"
             >
               Rafael Cavalinhos
             </h1>
