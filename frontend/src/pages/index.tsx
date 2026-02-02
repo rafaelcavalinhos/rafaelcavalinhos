@@ -16,6 +16,16 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import { TextAnchor, TextButton } from '@/components/utils/buttons';
 
+type Project = {
+  images: string[];
+  title: string;
+  description: string;
+  technologies: string[];
+  downloadUrl: string;
+  tags?: string[];
+  videos?: boolean;
+};
+
 export default function Home() {
   const techInterests = [
     'Next.js',
@@ -49,6 +59,69 @@ export default function Home() {
   ];
 
   const hobbies = ['Guitar', 'Gaming', 'Programming', 'Animals', 'Cars'];
+
+  const projects: Project[] = [
+    {
+      tags: ['College Project'],
+      images: ['/projects/press-em1.png', '/projects/press-em2.png', '/projects/press-em3.png'],
+      title: "Press 'em",
+      description:
+        "In Press 'em you need to defeat robots and solve puzzles by grabbing crates and pressing buttons to complete the levels!",
+      technologies: ['Unity', 'C#', 'Aseprite'],
+      downloadUrl: 'https://rafael-cavalinhos.itch.io/press-em',
+    },
+    {
+      tags: ['College Project'],
+      images: ['/projects/castaway1.png', '/projects/castaway2.png', '/projects/castaway3.png'],
+      title: 'Castaway',
+      description:
+        'Castaway is a game where you will try to survive the days and nights in an island whilst fighting enemies and gathering resources to finally fix and escape in your until then wrecked ship.',
+      technologies: ['Unity', 'C#', 'Aseprite'],
+      downloadUrl: 'https://rafael-cavalinhos.itch.io/castaway',
+    },
+    {
+      tags: ['College Project', 'Game Jam'],
+      images: [
+        '/projects/factory-dealings1.png',
+        '/projects/factory-dealings2.png',
+        '/projects/factory-dealings3.png',
+      ],
+      title: 'Factory Dealings',
+      description:
+        "Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death.",
+      technologies: ['Unity', 'C#', 'Aseprite'],
+      downloadUrl: 'https://rafael-cavalinhos.itch.io/factory-dealings',
+    },
+    {
+      tags: ['Hobby Project'],
+      images: [
+        '/projects/snake-game1.png',
+        '/projects/snake-game2.png',
+        '/projects/snake-game3.png',
+      ],
+      title: 'Snake Game',
+      description: 'A basic 2D Snake game made as a hobby project and published for fun.',
+      technologies: ['Unity', 'C#', 'Aseprite'],
+      downloadUrl: 'https://rafael-cavalinhos.itch.io/snake-game',
+    },
+    {
+      tags: ['Internship', 'Team Project'],
+      videos: true,
+      images: [
+        '/projects/beach-rolling.mp4',
+        '/projects/spooky-hunt.mp4',
+        '/projects/brawl-fighters.mp4',
+        '/projects/wave-racer.mp4',
+        '/projects/feng-shui.mp4',
+        '/projects/flames-out.mp4',
+      ],
+      title: 'Internship Mobile Games',
+      description:
+        'These mobile games were developed as demonstration prototypes for advertising purposes, with the objective of evaluating their potential before deciding which concepts would proceed to full development. As a result, only the advertisements are available.',
+      technologies: ['Unity', 'C#'],
+      downloadUrl: 'https://rafael-cavalinhos.itch.io/estgio-bee-engeneering',
+    },
+  ];
 
   const [scrollY, setScrollY] = useState(0);
   const [heroScale, setHeroScale] = useState(1);
@@ -172,7 +245,7 @@ export default function Home() {
             }`}
           />
 
-          <TextButton
+          {/* <TextButton
             className="fixed left-1/2 z-99 mt-4 -translate-x-1/2 whitespace-nowrap transition-transform duration-300 ease-out"
             style={{ scale: scrollY >= windowHeight * 0.9 ? 1 : 0 }}
           >
@@ -184,7 +257,7 @@ export default function Home() {
             >
               Rafael Cavalinhos
             </h1>
-          </TextButton>
+          </TextButton> */}
 
           <FlexCol className="text-color w-full">
             {/* Hero Section */}
@@ -351,7 +424,7 @@ export default function Home() {
 
                   <h2
                     style={{ animationDelay: `${Math.random() * 0.5}s` }}
-                    className="text-gradient mt-5 text-3xl"
+                    className="text-gradient text-xl"
                   >
                     Hobbies
                   </h2>
@@ -371,40 +444,15 @@ export default function Home() {
             </FlexCol>
 
             {/* Education Section */}
-            <FlexCol
-              id="education"
-              className="background-color z-10 items-center gap-y-4 px-20 py-30"
-            >
+            <FlexCol id="education" className="background-color z-10 items-center p-4">
               <SlideUp>
                 <h1 className="title">Education</h1>
               </SlideUp>
 
-              {/* <FlexRow className="w-full justify-between px-[18%] absolute pt-12">
-
               <SlideUp delay={0.1}>
-                <FlexCenter className="mt-20 group hover:scale-110 transition duration-300 w-10 h-10 foreground-color rounded-full text-reverse-color border-3 border-color font-semibold">
-                    <p className="group-hover:scale-125 transition">1</p>
-                </FlexCenter>
-              </SlideUp>
-
-              <SlideUp delay={0.2}>
-                <FlexCenter className="mt-10 group hover:scale-110 transition duration-300 w-10 h-10 foreground-color rounded-full text-reverse-color border-3 border-color font-semibold">
-                  <p className="group-hover:scale-125 transition">2</p>
-                </FlexCenter>
-              </SlideUp>
-
-              <SlideUp delay={0.3}>
-                <FlexCenter className="group hover:scale-110 transition duration-300 w-10 h-10 foreground-color rounded-full text-reverse-color border-3 border-color font-semibold">
-                    <p className="group-hover:scale-125 transition">3</p>
-                </FlexCenter>
-              </SlideUp>
-
-            </FlexRow> */}
-
-              <SlideUp delay={0.1}>
-                <FlexCol className="w-full gap-x-4 text-white">
-                  <FlexCol className="group foreground-color border-color mt-20 w-full justify-start rounded-2xl border-4 px-5 py-3 transition duration-300 hover:scale-105">
-                    <span className="transition group-hover:scale-102">
+                <FlexCol className="w-full gap-x-4 gap-y-4 text-white">
+                  <FlexCol className="group foreground-color border-color w-full justify-start rounded-2xl border-4 p-4 transition duration-300 hover:scale-105">
+                    <FlexCol className="transition group-hover:scale-102">
                       <p
                         style={{ animationDelay: `${Math.random() * 0.5}s` }}
                         className="text-gradient-waves text-xl font-bold"
@@ -412,7 +460,7 @@ export default function Home() {
                         IT Management Technician
                       </p>
                       <p className="text-base">Escola Tecnológica do Litoral Alentejano</p>
-                      <FlexRow className="mt-2 mb-4 items-center gap-x-4 font-semibold">
+                      <FlexRow className="mt-2 mb-4 items-center gap-x-4 text-sm font-semibold">
                         <p>
                           <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 09/2017 - 07/2020
                         </p>
@@ -421,16 +469,16 @@ export default function Home() {
                         </p>
                       </FlexRow>
 
-                      <p className="text-justify">
+                      {/* <p className="text-justify">
                         Focused on the development and maintenance of IT solutions for business
                         environments, creating websites and company portals, installing and
                         configuring operating systems and application software, managing relational
                         databases and building management-oriented software applications.
-                      </p>
-                    </span>
+                      </p> */}
+                    </FlexCol>
                   </FlexCol>
 
-                  <FlexCol className="group foreground-color border-color mt-10 w-full justify-start rounded-2xl border-4 px-5 py-3 transition duration-300 hover:scale-105">
+                  <FlexCol className="group foreground-color border-color w-full justify-start rounded-2xl border-4 p-4 transition duration-300 hover:scale-105">
                     <span className="transition group-hover:scale-102">
                       <p
                         style={{ animationDelay: `${Math.random() * 0.5}s` }}
@@ -439,7 +487,7 @@ export default function Home() {
                         Video Games and Multimedia Applications Development
                       </p>
                       <p className="text-base">Instituto Politécnico de Setúbal</p>
-                      <FlexRow className="mt-2 mb-4 items-center gap-x-4 font-semibold">
+                      <FlexRow className="mt-2 mb-4 items-center gap-x-4 text-sm font-semibold">
                         <p>
                           <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2020 - 06/2023
                         </p>
@@ -449,17 +497,17 @@ export default function Home() {
                         </p>
                       </FlexRow>
 
-                      <p className="text-justify">
+                      {/* <p className="text-justify">
                         Focused on game development and multimedia applications, covering game
                         design techniques, interface design and core programming concepts. It
                         includes work with graphic APIs and game engines, as well as the creation
                         and editing of multimedia assets such as audio, video, textures and 3D
                         models.
-                      </p>
+                      </p> */}
                     </span>
                   </FlexCol>
 
-                  <FlexCol className="group foreground-color border-color w-full justify-start rounded-2xl border-4 px-5 py-3 transition duration-300 hover:scale-105">
+                  <FlexCol className="group foreground-color border-color w-full justify-start rounded-2xl border-4 p-4 transition duration-300 hover:scale-105">
                     <span className="transition group-hover:scale-102">
                       <p
                         style={{ animationDelay: `${Math.random() * 0.5}s` }}
@@ -468,7 +516,7 @@ export default function Home() {
                         Bachelor’s Degree in Computer Science and Engineering
                       </p>
                       <p className="text-base">Instituto Politécnico de Setúbal</p>
-                      <FlexRow className="mt-2 mb-4 items-center gap-x-4 font-semibold">
+                      <FlexRow className="mt-2 mb-4 items-center gap-x-4 text-sm font-semibold">
                         <p>
                           <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 10/2023 - 10/2025
                         </p>
@@ -478,14 +526,14 @@ export default function Home() {
                         </p>
                       </FlexRow>
 
-                      <p className="text-justify">
+                      {/* <p className="text-justify">
                         Bachelor’s degree focused on developing technical and scientific skills in
                         the field of computer science. It covers programming, databases, networks,
                         software development, and technology integration. The program combines
                         theory and practice through laboratory projects and teamwork, preparing
                         professionals for the design, analysis, and implementation of modern IT
                         solutions.
-                      </p>
+                      </p> */}
                     </span>
                   </FlexCol>
                 </FlexCol>
@@ -493,192 +541,111 @@ export default function Home() {
             </FlexCol>
 
             {/* Projects Section */}
-            <FlexCol
-              id="projects"
-              className="background-secundary-color z-10 w-full items-center gap-y-4 px-20 py-30"
-            >
+            <FlexCol id="projects" className="background-secundary-color z-10 w-full items-center">
               <SlideUp delay={0.1}>
-                <h1 className="title">Projects</h1>
+                <h1 className="title p-4">Projects</h1>
               </SlideUp>
 
-              <FlexRow className="flex-wrap justify-center gap-2">
-                <SlideUp delay={0.1}>
-                  <Project
-                    tags={['College Project']}
-                    images={[
-                      '/projects/press-em1.png',
-                      '/projects/press-em2.png',
-                      '/projects/press-em3.png',
-                    ]}
-                    title="Press 'em"
-                    description="In Press 'em you need to defeat robots and solve puzzles by grabbing crates and pressing buttons to complete the levels!"
-                    technologies={['Unity', 'C#', 'Aseprite']}
-                    downloadUrl="https://rafael-cavalinhos.itch.io/press-em"
-                  />
-                </SlideUp>
-
-                <SlideUp delay={0.2}>
-                  <Project
-                    tags={['College Project']}
-                    images={[
-                      '/projects/castaway1.png',
-                      '/projects/castaway2.png',
-                      '/projects/castaway3.png',
-                    ]}
-                    title="Castaway"
-                    description="Castaway is a game where you will try to survive the days and nights in an island whilst fighting enemies and gathering resources to finally fix and escape in your until then wrecked ship."
-                    technologies={['Unity', 'C#', 'Aseprite']}
-                    downloadUrl="https://rafael-cavalinhos.itch.io/castaway"
-                  />
-                </SlideUp>
-
-                <SlideUp delay={0.3}>
-                  <Project
-                    tags={['College Project', 'Game Jam']}
-                    images={[
-                      '/projects/factory-dealings1.png',
-                      '/projects/factory-dealings2.png',
-                      '/projects/factory-dealings3.png',
-                    ]}
-                    title="Factory Dealings"
-                    description="Factory Dealings is an arcade game where you'll have to give items for injured robots, and fast, or else they will explode and die a cruel death."
-                    technologies={['Unity', 'C#', 'Aseprite']}
-                    downloadUrl="https://rafael-cavalinhos.itch.io/factory-dealings"
-                  />
-                </SlideUp>
-
-                <SlideUp delay={0.4}>
-                  <Project
-                    tags={['Hobby Project']}
-                    images={[
-                      '/projects/snake-game1.png',
-                      '/projects/snake-game2.png',
-                      '/projects/snake-game3.png',
-                    ]}
-                    title="Snake Game"
-                    description="A basic 2D Snake game made as a hobby project and published for fun."
-                    technologies={['Unity', 'C#', 'Aseprite']}
-                    downloadUrl="https://rafael-cavalinhos.itch.io/snake-game"
-                  />
-                </SlideUp>
-
-                <SlideUp delay={0.5}>
-                  <Project
-                    tags={['Internship', 'Team Project']}
-                    videos
-                    images={[
-                      '/projects/beach-rolling.mp4',
-                      '/projects/spooky-hunt.mp4',
-                      '/projects/brawl-fighters.mp4',
-                      '/projects/wave-racer.mp4',
-                      '/projects/feng-shui.mp4',
-                      '/projects/flames-out.mp4',
-                    ]}
-                    title="Internship Mobile Games"
-                    description="These mobile games were developed as demonstration prototypes for advertising purposes, with the objective of evaluating their potential before deciding which concepts would proceed to full development. As a result, only the advertisements are available."
-                    technologies={['Unity', 'C#']}
-                    downloadUrl="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
-                  />
-                </SlideUp>
+              <FlexRow className="w-full gap-x-4 overflow-x-auto px-4 pb-4">
+                {projects.map(
+                  ({ tags, images, title, description, technologies, downloadUrl, videos }, i) => (
+                    <SlideUp delay={0.1 * (i + 1)}>
+                      <Project
+                        tags={tags}
+                        images={images}
+                        title={title}
+                        description={description}
+                        technologies={technologies}
+                        downloadUrl={downloadUrl}
+                        videos={videos}
+                      />
+                    </SlideUp>
+                  ),
+                )}
               </FlexRow>
             </FlexCol>
 
             {/* Work Experience Section */}
-            <FlexCol
-              id="work-experience"
-              className="background-color z-10 w-full items-center gap-y-4 px-20 py-30"
-            >
+            <FlexCol id="work-experience" className="background-color z-10 w-full items-center p-4">
               <SlideUp delay={0.1}>
                 <h1 className="title">Work Experience</h1>
               </SlideUp>
 
-              {/* <SlideUp delay={0.2}>
-              <p className="text-center text-6xl text-gradient py-6">Under construction</p>
-            </SlideUp> */}
-
-              <FlexRow className="w-full">
-                {/* <FlexCol className="justify-around p-10">
-                <FontAwesomeIcon icon={faArrowCircleRight} className="text-blue-400"></FontAwesomeIcon>
-                <FontAwesomeIcon icon={faArrowCircleRight} className="text-blue-400"></FontAwesomeIcon>
-              </FlexCol> */}
-
-                <FlexCol className="w-full gap-y-2">
-                  <SlideUp delay={0.2}>
-                    <FlexCol className="group border-color text-color w-full justify-start border-y-4 px-5 py-3 transition duration-300 hover:scale-105">
-                      <span className="transition group-hover:scale-102">
-                        <p
-                          style={{ animationDelay: `${Math.random() * 0.5}s` }}
-                          className="text-gradient-waves-black text-xl font-bold"
-                        >
-                          Internship at Albatroz Digital
+              <FlexCol className="w-full gap-y-4">
+                <SlideUp delay={0.2}>
+                  <FlexCol className="group border-color text-color w-full justify-start border-y-4 p-4 transition duration-300 hover:scale-105">
+                    <span className="transition group-hover:scale-102">
+                      <p
+                        style={{ animationDelay: `${Math.random() * 0.5}s` }}
+                        className="text-gradient-waves-black text-xl font-bold"
+                      >
+                        Internship at Albatroz Digital
+                      </p>
+                      <p className="text-base">Albatroz Digital</p>
+                      <FlexRow className="mt-2 mb-4 items-center justify-between text-sm font-semibold">
+                        <p>
+                          <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 07/2025 - 09/2025
                         </p>
-                        <p className="text-base">Albatroz Digital</p>
-                        <FlexRow className="mt-2 mb-4 items-center gap-x-4 font-semibold">
-                          <p>
-                            <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 07/2025 - 09/2025
-                          </p>
-                          <p>
-                            <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Almada -
-                            Portugal
-                          </p>
-                        </FlexRow>
-
-                        <p className="text-justify">
-                          Designed and implemented a full interface for creating and managing
-                          entities. <br />
-                          Built reusable front-end components to ensure visual consistency and
-                          maintainability. <br />
-                          Developed the backend logic, API endpoints and database communication
-                          needed to support the new interface.
+                        <p>
+                          <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Almada - Portugal
                         </p>
-                      </span>
-                    </FlexCol>
-                  </SlideUp>
+                      </FlexRow>
 
-                  <SlideUp delay={0.3}>
-                    <FlexCol className="group border-color text-color w-full justify-start border-y-4 px-5 py-3 transition duration-300 hover:scale-105">
-                      <span className="transition group-hover:scale-102">
-                        <p
-                          style={{ animationDelay: `${Math.random() * 0.5}s` }}
-                          className="text-gradient-waves-black text-xl font-bold"
-                        >
-                          Internship at Bee Engineering
-                        </p>
-                        <p className="text-base">Bee Engineering</p>
-                        <FlexRow className="mt-2 mb-4 items-center gap-x-4 font-semibold">
-                          <p>
-                            <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 04/2022 - 08/2022
-                          </p>
-                          <p>
-                            <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Remote (Lisbon
-                            - Portugal)
-                          </p>
-                        </FlexRow>
+                      <p className="text-justify">
+                        Designed and implemented a full interface for creating and managing
+                        entities. <br />
+                        Built reusable front-end components to ensure visual consistency and
+                        maintainability. <br />
+                        Developed the backend logic, API endpoints and database communication needed
+                        to support the new interface.
+                      </p>
+                    </span>
+                  </FlexCol>
+                </SlideUp>
 
-                        <p className="text-justify">
-                          Developed mobile game prototypes in Unity, handling core gameplay logic,
-                          UI flow and level structure. <br />
-                          Designed and tuned levels, integrated animations, audio and gameplay
-                          feedback to enhance game feel. <br />
-                          Worked in rapid prototyping cycles, iterating based on internal
-                          playtesting and feedback.
+                <SlideUp delay={0.3}>
+                  <FlexCol className="group border-color text-color w-full justify-start border-y-4 px-5 py-3 transition duration-300 hover:scale-105">
+                    <span className="transition group-hover:scale-102">
+                      <p
+                        style={{ animationDelay: `${Math.random() * 0.5}s` }}
+                        className="text-gradient-waves-black text-xl font-bold"
+                      >
+                        Internship at Bee Engineering
+                      </p>
+                      <p className="text-base">Bee Engineering</p>
+                      <FlexRow className="mt-2 mb-4 items-center justify-between text-sm font-semibold">
+                        <p>
+                          <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon> 04/2022 - 08/2022
                         </p>
-                      </span>
-                    </FlexCol>
-                  </SlideUp>
-                </FlexCol>
-              </FlexRow>
+                        <p>
+                          <FontAwesomeIcon icon={faLocationDot}></FontAwesomeIcon> Remote <br />{' '}
+                          (Lisbon - Portugal)
+                        </p>
+                      </FlexRow>
+
+                      <p className="text-justify">
+                        Developed mobile game prototypes in Unity, handling core gameplay logic, UI
+                        flow and level structure. <br />
+                        Designed and tuned levels, integrated animations, audio and gameplay
+                        feedback to enhance game feel. <br />
+                        Worked in rapid prototyping cycles, iterating based on internal playtesting
+                        and feedback.
+                      </p>
+                    </span>
+                  </FlexCol>
+                </SlideUp>
+              </FlexCol>
             </FlexCol>
 
             {/* Contact Section */}
             <FlexCol
               id="contact"
-              className="foreground-strong-color selection:foreground-color z-10 m-0 w-full items-center gap-y-4 px-20 py-30 text-white"
+              className="foreground-strong-color z-10 w-full items-center p-4 text-white"
             >
               <h1 className="title">Contact</h1>
 
-              <FlexRow className="w-full items-start justify-between">
-                <FlexCol className="w-[33%] items-center text-center">
+              <FlexCol className="w-full items-center gap-y-4">
+                <FlexCol className="items-center gap-y-2 text-center">
                   <p
                     style={{ animationDelay: `${Math.random() * 0.5}s` }}
                     className="text-gradient text-xl font-semibold"
@@ -688,7 +655,7 @@ export default function Home() {
                   <p>rafaelcavalinhos2002@gmail.com</p>
                   <button
                     onClick={() => window.open('/cv.pdf', '_blank')}
-                    className="group w-[45%] cursor-pointer rounded-2xl border-2 border-white bg-inherit text-base font-semibold transition duration-200 hover:scale-110"
+                    className="group cursor-pointer rounded-full border-2 border-white bg-inherit px-4 py-2 text-base font-semibold transition duration-200 hover:scale-110"
                   >
                     <span className="inline-flex items-center transition duration-300 group-hover:scale-115">
                       Download CV <FontAwesomeIcon icon={faDownload} />
@@ -696,7 +663,7 @@ export default function Home() {
                   </button>
                 </FlexCol>
 
-                <FlexCol className="w-[33%] items-center text-center">
+                {/* <FlexCol className="w-[33%] items-center text-center">
                   <p
                     style={{ animationDelay: `${Math.random() * 0.5}s` }}
                     className="text-gradient text-xl font-semibold"
@@ -718,16 +685,16 @@ export default function Home() {
                   <a href="#contact" className="">
                     Contact
                   </a>
-                </FlexCol>
+                </FlexCol> */}
 
-                <FlexCol className="w-[33%] text-center">
+                <FlexCol className="gap-y-2 text-center">
                   <p
                     style={{ animationDelay: `${Math.random() * 0.5}s` }}
                     className="text-gradient text-xl font-semibold"
                   >
                     Socials
                   </p>
-                  <FlexRow className="justify-center gap-x-10">
+                  <FlexRow className="justify-center gap-x-2">
                     <FontAwesomeIcon
                       onClick={() =>
                         window.open(
@@ -752,15 +719,11 @@ export default function Home() {
                     />
                   </FlexRow>
                 </FlexCol>
-              </FlexRow>
+              </FlexCol>
             </FlexCol>
           </FlexCol>
         </main>
       </div>
-
-      {/* <FlexCenter className="block lg:hidden h-full font-bold text-2xl">
-      <p className="text-gradient text-center">Please open this webpage on a computer.</p>
-    </FlexCenter> */}
     </>
   );
 }
