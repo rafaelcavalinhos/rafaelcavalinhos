@@ -1,8 +1,14 @@
-import { FlexCol, FlexRow } from "@/components/utils/flex";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faArrowLeft, faArrowRight, faDownload, } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { FlexCol, FlexRow } from '@/components/utils/flex';
+import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faAngleLeft,
+  faAngleRight,
+  faArrowLeft,
+  faArrowRight,
+  faDownload,
+} from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface Props {
   images: string[];
@@ -12,11 +18,13 @@ interface Props {
   downloadUrl: string;
   tags?: string[];
   videos?: boolean;
+  featured?: boolean;
+  wip?: boolean;
 }
 
 const Project = (props: Props) => {
-
-  const { images, title, description, technologies, downloadUrl, tags, videos } = props;
+  const { images, title, description, technologies, downloadUrl, tags, videos, wip, featured } =
+    props;
 
   const [currentImage, setCurrentImage] = useState(1);
   const [animate, setAnimate] = useState(true);
@@ -31,13 +39,13 @@ const Project = (props: Props) => {
   const nextImage = () => {
     if (locked) return;
     setLocked(true);
-    setCurrentImage(i => i + 1);
+    setCurrentImage((i) => i + 1);
   };
 
   const prevImage = () => {
     if (locked) return;
     setLocked(true);
-    setCurrentImage(i => i - 1);
+    setCurrentImage((i) => i - 1);
   };
 
   useEffect(() => {
@@ -45,9 +53,12 @@ const Project = (props: Props) => {
 
     if (timerRef.current) clearTimeout(timerRef.current);
 
-    timerRef.current = setTimeout(() => {
-      nextImage();
-    }, videos ? 15000 : (Math.random() * 2000 + 2000));
+    timerRef.current = setTimeout(
+      () => {
+        nextImage();
+      },
+      videos ? 15000 : Math.random() * 2000 + 2000,
+    );
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -64,9 +75,8 @@ const Project = (props: Props) => {
 
       if (i === activeIndex) {
         const playPromise = v.play();
-        if (playPromise && typeof playPromise.catch === "function") {
-          playPromise.catch(() => {
-          });
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {});
         }
       } else {
         v.pause();
@@ -77,111 +87,126 @@ const Project = (props: Props) => {
     });
   }, [currentImage, videos]);
 
-  return (<>
-
-    <FlexCol className="w-[350px] border-4 border-color rounded-2xl overflow-hidden h-full foreground-color text-white hover:scale-102 transition duration-300"> {/*  */}
-
-      <FlexCol className="relative">
-
-        <FlexRow className="absolute z-10 gap-x-2 flex-wrap w-full justify-end p-2 gap-y-1">
-          {tags?.map((tag, i) => (<>
-            <div key={i} className="text-white text-sm font-semibold border-2 border-color foreground-color rounded-3xl px-2">{tag}</div>
-          </>))}
-        </FlexRow>
-
-        <FlexRow className="absolute z-10 justify-between w-full px-2 text-2xl h-full items-center">
-          <FontAwesomeIcon icon={faAngleLeft} className="hover:scale-125 transition cursor-pointer" onClick={prevImage}/>
-          <FontAwesomeIcon icon={faAngleRight} className="hover:scale-125 transition cursor-pointer" onClick={nextImage}/>
-        </FlexRow>
-      
-        <FlexRow
-          className={animate ? "transition-transform duration-500" : ""}
-          style={{ transform: `translateX(-${currentImage * 100}%)` }}
-          onTransitionEnd={() => {
-            if (currentImage === images.length + 1) {
-              setAnimate(false);
-              requestAnimationFrame(() => {
-                setCurrentImage(1);
-                requestAnimationFrame(() => {
-                  setAnimate(true);
-                  setLocked(false);
-                });
-              });
-              return;
-            }
-
-            if (currentImage === 0) {
-              setAnimate(false);
-              requestAnimationFrame(() => {
-                setCurrentImage(images.length);
-                requestAnimationFrame(() => {
-                  setAnimate(true);
-                  setLocked(false);
-                });
-              });
-              return;
-            }
-
-            setLocked(false);
-          
-          }}
-        >
-          {slides.map((url, i) =>
-            videos ? (
-              <video
-                key={i}
-                ref={(el) => {
-                  videoRefs.current[i] = el;
-                }}
-                src={url}
-                className="object-cover"
-                muted
-                playsInline
-                preload="auto"
-              />
-            ) : (
-              <Image
-                key={i}
-                src={url}
-                alt=""
-                width={350}
-                height={350}
-                className="object-cover"
-              />
-            )
-          )}
-        </FlexRow>
-
-      </FlexCol>
-
-      <FlexCol className="p-4 gap-y-6 justify-between h-full pt-2">
-        <FlexCol className="gap-y-0">
-          <p style={{ animationDelay: `${Math.random() * 0.5}s` }} className="text-gradient-waves font-bold  text-2xl">{title}</p>
-          <p className="">{description}</p>
-        </FlexCol>
-
-        <FlexCol className="gap-y-2">
-          <FlexRow className="flex-wrap gap-x-2">
-            { technologies.map((technologie, i) => (
-              <div key={i} className="group hover:scale-120 transition duration-300 border-2 rounded-3xl py-0 px-2 border-gray-200 bg-white text-black font-semibold">
-                <p className="group-hover:scale-115 transition duration-200">{technologie}</p>
-              </div>
+  return (
+    <>
+      <FlexCol className="border-color foreground-color h-full w-[350px] overflow-hidden rounded-2xl border-4 text-white transition duration-300 hover:scale-102">
+        {' '}
+        {/*  */}
+        <FlexCol className="relative">
+          <FlexRow className="absolute z-10 w-full flex-wrap justify-end gap-x-2 gap-y-1 p-2">
+            {tags?.map((tag, i) => (
+              <>
+                <div
+                  key={i}
+                  className="border-color foreground-color rounded-3xl border-2 px-2 text-sm font-semibold text-white"
+                >
+                  {tag}
+                </div>
+              </>
             ))}
           </FlexRow>
 
-          <button onClick={() => window.open(`${downloadUrl}`, "_blank")} className="w-full font-semibold cursor-pointer group bg-inherit border-2 border-white text-white rounded-2xl text-base transition duration-200 hover:scale-105">
-            <span className="inline-flex items-center transition duration-300 group-hover:scale-110">
-                Download <FontAwesomeIcon icon={faDownload} />
-            </span>
-          </button>
+          <FlexRow className="absolute z-10 h-full w-full items-center justify-between px-2 text-2xl">
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="cursor-pointer transition hover:scale-125"
+              onClick={prevImage}
+            />
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              className="cursor-pointer transition hover:scale-125"
+              onClick={nextImage}
+            />
+          </FlexRow>
+
+          <FlexRow
+            className={animate ? 'transition-transform duration-500' : ''}
+            style={{ transform: `translateX(-${currentImage * 100}%)` }}
+            onTransitionEnd={() => {
+              if (currentImage === images.length + 1) {
+                setAnimate(false);
+                requestAnimationFrame(() => {
+                  setCurrentImage(1);
+                  requestAnimationFrame(() => {
+                    setAnimate(true);
+                    setLocked(false);
+                  });
+                });
+                return;
+              }
+
+              if (currentImage === 0) {
+                setAnimate(false);
+                requestAnimationFrame(() => {
+                  setCurrentImage(images.length);
+                  requestAnimationFrame(() => {
+                    setAnimate(true);
+                    setLocked(false);
+                  });
+                });
+                return;
+              }
+
+              setLocked(false);
+            }}
+          >
+            {slides.map((url, i) =>
+              videos ? (
+                <video
+                  key={i}
+                  ref={(el) => {
+                    videoRefs.current[i] = el;
+                  }}
+                  src={url}
+                  className="object-cover"
+                  muted
+                  playsInline
+                  preload="auto"
+                />
+              ) : (
+                <Image key={i} src={url} alt="" width={350} height={350} className="object-cover" />
+              ),
+            )}
+          </FlexRow>
         </FlexCol>
+        <FlexCol className="h-full justify-between gap-y-6 p-4 pt-2">
+          <FlexCol className="gap-y-0">
+            <p
+              style={{ animationDelay: `${Math.random() * 0.5}s` }}
+              className="text-gradient-waves text-2xl font-bold"
+            >
+              {title}
+            </p>
+            <p className="">{description}</p>
+          </FlexCol>
 
+          <FlexCol className="gap-y-2">
+            <FlexRow className="flex-wrap gap-2">
+              {technologies.map((technologie, i) => (
+                <div
+                  key={i}
+                  className="group rounded-3xl border-2 border-gray-200 bg-white px-2 py-0 font-semibold text-black transition duration-300 hover:scale-120"
+                >
+                  <p className="transition duration-200 group-hover:scale-115">{technologie}</p>
+                </div>
+              ))}
+            </FlexRow>
+
+            {!wip && (
+              <button
+                onClick={() => window.open(`${downloadUrl}`, '_blank')}
+                className="group w-full cursor-pointer rounded-2xl border-2 border-white bg-inherit text-base font-semibold text-white transition duration-200 hover:scale-105"
+              >
+                <span className="inline-flex items-center transition duration-300 group-hover:scale-110">
+                  Download <FontAwesomeIcon icon={faDownload} />
+                </span>
+              </button>
+            )}
+          </FlexCol>
+        </FlexCol>
       </FlexCol>
-
-    </FlexCol>
-    
-
-  </>);
-}
+    </>
+  );
+};
 
 export default Project;
