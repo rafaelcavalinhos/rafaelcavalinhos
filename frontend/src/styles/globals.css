@@ -2,6 +2,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
   height: 100%;
 }
 
@@ -14,78 +15,24 @@ body {
   height: 100%;
 }
 
-:root {
-  --foreground-color: theme(colors.blue.400);
-  --foreground-strong-color: theme(colors.blue.800);
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-  --background-color: theme(colors.white);
-  --background-secundary-color: theme(colors.gray.100);
+  .surface {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+  }
 
-  --border-color: theme(colors.blue.200);
-  --header-border-color: theme(colors.gray.200);
+  .text-muted {
+    color: #94a3b8;
+  }
 
-  --text-color: theme(colors.black);
-  --text-reverse-color: theme(colors.white);
-}
-
-.dark {
-  /* --foreground-color: theme(colors.rose.700);
-  --foreground-strong-color: theme(colors.rose.800); */
-
-  --background-color: theme(colors.gray.800);
-  --background-secundary-color: theme(colors.gray.900);
-
-  /* --border-color: theme(colors.rose.600); */
-  --header-border-color: theme(colors.gray.900);
-
-  --text-color: theme(colors.white);
-  --text-reverse-color: theme(colors.black);
-}
-
-.title {
-  @apply mb-10 text-4xl font-bold;
-}
-
-.text-color {
-  color: var(--text-color);
-}
-
-.text-reverse-color {
-  color: var(--text-reverse-color);
-}
-
-.foreground-color {
-  background-color: var(--foreground-color);
-}
-
-.foreground-strong-color {
-  background-color: var(--foreground-strong-color);
-}
-
-.background-color {
-  background-color: var(--background-color);
-}
-
-.background-secundary-color {
-  background-color: var(--background-secundary-color);
-}
-
-.border-color {
-  border-color: var(--border-color);
-}
-
-.header-border-color {
-  border-color: var(--header-border-color);
-}
-
-.area {
-  @apply bg-red-500;
-}
-
-.area-red {
-  @apply bg-red-500;
-}
-
-.area-yellow {
-  @apply bg-yellow-500;
+  .accent {
+    color: #6366f1;
+  }
 }

@@ -1,22 +1,19 @@
-.text-gradient {
-  background: radial-gradient(
-    circle at 100%,
-    var(--foreground-strong-color),
-    var(--foreground-color) 50%,
-    var(--border-color) 75%,
-    var(--foreground-color) 75%
-  );
-  background-size: 200% auto;
-  color: #000;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: animatedTextGradient 3s linear infinite;
-}
-
 @keyframes animatedTextGradient {
+  from {
+    background-position: 0% center;
+  }
   to {
     background-position: 200% center;
   }
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #38bdf8, #5262f5, #38bdf8);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animatedTextGradient 4s linear infinite;
 }
 
 .text-gradient-waves {
