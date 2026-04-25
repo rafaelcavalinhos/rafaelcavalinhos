@@ -1,7 +1,9 @@
 {
-  "heroTitle1": "Olá!",
-  "heroTitle2": "Sou o",
-  "heroTitle3": "Programador Full-Stack",
+  "heroTitle1": "Sou o",
+  "heroTitle2": ", e desenvolvo",
+  "heroTitle3": "Aplicações web com UX intuitiva",
+  "heroTitle4": "e backends escaláveis e seguros.",
+  "heroTitle5": "Programador Full-Stack",
   "home": "Início",
   "about": "Sobre",
   "projects": "Projetos",

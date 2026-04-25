@@ -33,3 +33,15 @@ body {
     background-clip: text;
   }
 }
+
+@keyframes runIn {
+  from {
+    transform: translateX(-60vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.character-run {
+  animation: runIn 3000ms linear forwards;
+}

@@ -1,5 +1,6 @@
+import { SlideUp } from '@/components/utils/animations';
 import { FlexCol, FlexRow } from '@/components/utils/flex';
-import { faGit, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import { faFileLines } from '@fortawesome/free-solid-svg-icons/faFileLines';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,6 +29,16 @@ const Index = () => {
   const isScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // 'running' → character is animating in; 'idle' → swapped to idle sprite
+  const [charState, setCharState] = useState<'running' | 'idle'>('running');
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setCharState('idle');
+    }, 3000);
+    return () => clearTimeout(t);
+  }, []);
+
   const scrollTo = (key: NavKey) => {
     setActive(key);
     isScrollingRef.current = true;
@@ -42,8 +53,8 @@ const Index = () => {
       sectionRefs.current[key]?.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  const [heroScale, setHeroScale] = useState(1);
 
+  const [heroScale, setHeroScale] = useState(1);
   const ticking = useRef(false);
 
   useEffect(() => {
@@ -76,15 +87,17 @@ const Index = () => {
     });
   }, [active]);
 
+  const IMG_SIZE = 148;
+
   return (
     <main className="text-primary bg-background relative">
       {/* Nav */}
       <div
         ref={navRef}
-        className="bg-accent/50 border-background/30 fixed top-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-x-1 rounded-full border p-1 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-md"
+        className="bg-accent/60 border-background/30 fixed top-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-x-1 rounded-full border p-1 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-md"
       >
         <span
-          className="bg-accent/40 pointer-events-none absolute top-1 h-[calc(100%-8px)] rounded-full transition-all duration-300 ease-[cubic-bezier(0.34,1.2,0.64,1)]"
+          className="bg-accent/50 pointer-events-none absolute top-1 h-[calc(100%-8px)] rounded-full transition-all duration-300 ease-[cubic-bezier(0.34,1.2,0.64,1)]"
           style={{ left: pillStyle.left, width: pillStyle.width }}
         />
         {NAV_KEYS.map((key) => (
@@ -95,7 +108,7 @@ const Index = () => {
             }}
             onClick={() => scrollTo(key)}
             className={`relative z-10 cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium whitespace-nowrap transition-colors duration-300 ${
-              active === key ? 'text-secondary' : 'text-primary hover:text-secondary'
+              active === key ? 'text-secondary' : 'text-secondary/70 hover:text-secondary'
             }`}
           >
             {t(key)}
@@ -109,44 +122,85 @@ const Index = () => {
         ref={(el: HTMLDivElement | null) => {
           sectionRefs.current['home'] = el;
         }}
-        className="fixed top-40 left-0 z-0 flex h-screen w-full flex-col items-center justify-start bg-inherit px-100"
+        className="fixed top-40 left-0 z-0 flex w-full flex-col items-center justify-start bg-inherit px-100"
         style={{ transform: `scale(${heroScale})`, transformOrigin: 'top' }}
       >
-        <FlexRow className="items-end pb-10">
-          <Image
-            src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDJB5cB8YGVOI8R9jNAEBUm7lq2duLhwcW3oCn"
-            alt="guy"
-            width={248}
-            height={248}
-          />
-          <FlexCol className="-translate-x-16 items-start text-5xl font-semibold whitespace-nowrap">
-            <p>{t('heroTitle1')}</p>
-            <p>
-              {t('heroTitle2')} <span className="text-gradient font-bold">Rafael Cavalinhos</span>
-            </p>
-            <p>{t('heroTitle3')}</p>
+        <FlexRow className="pb-10">
+          {/* Character wrapper — slides in from the left, then swaps to idle */}
+          <div
+            className="character-run"
+            style={{ position: 'relative', width: IMG_SIZE, height: IMG_SIZE, flexShrink: 0 }}
+          >
+            <Image
+              src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDAGzJVLxAvIPuqmHXKkD5ryoRFLze7WgctCG6"
+              alt="shadow"
+              width={IMG_SIZE}
+              height={IMG_SIZE}
+              priority
+              style={{
+                position: 'absolute',
+                top: 20,
+                left: 0,
+              }}
+            />
+
+            {/* Running sprite — visible while animating in */}
+            <Image
+              src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDHONKPLtDCunkeJMUlW08VPREZGx6ch1qiaLN"
+              alt="character running"
+              width={IMG_SIZE}
+              height={IMG_SIZE}
+              priority
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                opacity: charState === 'running' ? 1 : 0,
+              }}
+            />
+            {/* Idle sprite — fades in once the character arrives */}
+            <Image
+              src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDlW2ExSAXRWdDiz15U6jTKhoQt87aA3OMuIHL"
+              alt="character idle"
+              width={IMG_SIZE}
+              height={IMG_SIZE}
+              priority
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                opacity: charState === 'idle' ? 1 : 0,
+              }}
+            />
+          </div>
+
+          <FlexCol className="h-full items-start justify-between text-2xl font-semibold whitespace-nowrap">
+            <SlideUp delay={0}>
+              <p className="mb-2">
+                {t('heroTitle1')} <span className="text-gradient font-bold">Rafael Cavalinhos</span>
+                {t('heroTitle2')}
+              </p>
+            </SlideUp>
+            <SlideUp delay={0.1}>
+              <p className="text-5xl font-semibold">{t('heroTitle3')}</p>
+            </SlideUp>
+            <SlideUp delay={0.2}>
+              <p className="text-5xl font-semibold">{t('heroTitle4')}</p>
+            </SlideUp>
+            <SlideUp className="" delay={0.3}>
+              <p className="mt-4">{t('heroTitle5')}</p>
+            </SlideUp>
           </FlexCol>
         </FlexRow>
+
         <FlexRow className="gap-x-8">
           {[
-            {
-              icon: faGithub,
-              onClick: () => undefined,
-            },
-            {
-              icon: faLinkedin,
-              onClick: () => undefined,
-            },
-            {
-              icon: faEnvelope,
-              onClick: () => undefined,
-            },
-            {
-              icon: faFileLines,
-              onClick: () => undefined,
-            },
-          ].map((b, i) => {
-            return (
+            { icon: faGithub, onClick: () => undefined },
+            { icon: faLinkedin, onClick: () => undefined },
+            { icon: faEnvelope, onClick: () => undefined },
+            { icon: faFileLines, onClick: () => undefined },
+          ].map((b, i) => (
+            <SlideUp delay={(i + 1) * 0.1 + 0.3}>
               <FlexCol
                 key={`social-button-${i}`}
                 className="group bg-accent text-background border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl transition hover:scale-115"
@@ -155,10 +209,10 @@ const Index = () => {
                 <FontAwesomeIcon
                   icon={b.icon}
                   className="transition duration-300 ease-in-out group-hover:scale-120"
-                ></FontAwesomeIcon>
+                />
               </FlexCol>
-            );
-          })}
+            </SlideUp>
+          ))}
         </FlexRow>
       </div>
 
