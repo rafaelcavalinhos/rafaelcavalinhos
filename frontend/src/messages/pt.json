@@ -8,5 +8,11 @@
   "about": "Sobre",
   "projects": "Projetos",
   "experience": "Experiência",
-  "education": "Formação"
+  "education": "Formação",
+  "skills": "Competências",
+  "backend": "Backend",
+  "backendDescription1": "Gosto de resolver problemas e de construir sistemas complexos.",
+  "backendDescription2": "Procuro desenvolver soluções escaláveis, fiáveis e seguras, com foco na qualidade e manutenção a longo prazo.",
+  "frontend": "Frontend e Design",
+  "frontendDescription1": "Tenho interesse em design, animação e interações, e procuro criar websites envolventes com boas experiências de utilização."
 }

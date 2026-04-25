@@ -16,7 +16,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-const NAV_KEYS = ['home', 'about', 'projects', 'experience', 'education'] as const;
+const NAV_KEYS = ['home', 'about', 'projects', 'experience', 'education', 'skills'] as const;
 type NavKey = (typeof NAV_KEYS)[number];
 
 const Index = () => {
@@ -87,12 +87,12 @@ const Index = () => {
     });
   }, [active]);
 
-  const IMG_SIZE = 148;
+  const ICON_SIZE = 30;
 
   return (
     <main className="text-primary bg-background relative">
       {/* Nav */}
-      <div
+      {/* <div
         ref={navRef}
         className="bg-accent/60 border-background/30 fixed top-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-x-1 rounded-full border p-1 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-md"
       >
@@ -114,7 +114,7 @@ const Index = () => {
             {t(key)}
           </button>
         ))}
-      </div>
+      </div> */}
 
       {/* Home */}
       <div
@@ -125,31 +125,32 @@ const Index = () => {
         className="fixed top-40 left-0 z-0 flex w-full flex-col items-center justify-start bg-inherit px-100"
         style={{ transform: `scale(${heroScale})`, transformOrigin: 'top' }}
       >
-        <FlexRow className="pb-10">
+        <FlexRow className="gap-x-4 pb-10">
           {/* Character wrapper — slides in from the left, then swaps to idle */}
           <div
             className="character-run"
-            style={{ position: 'relative', width: IMG_SIZE, height: IMG_SIZE, flexShrink: 0 }}
+            style={{ position: 'relative', width: 128, height: 148, flexShrink: 0 }}
           >
             <Image
-              src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDAGzJVLxAvIPuqmHXKkD5ryoRFLze7WgctCG6"
+              src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDQmOmyEYpNsKptcm4WTiRGVl7DfL6AqSgr9XY"
               alt="shadow"
-              width={IMG_SIZE}
-              height={IMG_SIZE}
+              width={128}
+              height={148}
               priority
               style={{
                 position: 'absolute',
                 top: 20,
                 left: 0,
               }}
+              unoptimized
             />
 
             {/* Running sprite — visible while animating in */}
             <Image
               src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDHONKPLtDCunkeJMUlW08VPREZGx6ch1qiaLN"
               alt="character running"
-              width={IMG_SIZE}
-              height={IMG_SIZE}
+              width={128}
+              height={148}
               priority
               style={{
                 position: 'absolute',
@@ -157,13 +158,14 @@ const Index = () => {
                 left: 0,
                 opacity: charState === 'running' ? 1 : 0,
               }}
+              unoptimized
             />
             {/* Idle sprite — fades in once the character arrives */}
             <Image
               src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDlW2ExSAXRWdDiz15U6jTKhoQt87aA3OMuIHL"
               alt="character idle"
-              width={IMG_SIZE}
-              height={IMG_SIZE}
+              width={128}
+              height={148}
               priority
               style={{
                 position: 'absolute',
@@ -171,6 +173,7 @@ const Index = () => {
                 left: 0,
                 opacity: charState === 'idle' ? 1 : 0,
               }}
+              unoptimized
             />
           </div>
 
@@ -216,26 +219,123 @@ const Index = () => {
         </FlexRow>
       </div>
 
-      {/* About */}
-      <section
-        id="about"
-        ref={(el) => {
-          sectionRefs.current['about'] = el;
-        }}
-        className="border-primary bg-surface relative z-10 mt-[80vh] flex h-screen justify-center border-y-4 py-10 text-2xl"
-      >
-        <h2 className="text-4xl font-semibold">{t('about')}</h2>
-      </section>
-
       {/* Projects */}
       <section
         id="projects"
         ref={(el) => {
           sectionRefs.current['projects'] = el;
         }}
-        className="flex h-screen items-center justify-center text-2xl"
+        className="border-primary bg-surface relative z-10 mt-[80vh] flex h-screen justify-center border-y-4 py-10 text-2xl"
       >
-        Projects
+        <h2 className="text-4xl font-semibold">{t('projects')}</h2>
+      </section>
+
+      {/* Skills */}
+      <section
+        id="skills"
+        ref={(el) => {
+          sectionRefs.current['skills'] = el;
+        }}
+        className="relative z-10 flex h-screen flex-col items-center px-60 py-10 text-2xl"
+      >
+        <h2 className="mb-20 text-4xl font-semibold">{t('skills')}</h2>
+        <FlexRow className="mb-4 gap-x-4">
+          {/* Frontend */}
+          <FlexCol className="border-border bg-surface/50 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
+            <p className="text-muted text-base">{t('frontendDescription1')}</p>
+            <FlexRow className="mt-2 gap-4">
+              <Image src="/skills/nextjs.webp" alt="nextjs" width={ICON_SIZE} height={ICON_SIZE} />
+              <Image src="/skills/tailwind.webp" alt="tailwind " width={42} height={ICON_SIZE} />
+              <Image
+                src="/skills/typescript.webp"
+                alt="typescript"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+              <Image src="/skills/html.webp" alt="html" width={ICON_SIZE} height={ICON_SIZE} />
+              <Image src="/skills/unity.webp" alt="unity" width={ICON_SIZE} height={ICON_SIZE} />
+              <Image src="/skills/figma.webp" alt="figma" width={ICON_SIZE} height={ICON_SIZE} />
+            </FlexRow>
+          </FlexCol>
+          {/* Backend */}
+          <FlexCol className="border-border bg-surface/50 translate-y-10 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
+            <p className="text-muted text-base">{t('backendDescription1')}</p>
+            <p className="text-muted text-base">{t('backendDescription2')}</p>
+            <FlexRow className="mt-2 gap-4">
+              <Image src="/skills/nodejs.webp" alt="nodejs" width={ICON_SIZE} height={ICON_SIZE} />
+              <Image
+                src="/skills/fastify.webp"
+                alt="fastify"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+              <Image
+                src="/skills/postgresql.webp"
+                alt="postgresql"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+              <Image
+                src="/skills/typescript.webp"
+                alt="typescript"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+              <Image
+                src="/skills/puppeteer.webp"
+                alt="puppeteer"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+            </FlexRow>
+          </FlexCol>
+        </FlexRow>
+        <FlexRow className="gap-x-4">
+          {/* Backend */}
+          <FlexCol className="border-border bg-surface/50 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <h3 className="mb-2 text-2xl font-semibold">{t('backend')}</h3>
+            <p className="text-muted text-lg">{t('backendDescription1')}</p>
+            <p className="text-muted text-lg">{t('backendDescription2')}</p>
+            <FlexRow className="mt-2 gap-4">
+              <Image src="/skills/nodejs.webp" alt="nodejs" width={ICON_SIZE} height={ICON_SIZE} />
+              <Image
+                src="/skills/postgresql.webp"
+                alt="postgresql"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+              <Image
+                src="/skills/typescript.webp"
+                alt="typescript"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+            </FlexRow>
+          </FlexCol>
+          {/* Frontend */}
+          <FlexCol className="border-border bg-surface/50 translate-y-10 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <h3 className="mb-2 text-2xl font-semibold">{t('backend')}</h3>
+            <p className="text-muted text-lg">{t('backendDescription1')}</p>
+            <p className="text-muted text-lg">{t('backendDescription2')}</p>
+            <FlexRow className="mt-2 gap-4">
+              <Image src="/skills/nodejs.webp" alt="nodejs" width={ICON_SIZE} height={ICON_SIZE} />
+              <Image
+                src="/skills/postgresql.webp"
+                alt="postgresql"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+              <Image
+                src="/skills/typescript.webp"
+                alt="typescript"
+                width={ICON_SIZE}
+                height={ICON_SIZE}
+              />
+            </FlexRow>
+          </FlexCol>
+        </FlexRow>
       </section>
 
       {/* Experience */}
