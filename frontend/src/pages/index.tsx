@@ -89,6 +89,49 @@ const Index = () => {
 
   const ICON_SIZE = 30;
 
+  type SkillIconProps = {
+    name: string;
+    hover?: string;
+    width?: number;
+    height?: number;
+  };
+
+  function renderSkillIcons(icons: SkillIconProps[]) {
+    return icons.map((o) => {
+      const displayName = (o.hover ?? o.name).replace(/\.[^.]+$/, '');
+      const isSvg = o.name.endsWith('.svg');
+      const size = o.width ?? ICON_SIZE;
+
+      return (
+        <div key={o.name} className="group relative inline-flex transition hover:scale-110">
+          {isSvg ? (
+            <img
+              src={`/skills/${o.name}`}
+              alt={displayName}
+              width={size}
+              height={size}
+              style={{ width: size, height: size }}
+            />
+          ) : (
+            <Image
+              src={`/skills/${o.name}`}
+              alt={displayName}
+              width={o.width ?? ICON_SIZE}
+              height={o.height ?? ICON_SIZE}
+              style={{ width: 'auto', height: 'auto' }}
+            />
+          )}
+          <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
+            <span className="bg-accent text-secondary relative block rounded-md px-2 py-1 text-sm whitespace-nowrap capitalize shadow-md">
+              {displayName}
+              <span className="bg-accent absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 shadow-md" />
+            </span>
+          </div>
+        </div>
+      );
+    });
+  }
+
   return (
     <main className="text-primary bg-background relative">
       {/* Nav */}
@@ -241,98 +284,74 @@ const Index = () => {
         <h2 className="mb-20 text-4xl font-semibold">{t('skills')}</h2>
         <FlexRow className="mb-4 gap-x-4">
           {/* Frontend */}
-          <FlexCol className="border-border bg-surface/50 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-            <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
-            <p className="text-muted text-base">{t('frontendDescription1')}</p>
+          <FlexCol className="border-border bg-surface/50 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol>
+              <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
+              <p className="text-muted text-base">{t('frontendDescription1')}</p>
+            </FlexCol>
             <FlexRow className="mt-2 gap-4">
-              <Image src="/skills/nextjs.webp" alt="nextjs" width={ICON_SIZE} height={ICON_SIZE} />
-              <Image src="/skills/tailwind.webp" alt="tailwind " width={42} height={ICON_SIZE} />
-              <Image
-                src="/skills/typescript.webp"
-                alt="typescript"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
-              <Image src="/skills/html.webp" alt="html" width={ICON_SIZE} height={ICON_SIZE} />
-              <Image src="/skills/unity.webp" alt="unity" width={ICON_SIZE} height={ICON_SIZE} />
-              <Image src="/skills/figma.webp" alt="figma" width={ICON_SIZE} height={ICON_SIZE} />
+              {renderSkillIcons([
+                { name: 'nextjs.webp', hover: 'Next.js' },
+                { name: 'typescript.webp', hover: 'TypeScript' },
+                { name: 'javascript.svg', hover: 'JavaScript' },
+                { name: 'tailwind.svg' },
+                { name: 'html.webp' },
+                { name: 'unity.webp' },
+                { name: 'figma.svg' },
+                { name: 'aseprite.svg' },
+              ])}
             </FlexRow>
           </FlexCol>
           {/* Backend */}
-          <FlexCol className="border-border bg-surface/50 translate-y-10 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-            <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
-            <p className="text-muted text-base">{t('backendDescription1')}</p>
-            <p className="text-muted text-base">{t('backendDescription2')}</p>
+          <FlexCol className="border-border bg-surface/50 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol>
+              <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
+              <p className="text-muted text-base">{t('backendDescription1')}</p>
+              <p className="text-muted text-base">{t('backendDescription2')}</p>
+            </FlexCol>
             <FlexRow className="mt-2 gap-4">
-              <Image src="/skills/nodejs.webp" alt="nodejs" width={ICON_SIZE} height={ICON_SIZE} />
-              <Image
-                src="/skills/fastify.webp"
-                alt="fastify"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
-              <Image
-                src="/skills/postgresql.webp"
-                alt="postgresql"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
-              <Image
-                src="/skills/typescript.webp"
-                alt="typescript"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
-              <Image
-                src="/skills/puppeteer.webp"
-                alt="puppeteer"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
+              {renderSkillIcons([
+                { name: 'nodejs.webp', hover: 'NodeJS' },
+                { name: 'fastify.webp' },
+                { name: 'postgresql.webp', hover: 'PostgreSQL' },
+                { name: 'puppeteer.webp' },
+              ])}
             </FlexRow>
           </FlexCol>
         </FlexRow>
         <FlexRow className="gap-x-4">
-          {/* Backend */}
-          <FlexCol className="border-border bg-surface/50 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-            <h3 className="mb-2 text-2xl font-semibold">{t('backend')}</h3>
-            <p className="text-muted text-lg">{t('backendDescription1')}</p>
-            <p className="text-muted text-lg">{t('backendDescription2')}</p>
+          {/* DevOps */}
+          <FlexCol className="border-border bg-surface/50 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol>
+              <h3 className="mb-2 text-xl font-semibold">{t('devOps')}</h3>
+              <p className="text-muted text-base">{t('devOpsDescription1')}</p>
+            </FlexCol>
             <FlexRow className="mt-2 gap-4">
-              <Image src="/skills/nodejs.webp" alt="nodejs" width={ICON_SIZE} height={ICON_SIZE} />
-              <Image
-                src="/skills/postgresql.webp"
-                alt="postgresql"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
-              <Image
-                src="/skills/typescript.webp"
-                alt="typescript"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
+              {renderSkillIcons([
+                { name: 'vercel.svg' },
+                { name: 'railway.svg' },
+                { name: 'docker.svg' },
+                { name: 'cloudflare.svg' },
+                { name: 'github.svg' },
+                { name: 'git.svg' },
+              ])}
             </FlexRow>
           </FlexCol>
-          {/* Frontend */}
-          <FlexCol className="border-border bg-surface/50 translate-y-10 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-            <h3 className="mb-2 text-2xl font-semibold">{t('backend')}</h3>
-            <p className="text-muted text-lg">{t('backendDescription1')}</p>
-            <p className="text-muted text-lg">{t('backendDescription2')}</p>
+          {/* Managment */}
+          <FlexCol className="border-border bg-surface/50 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol>
+              <h3 className="mb-2 text-xl font-semibold">{t('managment')}</h3>
+              <p className="text-muted text-base">{t('managmentDescription1')}</p>
+            </FlexCol>
             <FlexRow className="mt-2 gap-4">
-              <Image src="/skills/nodejs.webp" alt="nodejs" width={ICON_SIZE} height={ICON_SIZE} />
-              <Image
-                src="/skills/postgresql.webp"
-                alt="postgresql"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
-              <Image
-                src="/skills/typescript.webp"
-                alt="typescript"
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
+              {['Agile', 'Scrum', 'Jira'].map((name) => (
+                <span
+                  key={name}
+                  className="bg-accent text-secondary cursor-default rounded-xl px-3 py-1 text-sm font-medium transition hover:scale-110"
+                >
+                  {name}
+                </span>
+              ))}
             </FlexRow>
           </FlexCol>
         </FlexRow>
