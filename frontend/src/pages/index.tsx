@@ -141,8 +141,7 @@ const Index = () => {
   const GAMES = [
     {
       title: "Press 'em",
-      description:
-        'Defeat robots and solve puzzles by grabbing crates and pressing buttons to complete the levels.',
+      description: t('pressEmDescription'),
       url: 'https://rafael-cavalinhos.itch.io/press-em',
       tags: [t('collegeProject')],
       tech: ['Unity', 'C#', 'Aseprite'],
@@ -150,8 +149,7 @@ const Index = () => {
     },
     {
       title: 'Castaway',
-      description:
-        'Survive days and nights on a deserted island, fight enemies and gather resources to escape.',
+      description: t('castawayDescription'),
       url: 'https://rafael-cavalinhos.itch.io/castaway',
       tags: [t('collegeProject')],
       tech: ['Unity', 'C#', 'Aseprite'],
@@ -159,8 +157,7 @@ const Index = () => {
     },
     {
       title: 'Factory Dealings',
-      description:
-        'An arcade game — give items to injured robots before they explode. Fast-paced and chaotic.',
+      description: t('factoryDealingsDescription'),
       url: 'https://rafael-cavalinhos.itch.io/factory-dealings',
       tags: [t('collegeProject'), 'Game Jam'],
       tech: ['Unity', 'C#', 'Aseprite'],
@@ -172,7 +169,8 @@ const Index = () => {
     },
     {
       title: 'Snake Game',
-      description: 'A classic 2D Snake game made for fun and published on itch.io.',
+      description: t('snakeGameDescription'),
+
       url: 'https://rafael-cavalinhos.itch.io/snake-game',
       tags: ['Hobby'],
       tech: ['Unity', 'C#', 'Aseprite'],
@@ -332,7 +330,7 @@ const Index = () => {
               <div className="whitespace-nowrap">{t('soloProjects')}</div>
               <div className="h-min w-full border-b"></div>
             </FlexRow>
-            <FlexRow className="border-border mt-4 mb-10 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexRow className="border-border bg-background mt-4 mb-10 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol className="flex-1 justify-center">
                 <h3 className="text-3xl font-bold">Axon</h3>
                 <p className="text-accent text-lg">{t('axonSubtitle')}</p>
@@ -397,7 +395,7 @@ const Index = () => {
             </FlexRow>
             <FlexRow className="w-full gap-x-4">
               {/* Território Participado */}
-              <FlexCol className="border-border mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexCol className="border-border bg-background mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                 <FlexCol className="flex-1 justify-center">
                   <FlexCol className="relative mb-4 min-h-[300px] flex-1">
                     <Image
@@ -436,7 +434,7 @@ const Index = () => {
                 </FlexCol>
               </FlexCol>
               {/* Estágio Bee Engineering */}
-              <FlexCol className="border-border mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexCol className="bg-background border-border mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                 <FlexCol className="flex-1 justify-center">
                   <FlexCol className="relative mb-4 flex-1">
                     <MediaCarousel
@@ -459,6 +457,7 @@ const Index = () => {
                   <FlexRow className="mt-4 gap-x-2">
                     {renderSkillIcons([
                       { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
+                      { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
                     ])}
                   </FlexRow>
                   <a
@@ -499,13 +498,13 @@ const Index = () => {
         ref={(el) => {
           sectionRefs.current['skills'] = el;
         }}
-        className="relative flex h-screen flex-col items-center px-50 py-10 text-2xl"
+        className="relative flex flex-col items-center px-50 py-10 text-2xl"
       >
         <h2 className="mb-20 text-4xl font-semibold">{t('skills')}</h2>
         <SlideUp delay={0.1}>
           <FlexRow className="mb-4 gap-x-4">
             {/* Frontend */}
-            <FlexCol className="border-border bg-surface/50 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/50 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
                 <p className="text-muted text-base">{t('frontendDescription1')}</p>
@@ -515,6 +514,7 @@ const Index = () => {
                   { name: 'nextjs.webp', hover: 'Next.js' },
                   { name: 'typescript.webp', hover: 'TypeScript' },
                   { name: 'javascript.svg', hover: 'JavaScript' },
+                  { name: 'csharp.svg', hover: 'C#' },
                   { name: 'tailwind.svg', hover: 'Tailwind' },
                   { name: 'html.webp', hover: 'HTML' },
                   { name: 'unity.webp', hover: 'Unity' },
@@ -524,7 +524,7 @@ const Index = () => {
               </FlexRow>
             </FlexCol>
             {/* Backend */}
-            <FlexCol className="border-border bg-surface/50 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/50 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
                 <p className="text-muted text-base">{t('backendDescription1')}</p>
@@ -544,7 +544,7 @@ const Index = () => {
         <SlideUp delay={0.2}>
           <FlexRow className="gap-x-4">
             {/* DevOps */}
-            <FlexCol className="border-border bg-surface/50 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/50 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('devOps')}</h3>
                 <p className="text-muted text-base">{t('devOpsDescription1')}</p>
@@ -561,7 +561,7 @@ const Index = () => {
               </FlexRow>
             </FlexCol>
             {/* Managment */}
-            <FlexCol className="border-border bg-surface/50 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/50 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('managment')}</h3>
                 <p className="text-muted text-base">{t('managmentDescription1')}</p>

@@ -32,5 +32,8 @@
   "internshipSubtitle": "Bee Enginnering - Protótipos de Jogos",
   "internshipDescription": "Desenvolvemos seis protótipos de jogos para dispositivos móveis na Bee Engineering como demonstrações publicitárias. A nossa equipa foi responsável pela mecânica principal do jogo, fluxo da interface do utilizador, animações, áudio e design de níveis em ciclos rápidos de prototipagem.",
   "games": "Jogos",
-  "castawayDescription": "Sobreviva dias e noites numa ilha deserta, combata inimigos e recolha recursos para escapar."
+  "castawayDescription": "Sobreviva dias e noites numa ilha deserta, combata inimigos e recolha recursos para escapar.",
+  "pressEmDescription": "Derrota robôs e resolve puzzles pegando em caixas e premindo botões para completares os níveis.",
+  "factoryDealingsDescription": "Um jogo de arcada - dá itens aos robôs feridos antes que estes explodam. Ritmo acelerado e caótico.",
+  "snakeGameDescription": "Um clássico jogo da cobrinha em 2D feito para diversão e publicado no itch.io."
 }

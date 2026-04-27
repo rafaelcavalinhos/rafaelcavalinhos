@@ -3,6 +3,7 @@ import { MediaCarousel } from '../media-carousel/media-carousel';
 import { SlideUp } from '../utils/animations';
 import { faItchIo } from '@fortawesome/free-brands-svg-icons';
 import { FlexRow } from '../utils/flex';
+import Image from 'next/image';
 
 type Project = {
   title: string;
@@ -17,6 +18,50 @@ type Project = {
   accent?: string;
 };
 
+type SkillIconProps = {
+  name: string;
+  hover?: string;
+  width?: number;
+  height?: number;
+};
+
+function renderSkillIcons(icons: SkillIconProps[]) {
+  return icons.map((o) => {
+    const displayName = o.hover ?? o.name.replace(/\.[^.]+$/, '');
+    const isSvg = o.name.endsWith('.svg');
+    const size = 25;
+
+    return (
+      <div key={o.name} className="group relative inline-flex transition hover:scale-110">
+        {isSvg ? (
+          <img
+            src={`/skills/${o.name}`}
+            alt={displayName}
+            width={size}
+            height={size}
+            style={{ width: size, height: size }}
+          />
+        ) : (
+          <div style={{ width: size, height: size }}>
+            <Image
+              src={`/skills/${o.name}`}
+              alt={displayName}
+              fill
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+        )}
+        <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
+          <span className="bg-accent text-secondary relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
+            {displayName}
+            <span className="bg-accent absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 shadow-md" />
+          </span>
+        </div>
+      </div>
+    );
+  });
+}
+
 export function GameCard({
   project,
   delay,
@@ -28,13 +73,19 @@ export function GameCard({
 }) {
   return (
     <SlideUp delay={delay}>
-      <div className="border-border bg-surface text-primary flex flex-col overflow-hidden rounded-xl border p-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+      <div className="border-border bg-background text-primary flex flex-col overflow-hidden rounded-xl border p-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
         <MediaCarousel images={project.images} />
 
         <div className="flex flex-col gap-2 p-4">
           <h3 className="font-bold">{project.title}</h3>
           <p className="text-muted text-xs leading-relaxed">{project.description}</p>
-
+          <FlexRow className="gap-1">
+            {renderSkillIcons([
+              { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
+              { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
+              { width: 25, height: 25, name: 'aseprite.svg', hover: 'Aseprite' },
+            ])}
+          </FlexRow>
           <a
             href={project.url}
             target="_blank"
