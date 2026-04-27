@@ -19,7 +19,7 @@ body {
 @theme {
   --color-primary: #2e2e2e;
   --color-secondary: #ffffff;
-  --color-muted: #5f5f5f;
+  --color-muted: #aaaaaa;
   --color-accent: #4da3ff;
   --color-background: #f4f4f4;
   --color-surface: #ffffff;
@@ -33,16 +33,4 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-}
-
-@keyframes runIn {
-  from {
-    transform: translateX(-50vw);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-.character-run {
-  animation: runIn 3000ms linear forwards;
 }

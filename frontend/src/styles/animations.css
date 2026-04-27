@@ -38,3 +38,28 @@
   -webkit-text-fill-color: transparent;
   animation: animatedTextGradient 3s linear infinite;
 }
+
+@keyframes runIn {
+  from {
+    transform: translateX(-50vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.character-run {
+  animation: runIn 3000ms linear forwards;
+}
+
+@keyframes slideUpIn {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up-in {
+  animation: slideUpIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

@@ -1,4 +1,9 @@
 {
+  "visit": "Visitar",
+  "seeOn": "Ver em",
+  "collegeProject": "Projeto Escolar",
+  "soloProjects": "Projetos Individuais",
+  "professionalProjects": "Trabalho Profissional",
   "heroTitle1": "Sou o",
   "heroTitle2": ", e desenvolvo",
   "heroTitle3": "Aplicações web com UX intuitiva",
@@ -18,5 +23,14 @@
   "devOps": "Cloud e DevOps",
   "devOpsDescription1": "Tenho experiência em colocar aplicações em produção e geri-las através de plataformas como a Vercel e Railway.",
   "managment": "Gestão",
-  "managmentDescription1": "Experiência na organização e acompanhamento de projetos através de metodologias ágeis."
+  "managmentDescription1": "Experiência na organização e acompanhamento de projetos através de metodologias ágeis.",
+  "axonSubtitle": "Plataforma de Gestão de Recursos Empresariais",
+  "axonDescription": "Uma plataforma ERP completa, criada individualmente - gerencie ferramentas, materiais de consumo, recursos humanos e otimize os fluxos de trabalho da empresa de ponta a ponta. Concebida, desenvolvida e implementada inteiramente por mim.",
+  "tpSubtitle": "Plataforma Web de Participação Cívica",
+  "tpDescription": "Um projeto de estágio profissional na Albatroz Digital. Uma plataforma ativa e implementada para a participação cívica e gestão territorial, utilizada por organizações reais.",
+  "internshipTitle": "Estágio em Jogos para Dispositivos Móveis",
+  "internshipSubtitle": "Bee Enginnering - Protótipos de Jogos",
+  "internshipDescription": "Desenvolvemos seis protótipos de jogos para dispositivos móveis na Bee Engineering como demonstrações publicitárias. A nossa equipa foi responsável pela mecânica principal do jogo, fluxo da interface do utilizador, animações, áudio e design de níveis em ciclos rápidos de prototipagem.",
+  "games": "Jogos",
+  "castawayDescription": "Sobreviva dias e noites numa ilha deserta, combata inimigos e recolha recursos para escapar."
 }
