@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MediaCarousel } from '../media-carousel/media-carousel';
 import { SlideUp } from '../utils/animations';
 import { faItchIo } from '@fortawesome/free-brands-svg-icons';
-import { FlexRow } from '../utils/flex';
+import { FlexCol, FlexRow } from '../utils/flex';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
@@ -80,41 +80,51 @@ export function GameCard({
   const t = useTranslations();
   return (
     <SlideUp delay={delay}>
-      <div className="border-border bg-background text-primary flex flex-col overflow-hidden rounded-xl border p-2 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
-        <MediaCarousel images={project.images} />
+      <div className="border-border bg-background text-primary flex h-full flex-col overflow-hidden rounded-xl border p-2 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+        <div className="shrink-0">
+          <MediaCarousel images={project.images} />
+        </div>
 
         <FlexRow className="gap-1 px-2 pt-4">
           {project.tags.map((tag, i) => (
             <FlexRow
               key={`tag-${i}`}
-              className={`text-secondary items-center rounded-full border px-2 text-xs ${tagColors[tag as keyof typeof tagColors]}`}
+              className={`items-center rounded-full border px-2 text-xs text-white ${tagColors[tag as keyof typeof tagColors]}`}
             >
               {t(tag)}
             </FlexRow>
           ))}
         </FlexRow>
 
-        <div className="flex flex-col gap-2 p-2">
-          <h3 className="font-bold">{project.title}</h3>
-          <p className="text-muted text-xs leading-relaxed">{project.description}</p>
-          <FlexRow className="gap-1">
-            {renderSkillIcons([
-              { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
-              { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
-              { width: 25, height: 25, name: 'aseprite.svg', hover: 'Aseprite' },
-            ])}
-          </FlexRow>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
-          >
-            <FlexRow className="items-center transition group-hover:scale-115">
-              <FontAwesomeIcon icon={faItchIo} className="text-xs" />
-              &nbsp;{`${seeOn} itch.io`}
+        {/* THIS becomes the flexible middle area */}
+        <div className="flex min-h-0 flex-1 flex-col gap-y-4 p-2">
+          <FlexCol>
+            <h3 className="font-bold">{project.title}</h3>
+            <p className="text-muted text-xs leading-relaxed">{project.description}</p>
+          </FlexCol>
+
+          {/* push bottom section down */}
+          <FlexCol className="mt-auto">
+            <FlexRow className="gap-1">
+              {renderSkillIcons([
+                { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
+                { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
+                { width: 25, height: 25, name: 'aseprite.svg', hover: 'Aseprite' },
+              ])}
             </FlexRow>
-          </a>
+
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-border group bg-accent mt-2 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
+            >
+              <FlexRow className="items-center transition group-hover:scale-115">
+                <FontAwesomeIcon icon={faItchIo} className="text-xs" />
+                &nbsp;{`${seeOn} itch.io`}
+              </FlexRow>
+            </a>
+          </FlexCol>
         </div>
       </div>
     </SlideUp>
