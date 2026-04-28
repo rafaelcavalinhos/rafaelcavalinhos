@@ -4,6 +4,7 @@ import { SlideUp } from '../utils/animations';
 import { faItchIo } from '@fortawesome/free-brands-svg-icons';
 import { FlexRow } from '../utils/flex';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 type Project = {
   title: string;
@@ -11,7 +12,6 @@ type Project = {
   description: string;
   url: string;
   tags: string[];
-  tech: string[];
   image?: string;
   images?: string[];
   videos?: string[];
@@ -71,12 +71,30 @@ export function GameCard({
   delay: number;
   seeOn: string;
 }) {
+  const tagColors = {
+    college: 'bg-orange-300 border-orange-400',
+    gameJam: 'bg-indigo-300 border-indigo-400',
+    hobby: 'bg-green-300 border-green-400',
+  };
+
+  const t = useTranslations();
   return (
     <SlideUp delay={delay}>
       <div className="border-border bg-background text-primary flex flex-col overflow-hidden rounded-xl border p-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
         <MediaCarousel images={project.images} />
 
-        <div className="flex flex-col gap-2 p-4">
+        <FlexRow className="gap-1 px-2 pt-4">
+          {project.tags.map((tag, i) => (
+            <FlexRow
+              key={`tag-${i}`}
+              className={`text-secondary items-center rounded-full border px-2 text-xs ${tagColors[tag as keyof typeof tagColors]}`}
+            >
+              {t(tag)}
+            </FlexRow>
+          ))}
+        </FlexRow>
+
+        <div className="flex flex-col gap-2 p-2">
           <h3 className="font-bold">{project.title}</h3>
           <p className="text-muted text-xs leading-relaxed">{project.description}</p>
           <FlexRow className="gap-1">

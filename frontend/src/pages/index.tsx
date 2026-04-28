@@ -4,7 +4,13 @@ import ProjectSection from '@/components/project-section/project-section';
 import { SlideUp } from '@/components/utils/animations';
 import { FlexCol, FlexRow } from '@/components/utils/flex';
 import { faGithub, faItchIo, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faArrowUpRightFromSquare, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowUpRightFromSquare,
+  faCalendar,
+  faLocationDot,
+  faUser,
+  faUsers,
+} from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import { faFileLines } from '@fortawesome/free-solid-svg-icons/faFileLines';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons/faGamepad';
@@ -21,18 +27,8 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-const NAV_KEYS = ['home', 'about', 'projects', 'experience', 'education', 'skills'] as const;
-type NavKey = (typeof NAV_KEYS)[number];
-
 const Index = () => {
   const t = useTranslations();
-  const [active, setActive] = useState<NavKey>('home');
-  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
-  const buttonRefs = useRef<Record<NavKey, HTMLButtonElement | null>>({} as any);
-  const navRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<Record<NavKey, HTMLElement | null>>({} as any);
-  const isScrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 'running' → character is animating in; 'idle' → swapped to idle sprite
   const [charState, setCharState] = useState<'running' | 'idle'>('running');
@@ -44,53 +40,8 @@ const Index = () => {
     return () => clearTimeout(t);
   }, []);
 
-  const scrollTo = (key: NavKey) => {
-    setActive(key);
-    isScrollingRef.current = true;
-    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
-    scrollTimeoutRef.current = setTimeout(() => {
-      isScrollingRef.current = false;
-    }, 800);
-
-    if (key === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      sectionRefs.current[key]?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const [heroScale, setHeroScale] = useState(1);
   const ticking = useRef(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(() => {
-          setHeroScale(Math.max(0, 1 - window.scrollY / 1000));
-          ticking.current = false;
-        });
-        ticking.current = true;
-      }
-    };
-
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
-    const activeBtn = buttonRefs.current[active];
-    const nav = navRef.current;
-    if (!activeBtn || !nav) return;
-
-    const btnRect = activeBtn.getBoundingClientRect();
-    const navRect = nav.getBoundingClientRect();
-
-    setPillStyle({
-      left: btnRect.left - navRect.left,
-      width: btnRect.width,
-    });
-  }, [active]);
 
   const ICON_SIZE = 30;
 
@@ -143,24 +94,21 @@ const Index = () => {
       title: "Press 'em",
       description: t('pressEmDescription'),
       url: 'https://rafael-cavalinhos.itch.io/press-em',
-      tags: [t('collegeProject')],
-      tech: ['Unity', 'C#', 'Aseprite'],
+      tags: ['college'],
       images: ['/projects/press-em1.png', '/projects/press-em2.png', '/projects/press-em3.png'],
     },
     {
       title: 'Castaway',
       description: t('castawayDescription'),
       url: 'https://rafael-cavalinhos.itch.io/castaway',
-      tags: [t('collegeProject')],
-      tech: ['Unity', 'C#', 'Aseprite'],
+      tags: ['college'],
       images: ['/projects/castaway1.png', '/projects/castaway2.png', '/projects/castaway3.png'],
     },
     {
       title: 'Factory Dealings',
       description: t('factoryDealingsDescription'),
       url: 'https://rafael-cavalinhos.itch.io/factory-dealings',
-      tags: [t('collegeProject'), 'Game Jam'],
-      tech: ['Unity', 'C#', 'Aseprite'],
+      tags: ['college', 'gameJam'],
       images: [
         '/projects/factory-dealings1.png',
         '/projects/factory-dealings2.png',
@@ -172,8 +120,7 @@ const Index = () => {
       description: t('snakeGameDescription'),
 
       url: 'https://rafael-cavalinhos.itch.io/snake-game',
-      tags: ['Hobby'],
-      tech: ['Unity', 'C#', 'Aseprite'],
+      tags: ['hobby'],
       images: [
         '/projects/snake-game1.png',
         '/projects/snake-game2.png',
@@ -182,40 +129,32 @@ const Index = () => {
     },
   ];
 
+  useEffect(() => {
+    const onScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+          setHeroScale(Math.max(0, 1 - y / 1000));
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <main className="text-primary bg-background relative">
-      {/* Nav */}
-      {/* <div
-        ref={navRef}
-        className="bg-accent/60 border-background/30 fixed top-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-x-1 rounded-full border p-1 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-md"
-      >
-        <span
-          className="bg-accent/50 pointer-events-none absolute top-1 h-[calc(100%-8px)] rounded-full transition-all duration-300 ease-[cubic-bezier(0.34,1.2,0.64,1)]"
-          style={{ left: pillStyle.left, width: pillStyle.width }}
-        />
-        {NAV_KEYS.map((key) => (
-          <button
-            key={key}
-            ref={(el) => {
-              buttonRefs.current[key] = el;
-            }}
-            onClick={() => scrollTo(key)}
-            className={`relative z-10 cursor-pointer rounded-full px-4 py-1.5 text-sm font-medium whitespace-nowrap transition-colors duration-300 ${
-              active === key ? 'text-secondary' : 'text-secondary/70 hover:text-secondary'
-            }`}
-          >
-            {t(key)}
-          </button>
-        ))}
-      </div> */}
+    <main className="text-primary relative">
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/bg.jpg')] bg-repeat opacity-20"
+        style={{ backgroundSize: '2000px', filter: 'blur(2px)' }}
+      />
 
       {/* Home */}
       <div
         id="home"
-        ref={(el: HTMLDivElement | null) => {
-          sectionRefs.current['home'] = el;
-        }}
-        className="fixed top-40 left-0 z-0 flex w-full flex-col items-center justify-start bg-inherit px-100"
+        className="fixed top-40 left-0 z-0 flex w-full flex-col items-center justify-start bg-transparent px-100"
         style={{ transform: `scale(${heroScale})`, transformOrigin: 'top' }}
       >
         <FlexRow className="gap-x-4 pb-10">
@@ -291,10 +230,27 @@ const Index = () => {
 
         <FlexRow className="gap-x-8">
           {[
-            { icon: faGithub, onClick: () => undefined },
-            { icon: faLinkedin, onClick: () => undefined },
-            { icon: faEnvelope, onClick: () => undefined },
-            { icon: faFileLines, onClick: () => undefined },
+            {
+              hover: 'Github',
+              icon: faGithub,
+              onClick: () => window.open('https://github.com/rafaelcavalinhos', '_blank'),
+            },
+            {
+              hover: 'LinkedIn',
+              icon: faLinkedin,
+              onClick: () =>
+                window.open('https://www.linkedin.com/in/rafael-cavalinhos-39937624a', '_blank'),
+            },
+            {
+              hover: t('Email'),
+              icon: faEnvelope,
+              onClick: () => (window.location.href = 'mailto:rafaelcavalinhos2002@gmail.com'),
+            },
+            {
+              hover: t('resume'),
+              icon: faFileLines,
+              onClick: () => window.open('/cv.pdf', '_blank'),
+            },
           ].map((b, i) => (
             <SlideUp delay={(i + 1) * 0.1 + 0.3}>
               <FlexCol
@@ -306,6 +262,12 @@ const Index = () => {
                   icon={b.icon}
                   className="transition duration-300 ease-in-out group-hover:scale-120"
                 />
+                <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
+                  <span className="bg-accent text-secondary relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
+                    {b.hover}
+                    <span className="bg-accent absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 shadow-md" />
+                  </span>
+                </div>
               </FlexCol>
             </SlideUp>
           ))}
@@ -315,10 +277,7 @@ const Index = () => {
       {/* Projects */}
       <section
         id="projects"
-        ref={(el) => {
-          sectionRefs.current['projects'] = el;
-        }}
-        className="slide-up-in border-primary bg-surface relative z-10 mt-[85vh] flex justify-center border-y-4 py-10 pb-20 text-2xl"
+        className="slide-up-in border-primary bg-background relative z-10 mt-[85vh] flex justify-center border-y-2 py-10 pb-20 text-2xl"
       >
         <FlexCol className="w-full items-center px-50">
           <h2 className="mb-10 text-4xl font-semibold">{t('projects')}</h2>
@@ -495,16 +454,13 @@ const Index = () => {
       {/* Skills */}
       <section
         id="skills"
-        ref={(el) => {
-          sectionRefs.current['skills'] = el;
-        }}
-        className="relative flex flex-col items-center px-50 py-10 text-2xl"
+        className="relative mb-20 flex flex-col items-center px-50 py-10 text-2xl"
       >
         <h2 className="mb-20 text-4xl font-semibold">{t('skills')}</h2>
         <SlideUp delay={0.1}>
           <FlexRow className="mb-4 gap-x-4">
             {/* Frontend */}
-            <FlexCol className="border-border bg-background/50 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/70 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
                 <p className="text-muted text-base">{t('frontendDescription1')}</p>
@@ -524,7 +480,7 @@ const Index = () => {
               </FlexRow>
             </FlexCol>
             {/* Backend */}
-            <FlexCol className="border-border bg-background/50 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/70 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
                 <p className="text-muted text-base">{t('backendDescription1')}</p>
@@ -544,7 +500,7 @@ const Index = () => {
         <SlideUp delay={0.2}>
           <FlexRow className="gap-x-4">
             {/* DevOps */}
-            <FlexCol className="border-border bg-background/50 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('devOps')}</h3>
                 <p className="text-muted text-base">{t('devOpsDescription1')}</p>
@@ -561,7 +517,7 @@ const Index = () => {
               </FlexRow>
             </FlexCol>
             {/* Managment */}
-            <FlexCol className="border-border bg-background/50 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+            <FlexCol className="border-border bg-background/70 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
               <FlexCol>
                 <h3 className="mb-2 text-xl font-semibold">{t('managment')}</h3>
                 <p className="text-muted text-base">{t('managmentDescription1')}</p>
@@ -581,26 +537,172 @@ const Index = () => {
         </SlideUp>
       </section>
 
-      {/* Experience */}
+      {/* Experience & Education */}
       <section
         id="experience"
-        ref={(el) => {
-          sectionRefs.current['experience'] = el;
-        }}
-        className="flex h-screen items-center justify-center text-2xl"
+        className="relative flex flex-col items-center px-50 py-10 pb-20 text-2xl"
       >
-        Experience
+        <FlexRow className="w-full items-start gap-x-4">
+          {/* Experience column */}
+          <FlexCol className="flex-1 translate-y-1/4 items-center gap-y-4">
+            <h2 className="mb-6 text-4xl font-semibold">{t('experience')}</h2>
+
+            <SlideUp delay={0.2}>
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol className="flex-1 gap-y-1">
+                  <p className="text-primary text-xl font-bold">{t('exp1Title')}</p>
+                  <p className="text-accent text-base font-semibold">{t('exp1Company')}</p>
+                  <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <span>
+                      <FontAwesomeIcon icon={faCalendar} className="mr-1" />
+                      {t('exp1Date')}
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faLocationDot} className="mr-1" />
+                      {t('exp1Location')}
+                    </span>
+                  </FlexRow>
+                  <p className="text-muted text-base leading-relaxed">{t('exp1Description')}</p>
+                </FlexCol>
+              </FlexRow>
+            </SlideUp>
+
+            <SlideUp delay={0.3}>
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol className="flex-1 gap-y-1">
+                  <p className="text-primary text-xl font-bold">{t('exp2Title')}</p>
+                  <p className="text-accent text-base font-semibold">{t('exp2Company')}</p>
+                  <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <span>
+                      <FontAwesomeIcon icon={faCalendar} className="mr-1" />
+                      {t('exp2Date')}
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faLocationDot} className="mr-1" />
+                      {t('exp2Location')}
+                    </span>
+                  </FlexRow>
+                  <p className="text-muted text-base leading-relaxed">{t('exp2Description')}</p>
+                </FlexCol>
+              </FlexRow>
+            </SlideUp>
+          </FlexCol>
+
+          {/* Education column */}
+          <FlexCol className="flex-1 items-center gap-y-4">
+            <h2 className="mb-6 text-4xl font-semibold">{t('education')}</h2>
+
+            <SlideUp delay={0.2}>
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol className="flex-1 gap-y-1">
+                  <p className="text-primary text-xl font-bold">{t('edu3Title')}</p>
+                  <p className="text-accent text-base font-semibold">{t('edu3School')}</p>
+                  <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <span>
+                      <FontAwesomeIcon icon={faCalendar} className="mr-1" />
+                      {t('edu3Date')}
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faLocationDot} className="mr-1" />
+                      {t('edu3Location')}
+                    </span>
+                  </FlexRow>
+                  <p className="text-muted text-base leading-relaxed">{t('edu3Description')}</p>
+                </FlexCol>
+              </FlexRow>
+            </SlideUp>
+
+            <SlideUp delay={0.3}>
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol className="flex-1 gap-y-1">
+                  <p className="text-primary text-xl font-bold">{t('edu2Title')}</p>
+                  <p className="text-accent text-base font-semibold">{t('edu2School')}</p>
+                  <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <span>
+                      <FontAwesomeIcon icon={faCalendar} className="mr-1" />
+                      {t('edu2Date')}
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faLocationDot} className="mr-1" />
+                      {t('edu2Location')}
+                    </span>
+                  </FlexRow>
+                  <p className="text-muted text-base leading-relaxed">{t('edu2Description')}</p>
+                </FlexCol>
+              </FlexRow>
+            </SlideUp>
+
+            <SlideUp delay={0.4}>
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol className="flex-1 gap-y-1">
+                  <p className="text-primary text-xl font-bold">{t('edu1Title')}</p>
+                  <p className="text-accent text-base font-semibold">{t('edu1School')}</p>
+                  <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <span>
+                      <FontAwesomeIcon icon={faCalendar} className="mr-1" />
+                      {t('edu1Date')}
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faLocationDot} className="mr-1" />
+                      {t('edu1Location')}
+                    </span>
+                  </FlexRow>
+                  <p className="text-muted text-base leading-relaxed">{t('edu1Description')}</p>
+                </FlexCol>
+              </FlexRow>
+            </SlideUp>
+          </FlexCol>
+        </FlexRow>
       </section>
 
-      {/* Education */}
-      <section
-        id="education"
-        ref={(el) => {
-          sectionRefs.current['education'] = el;
-        }}
-        className="flex h-screen items-center justify-center text-2xl"
-      >
-        Education
+      <section className="bg-background border-primary border-t-2">
+        <FlexCol className="w-full items-center gap-y-6 p-10">
+          <p className="text-xl font-semibold">
+            {t('builtBy')} <span className="text-gradient font-bold">Rafael Cavalinhos</span>
+          </p>
+          <FlexRow className="gap-x-2">
+            {[
+              {
+                hover: 'Github',
+                icon: faGithub,
+                onClick: () => window.open('https://github.com/rafaelcavalinhos', '_blank'),
+              },
+              {
+                hover: 'LinkedIn',
+                icon: faLinkedin,
+                onClick: () =>
+                  window.open('https://www.linkedin.com/in/rafael-cavalinhos-39937624a', '_blank'),
+              },
+              {
+                hover: t('Email'),
+                icon: faEnvelope,
+                onClick: () => (window.location.href = 'mailto:rafaelcavalinhos2002@gmail.com'),
+              },
+              {
+                hover: t('resume'),
+                icon: faFileLines,
+                onClick: () => window.open('/cv.pdf', '_blank'),
+              },
+            ].map((b, i) => (
+              <FlexCol
+                key={`social-button-${i}`}
+                className="group bg-accent text-background border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl transition hover:scale-115"
+                onClick={b.onClick}
+              >
+                <FontAwesomeIcon
+                  icon={b.icon}
+                  className="transition duration-300 ease-in-out group-hover:scale-120"
+                />
+                <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
+                  <span className="bg-accent text-secondary relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
+                    {b.hover}
+                    <span className="bg-accent absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 shadow-md" />
+                  </span>
+                </div>
+              </FlexCol>
+            ))}
+          </FlexRow>
+        </FlexCol>
       </section>
     </main>
   );
