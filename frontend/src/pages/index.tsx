@@ -146,38 +146,38 @@ const Index = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  // useEffect(() => {
-  //   const root = document.documentElement;
-  //   const saved = localStorage.getItem('theme');
+  useEffect(() => {
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
 
-  //   if (saved === 'dark') {
-  //     root.classList.add('dark');
-  //     setTheme('dark');
-  //   } else if (saved === 'light') {
-  //     root.classList.remove('dark');
-  //     setTheme('light');
-  //   } else {
-  //     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark') {
+      root.classList.add('dark');
+      setTheme('dark');
+    } else if (saved === 'light') {
+      root.classList.remove('dark');
+      setTheme('light');
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  //     if (prefersDark) {
-  //       root.classList.add('dark');
-  //       setTheme('dark');
-  //     } else {
-  //       setTheme('light');
-  //     }
-  //   }
-  // }, []);
+      if (prefersDark) {
+        root.classList.add('dark');
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    }
+  }, []);
 
-  // const toggleTheme = () => {
-  //   const root = document.documentElement;
-  //   const isDark = root.classList.toggle('dark');
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const isDark = root.classList.toggle('dark');
 
-  //   const newTheme = isDark ? 'dark' : 'light';
-  //   setTheme(newTheme);
-  //   localStorage.setItem('theme', newTheme);
-  // };
+    const newTheme = isDark ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   return (
     <main className="text-primary relative w-full">
@@ -185,7 +185,7 @@ const Index = () => {
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/bg.jpg')] bg-repeat opacity-20"
         style={{ backgroundSize: '2000px', filter: 'blur(2px)' }}
       />
-      {/* 
+
       <FlexRow className="mt-6 justify-between px-50">
         <p className="text-xl font-semibold">Rafael Cavalinhos.</p>
         <FontAwesomeIcon
@@ -193,13 +193,13 @@ const Index = () => {
           icon={theme === 'dark' ? faSun : faMoon}
           className="top-10 right-50 cursor-pointer text-2xl transition hover:scale-120"
         />
-      </FlexRow> */}
+      </FlexRow>
 
       {/* Home */}
       <div
         id="home"
-        className="fixed top-40 left-0 z-0 flex w-full flex-col items-center justify-start bg-transparent px-100"
-        style={{ transform: `scale(${heroScale})`, transformOrigin: 'top' }}
+        className="top-40 left-0 z-0 flex h-[85vh] w-full flex-col items-center justify-center bg-transparent px-100"
+        //style={{ transform: `scale(${heroScale})`, transformOrigin: 'top' }}
       >
         <FlexRow className="gap-x-4 pb-10">
           {/* Character wrapper — slides in from the left, then swaps to idle */}
@@ -321,7 +321,7 @@ const Index = () => {
       {/* Projects */}
       <section
         id="projects"
-        className="slide-up-in border-primary bg-background relative z-10 mt-[85vh] flex w-full justify-center border-y-2 py-10 pb-20 text-2xl"
+        className="slide-up-in border-primary bg-background relative z-10 flex w-full justify-center border-y-2 py-10 pb-20 text-2xl"
       >
         <FlexCol className="w-full items-center px-50">
           <h2 className="mb-10 text-4xl font-semibold">{t('projects')}</h2>
@@ -334,7 +334,7 @@ const Index = () => {
                 <div className="whitespace-nowrap">{t('soloProjects')}</div>
                 <div className="h-min w-full border-b"></div>
               </FlexRow>
-              <FlexRow className="border-border bg-background mt-4 mb-10 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexRow className="border-border bg-background mt-4 mb-10 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol className="flex-1 justify-center">
                   <h3 className="text-3xl font-bold">Axon</h3>
                   <p className="text-accent text-lg">{t('axonSubtitle')}</p>
@@ -360,7 +360,7 @@ const Index = () => {
                     href="https://getaxon.pt"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
+                    className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
                   >
                     <FlexRow className="items-center gap-1 transition group-hover:scale-115">
                       {t('visit')}{' '}
@@ -390,7 +390,7 @@ const Index = () => {
               </FlexRow>
               <FlexRow className="w-full gap-x-4">
                 {/* Território Participado */}
-                <FlexCol className="border-border bg-background mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol className="border-border bg-background mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                   <FlexCol className="flex-1 justify-center">
                     <FlexCol className="relative mb-4 min-h-[300px] flex-1">
                       <Image
@@ -421,7 +421,7 @@ const Index = () => {
                       href="https://territorioparticipado.pt"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
+                      className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
                     >
                       <FlexRow className="items-center gap-1 transition group-hover:scale-115">
                         {t('visit')}{' '}
@@ -431,7 +431,7 @@ const Index = () => {
                   </FlexCol>
                 </FlexCol>
                 {/* Estágio Bee Engineering */}
-                <FlexCol className="bg-background border-border mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol className="bg-background border-border mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                   <FlexCol className="flex-1 justify-center">
                     <FlexCol className="relative mb-4 flex-1">
                       <MediaCarousel
@@ -461,7 +461,7 @@ const Index = () => {
                       href="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
+                      className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
                     >
                       <FlexRow className="items-center transition group-hover:scale-115">
                         <FontAwesomeIcon icon={faItchIo} className="text-xs" />
@@ -500,7 +500,7 @@ const Index = () => {
           <SlideUp delay={0.1}>
             <FlexRow className="mb-4 gap-x-4">
               {/* Frontend */}
-              <FlexCol className="border-border bg-background/70 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexCol className="border-border bg-background/70 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol>
                   <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
                   <p className="text-muted text-base">{t('frontendDescription1')}</p>
@@ -520,7 +520,7 @@ const Index = () => {
                 </FlexRow>
               </FlexCol>
               {/* Backend */}
-              <FlexCol className="border-border bg-background/70 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexCol className="border-border bg-background/70 dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]] translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)]">
                 <FlexCol>
                   <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
                   <p className="text-muted text-base">{t('backendDescription1')}</p>
@@ -540,7 +540,7 @@ const Index = () => {
           <SlideUp delay={0.2}>
             <FlexRow className="w-full gap-x-4">
               {/* DevOps */}
-              <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol>
                   <h3 className="mb-2 text-xl font-semibold">{t('devOps')}</h3>
                   <p className="text-muted text-base">{t('devOpsDescription1')}</p>
@@ -557,7 +557,7 @@ const Index = () => {
                 </FlexRow>
               </FlexCol>
               {/* Managment */}
-              <FlexCol className="border-border bg-background/70 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexCol className="border-border bg-background/70 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol>
                   <h3 className="mb-2 text-xl font-semibold">{t('managment')}</h3>
                   <p className="text-muted text-base">{t('managmentDescription1')}</p>
@@ -589,7 +589,7 @@ const Index = () => {
             <h2 className="mb-6 text-4xl font-semibold">{t('experience')}</h2>
 
             <SlideUp delay={0.2}>
-              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol className="flex-1 gap-y-1">
                   <p className="text-primary text-xl font-bold">{t('exp1Title')}</p>
                   <p className="text-accent text-base font-semibold">{t('exp1Company')}</p>
@@ -609,7 +609,7 @@ const Index = () => {
             </SlideUp>
 
             <SlideUp delay={0.3}>
-              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol className="flex-1 gap-y-1">
                   <p className="text-primary text-xl font-bold">{t('exp2Title')}</p>
                   <p className="text-accent text-base font-semibold">{t('exp2Company')}</p>
@@ -634,7 +634,7 @@ const Index = () => {
             <h2 className="mb-6 text-4xl font-semibold">{t('education')}</h2>
 
             <SlideUp delay={0.2}>
-              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol className="flex-1 gap-y-1">
                   <p className="text-primary text-xl font-bold">{t('edu3Title')}</p>
                   <p className="text-accent text-base font-semibold">{t('edu3School')}</p>
@@ -654,7 +654,7 @@ const Index = () => {
             </SlideUp>
 
             <SlideUp delay={0.3}>
-              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol className="flex-1 gap-y-1">
                   <p className="text-primary text-xl font-bold">{t('edu2Title')}</p>
                   <p className="text-accent text-base font-semibold">{t('edu2School')}</p>
@@ -674,7 +674,7 @@ const Index = () => {
             </SlideUp>
 
             <SlideUp delay={0.4}>
-              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+              <FlexRow className="border-border bg-background/70 w-full gap-x-6 rounded-2xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                 <FlexCol className="flex-1 gap-y-1">
                   <p className="text-primary text-xl font-bold">{t('edu1Title')}</p>
                   <p className="text-accent text-base font-semibold">{t('edu1School')}</p>
@@ -727,7 +727,7 @@ const Index = () => {
             ].map((b, i) => (
               <FlexCol
                 key={`social-button-${i}`}
-                className="group bg-accent text-background border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl transition hover:scale-115"
+                className="group bg-accent border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl text-white transition hover:scale-115"
                 onClick={b.onClick}
               >
                 <FontAwesomeIcon
@@ -735,7 +735,7 @@ const Index = () => {
                   className="transition duration-300 ease-in-out group-hover:scale-120"
                 />
                 <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
-                  <span className="bg-accent text-secondary relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
+                  <span className="bg-accent relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
                     {b.hover}
                     <span className="bg-accent absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 shadow-md" />
                   </span>

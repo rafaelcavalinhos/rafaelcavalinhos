@@ -26,14 +26,14 @@ body {
   --color-border: #a6ccf7;
 }
 
-/* .dark {
+.dark {
   --color-primary: #e5e5e5;
   --color-secondary: #121212;
-  --color-muted: #888888;
-  --color-accent: #4da3ff;
-  --color-background: #030303;
+  --color-muted: #b1afaf;
+  --color-accent: #4597ee;
+  --color-background: #33374b;
   --color-surface: #1a1a1a;
-  --color-border: #a6ccf7;
+  --color-border: #85c2f5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,7 +46,7 @@ body {
     --color-surface: #1a1a1a;
     --color-border: #a6ccf7;
   }
-} */
+}
 
 @layer utilities {
   .text-gradient {

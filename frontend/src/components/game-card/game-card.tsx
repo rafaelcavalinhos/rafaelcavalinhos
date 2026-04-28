@@ -80,7 +80,7 @@ export function GameCard({
   const t = useTranslations();
   return (
     <SlideUp delay={delay}>
-      <div className="border-border bg-background text-primary flex flex-col overflow-hidden rounded-xl border p-2 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+      <div className="border-border bg-background text-primary flex flex-col overflow-hidden rounded-xl border p-2 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
         <MediaCarousel images={project.images} />
 
         <FlexRow className="gap-1 px-2 pt-4">
@@ -108,7 +108,7 @@ export function GameCard({
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
+            className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
           >
             <FlexRow className="items-center transition group-hover:scale-115">
               <FontAwesomeIcon icon={faItchIo} className="text-xs" />
