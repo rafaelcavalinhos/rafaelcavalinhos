@@ -145,7 +145,7 @@ const Index = () => {
   }, []);
 
   return (
-    <main className="text-primary relative">
+    <main className="text-primary relative w-full">
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/bg.jpg')] bg-repeat opacity-20"
         style={{ backgroundSize: '2000px', filter: 'blur(2px)' }}
@@ -277,7 +277,7 @@ const Index = () => {
       {/* Projects */}
       <section
         id="projects"
-        className="slide-up-in border-primary bg-background relative z-10 mt-[85vh] flex justify-center border-y-2 py-10 pb-20 text-2xl"
+        className="slide-up-in border-primary bg-background relative z-10 mt-[85vh] flex w-full justify-center border-y-2 py-10 pb-20 text-2xl"
       >
         <FlexCol className="w-full items-center px-50">
           <h2 className="mb-10 text-4xl font-semibold">{t('projects')}</h2>
@@ -294,18 +294,7 @@ const Index = () => {
                 <h3 className="text-3xl font-bold">Axon</h3>
                 <p className="text-accent text-lg">{t('axonSubtitle')}</p>
                 <p className="text-muted mt-6 text-base leading-relaxed">{t('axonDescription')}</p>
-                <FlexRow className="mt-4 gap-x-2">
-                  {/* {['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Fastify', 'Docker'].map(
-                  (t, i) => (
-                    <div
-                      key={`axon-tech-${i}`}
-                      className="border-muted/30 bg-muted/10 text-muted rounded-2xl border px-2 text-sm"
-                    >
-                      {t}
-                    </div>
-                  ),
-                )} */}
-
+                <FlexRow className="mt-4 w-full gap-x-2">
                   {renderSkillIcons([
                     { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
                     { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
@@ -456,7 +445,7 @@ const Index = () => {
         id="skills"
         className="relative mb-20 flex flex-col items-center px-50 py-10 text-2xl"
       >
-        <h2 className="mb-20 text-4xl font-semibold">{t('skills')}</h2>
+        <h2 className="mb-10 text-4xl font-semibold">{t('skills')}</h2>
         <SlideUp delay={0.1}>
           <FlexRow className="mb-4 gap-x-4">
             {/* Frontend */}
@@ -660,7 +649,7 @@ const Index = () => {
           <p className="text-xl font-semibold">
             {t('builtBy')} <span className="text-gradient font-bold">Rafael Cavalinhos</span>
           </p>
-          <FlexRow className="gap-x-2">
+          <FlexRow className="gap-x-4">
             {[
               {
                 hover: 'Github',
