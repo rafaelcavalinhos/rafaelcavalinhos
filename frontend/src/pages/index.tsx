@@ -8,6 +8,8 @@ import {
   faArrowUpRightFromSquare,
   faCalendar,
   faLocationDot,
+  faMoon,
+  faSun,
   faUser,
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
@@ -144,12 +146,54 @@ const Index = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  // useEffect(() => {
+  //   const root = document.documentElement;
+  //   const saved = localStorage.getItem('theme');
+
+  //   if (saved === 'dark') {
+  //     root.classList.add('dark');
+  //     setTheme('dark');
+  //   } else if (saved === 'light') {
+  //     root.classList.remove('dark');
+  //     setTheme('light');
+  //   } else {
+  //     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  //     if (prefersDark) {
+  //       root.classList.add('dark');
+  //       setTheme('dark');
+  //     } else {
+  //       setTheme('light');
+  //     }
+  //   }
+  // }, []);
+
+  // const toggleTheme = () => {
+  //   const root = document.documentElement;
+  //   const isDark = root.classList.toggle('dark');
+
+  //   const newTheme = isDark ? 'dark' : 'light';
+  //   setTheme(newTheme);
+  //   localStorage.setItem('theme', newTheme);
+  // };
+
   return (
     <main className="text-primary relative w-full">
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/bg.jpg')] bg-repeat opacity-20"
         style={{ backgroundSize: '2000px', filter: 'blur(2px)' }}
       />
+      {/* 
+      <FlexRow className="mt-6 justify-between px-50">
+        <p className="text-xl font-semibold">Rafael Cavalinhos.</p>
+        <FontAwesomeIcon
+          onClick={toggleTheme}
+          icon={theme === 'dark' ? faSun : faMoon}
+          className="top-10 right-50 cursor-pointer text-2xl transition hover:scale-120"
+        />
+      </FlexRow> */}
 
       {/* Home */}
       <div
@@ -255,7 +299,7 @@ const Index = () => {
             <SlideUp delay={(i + 1) * 0.1 + 0.3}>
               <FlexCol
                 key={`social-button-${i}`}
-                className="group bg-accent text-background border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl transition hover:scale-115"
+                className="group bg-accent border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl text-white transition hover:scale-115"
                 onClick={b.onClick}
               >
                 <FontAwesomeIcon
@@ -263,7 +307,7 @@ const Index = () => {
                   className="transition duration-300 ease-in-out group-hover:scale-120"
                 />
                 <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
-                  <span className="bg-accent text-secondary relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
+                  <span className="bg-accent relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
                     {b.hover}
                     <span className="bg-accent absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 shadow-md" />
                   </span>
@@ -282,94 +326,38 @@ const Index = () => {
         <FlexCol className="w-full items-center px-50">
           <h2 className="mb-10 text-4xl font-semibold">{t('projects')}</h2>
 
-          {/* Solo */}
-          <SlideUp>
-            <FlexRow className="text-accent/50 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
-              <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
-              <div className="whitespace-nowrap">{t('soloProjects')}</div>
-              <div className="h-min w-full border-b"></div>
-            </FlexRow>
-            <FlexRow className="border-border bg-background mt-4 mb-10 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-              <FlexCol className="flex-1 justify-center">
-                <h3 className="text-3xl font-bold">Axon</h3>
-                <p className="text-accent text-lg">{t('axonSubtitle')}</p>
-                <p className="text-muted mt-6 text-base leading-relaxed">{t('axonDescription')}</p>
-                <FlexRow className="mt-4 w-full gap-x-2">
-                  {renderSkillIcons([
-                    { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
-                    { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
-                    { width: 25, height: 25, name: 'tailwind.svg', hover: 'Tailwind' },
-                    { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
-                    { width: 25, height: 25, name: 'postgresql.webp', hover: 'PostgreSQL' },
-                    { width: 25, height: 25, name: 'fastify.webp', hover: 'Fastify' },
-                    { width: 25, height: 25, name: 'docker.svg', hover: 'Docker' },
-                    { width: 25, height: 25, name: 'cloudflare.svg', hover: 'Cloudflare' },
-                    { width: 25, height: 25, name: 'vercel.svg', hover: 'Vercel' },
-                    { width: 25, height: 25, name: 'railway.svg', hover: 'Railway' },
-                    { width: 25, height: 25, name: 'github.svg', hover: 'Github' },
-                  ])}
-                </FlexRow>
-                <a
-                  href="https://getaxon.pt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
-                >
-                  <FlexRow className="items-center gap-1 transition group-hover:scale-115">
-                    {t('visit')}{' '}
-                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" />
-                  </FlexRow>
-                </a>
-              </FlexCol>
-
-              <FlexCol className="relative min-h-[300px] flex-1">
-                <Image
-                  alt="axon"
-                  src="/projects/saas1.png"
-                  fill
-                  className="rounded-lg object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </FlexCol>
-            </FlexRow>
-          </SlideUp>
-
-          {/* Professional */}
-          <SlideUp>
-            <FlexRow className="text-accent/50 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
-              <FontAwesomeIcon icon={faUsers}></FontAwesomeIcon>
-              <div className="whitespace-nowrap">{t('professionalProjects')}</div>
-              <div className="h-min w-full border-b"></div>
-            </FlexRow>
-            <FlexRow className="w-full gap-x-4">
-              {/* Território Participado */}
-              <FlexCol className="border-border bg-background mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+          <FlexCol className="w-full">
+            {/* Solo */}
+            <SlideUp>
+              <FlexRow className="text-accent/50 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
+                <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                <div className="whitespace-nowrap">{t('soloProjects')}</div>
+                <div className="h-min w-full border-b"></div>
+              </FlexRow>
+              <FlexRow className="border-border bg-background mt-4 mb-10 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                 <FlexCol className="flex-1 justify-center">
-                  <FlexCol className="relative mb-4 min-h-[300px] flex-1">
-                    <Image
-                      alt="axon"
-                      src="/projects/tp.png"
-                      fill
-                      className="rounded-lg object-cover"
-                      sizes="(max-width: 500px) 100vw, 50vw"
-                    />
-                  </FlexCol>
-                  <h3 className="text-2xl font-bold">Território Participado</h3>
-                  <p className="text-accent text-lg">{t('tpSubtitle')}</p>
-                  <p className="text-muted mt-6 text-base leading-relaxed">{t('tpDescription')}</p>
-                  <FlexRow className="mt-4 gap-x-2">
+                  <h3 className="text-3xl font-bold">Axon</h3>
+                  <p className="text-accent text-lg">{t('axonSubtitle')}</p>
+                  <p className="text-muted mt-6 text-base leading-relaxed">
+                    {t('axonDescription')}
+                  </p>
+                  <FlexRow className="mt-4 w-full gap-x-2">
                     {renderSkillIcons([
-                      { width: 25, height: 25, name: 'figma.svg', hover: 'Figma' },
                       { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
                       { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
+                      { width: 25, height: 25, name: 'tailwind.svg', hover: 'Tailwind' },
                       { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
                       { width: 25, height: 25, name: 'postgresql.webp', hover: 'PostgreSQL' },
                       { width: 25, height: 25, name: 'fastify.webp', hover: 'Fastify' },
+                      { width: 25, height: 25, name: 'docker.svg', hover: 'Docker' },
+                      { width: 25, height: 25, name: 'cloudflare.svg', hover: 'Cloudflare' },
+                      { width: 25, height: 25, name: 'vercel.svg', hover: 'Vercel' },
+                      { width: 25, height: 25, name: 'railway.svg', hover: 'Railway' },
                       { width: 25, height: 25, name: 'github.svg', hover: 'Github' },
                     ])}
                   </FlexRow>
                   <a
-                    href="https://territorioparticipado.pt"
+                    href="https://getaxon.pt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
@@ -380,63 +368,125 @@ const Index = () => {
                     </FlexRow>
                   </a>
                 </FlexCol>
-              </FlexCol>
-              {/* Estágio Bee Engineering */}
-              <FlexCol className="bg-background border-border mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-                <FlexCol className="flex-1 justify-center">
-                  <FlexCol className="relative mb-4 flex-1">
-                    <MediaCarousel
-                      images={[
-                        '/projects/beach-rolling.mp4',
-                        '/projects/spooky-hunt.mp4',
-                        '/projects/brawl-fighters.mp4',
-                        '/projects/wave-racer.mp4',
-                        '/projects/feng-shui.mp4',
-                        '/projects/flames-out.mp4',
-                      ]}
-                      videos={true}
-                    ></MediaCarousel>
-                  </FlexCol>
-                  <h3 className="text-2xl font-bold">{t('internshipTitle')}</h3>
-                  <p className="text-accent text-lg">{t('internshipSubtitle')}</p>
-                  <p className="text-muted mt-6 text-base leading-relaxed">
-                    {t('internshipDescription')}
-                  </p>
-                  <FlexRow className="mt-4 gap-x-2">
-                    {renderSkillIcons([
-                      { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
-                      { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
-                    ])}
-                  </FlexRow>
-                  <a
-                    href="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
-                  >
-                    <FlexRow className="items-center transition group-hover:scale-115">
-                      <FontAwesomeIcon icon={faItchIo} className="text-xs" />
-                      &nbsp;{`${t('seeOn')} itch.io`}
-                    </FlexRow>
-                  </a>
-                </FlexCol>
-              </FlexCol>
-            </FlexRow>
-          </SlideUp>
 
-          {/* Games */}
-          <SlideUp>
-            <FlexRow className="text-accent/50 mt-10 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
-              <FontAwesomeIcon icon={faGamepad}></FontAwesomeIcon>
-              <div className="whitespace-nowrap">{t('games')}</div>
-              <div className="h-min w-full border-b"></div>
-            </FlexRow>
-            <div className="mt-4 grid grid-cols-4 gap-4">
-              {GAMES.map((g, i) => (
-                <GameCard key={g.title} seeOn={t('seeOn')} project={g} delay={0.05 * (i + 1)} />
-              ))}
-            </div>
-          </SlideUp>
+                <FlexCol className="relative min-h-[300px] flex-1">
+                  <Image
+                    alt="axon"
+                    src="/projects/saas1.png"
+                    fill
+                    className="rounded-lg object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </FlexCol>
+              </FlexRow>
+            </SlideUp>
+
+            {/* Professional */}
+            <SlideUp>
+              <FlexRow className="text-accent/50 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
+                <FontAwesomeIcon icon={faUsers}></FontAwesomeIcon>
+                <div className="whitespace-nowrap">{t('professionalProjects')}</div>
+                <div className="h-min w-full border-b"></div>
+              </FlexRow>
+              <FlexRow className="w-full gap-x-4">
+                {/* Território Participado */}
+                <FlexCol className="border-border bg-background mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                  <FlexCol className="flex-1 justify-center">
+                    <FlexCol className="relative mb-4 min-h-[300px] flex-1">
+                      <Image
+                        alt="axon"
+                        src="/projects/tp.png"
+                        fill
+                        className="rounded-lg object-cover"
+                        sizes="(max-width: 500px) 100vw, 50vw"
+                      />
+                    </FlexCol>
+                    <h3 className="text-2xl font-bold">Território Participado</h3>
+                    <p className="text-accent text-lg">{t('tpSubtitle')}</p>
+                    <p className="text-muted mt-6 text-base leading-relaxed">
+                      {t('tpDescription')}
+                    </p>
+                    <FlexRow className="mt-4 gap-x-2">
+                      {renderSkillIcons([
+                        { width: 25, height: 25, name: 'figma.svg', hover: 'Figma' },
+                        { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
+                        { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
+                        { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
+                        { width: 25, height: 25, name: 'postgresql.webp', hover: 'PostgreSQL' },
+                        { width: 25, height: 25, name: 'fastify.webp', hover: 'Fastify' },
+                        { width: 25, height: 25, name: 'github.svg', hover: 'Github' },
+                      ])}
+                    </FlexRow>
+                    <a
+                      href="https://territorioparticipado.pt"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
+                    >
+                      <FlexRow className="items-center gap-1 transition group-hover:scale-115">
+                        {t('visit')}{' '}
+                        <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" />
+                      </FlexRow>
+                    </a>
+                  </FlexCol>
+                </FlexCol>
+                {/* Estágio Bee Engineering */}
+                <FlexCol className="bg-background border-border mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                  <FlexCol className="flex-1 justify-center">
+                    <FlexCol className="relative mb-4 flex-1">
+                      <MediaCarousel
+                        images={[
+                          '/projects/beach-rolling.mp4',
+                          '/projects/spooky-hunt.mp4',
+                          '/projects/brawl-fighters.mp4',
+                          '/projects/wave-racer.mp4',
+                          '/projects/feng-shui.mp4',
+                          '/projects/flames-out.mp4',
+                        ]}
+                        videos={true}
+                      ></MediaCarousel>
+                    </FlexCol>
+                    <h3 className="text-2xl font-bold">{t('internshipTitle')}</h3>
+                    <p className="text-accent text-lg">{t('internshipSubtitle')}</p>
+                    <p className="text-muted mt-6 text-base leading-relaxed">
+                      {t('internshipDescription')}
+                    </p>
+                    <FlexRow className="mt-4 gap-x-2">
+                      {renderSkillIcons([
+                        { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
+                        { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
+                      ])}
+                    </FlexRow>
+                    <a
+                      href="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-border group bg-accent text-secondary mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap transition hover:scale-110 focus:outline-none"
+                    >
+                      <FlexRow className="items-center transition group-hover:scale-115">
+                        <FontAwesomeIcon icon={faItchIo} className="text-xs" />
+                        &nbsp;{`${t('seeOn')} itch.io`}
+                      </FlexRow>
+                    </a>
+                  </FlexCol>
+                </FlexCol>
+              </FlexRow>
+            </SlideUp>
+
+            {/* Games */}
+            <SlideUp>
+              <FlexRow className="text-accent/50 mt-10 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
+                <FontAwesomeIcon icon={faGamepad}></FontAwesomeIcon>
+                <div className="whitespace-nowrap">{t('games')}</div>
+                <div className="h-min w-full border-b"></div>
+              </FlexRow>
+              <div className="mt-4 grid grid-cols-4 gap-4">
+                {GAMES.map((g, i) => (
+                  <GameCard key={g.title} seeOn={t('seeOn')} project={g} delay={0.05 * (i + 1)} />
+                ))}
+              </div>
+            </SlideUp>
+          </FlexCol>
         </FlexCol>
       </section>
 
@@ -446,84 +496,86 @@ const Index = () => {
         className="relative mb-20 flex flex-col items-center px-50 py-10 text-2xl"
       >
         <h2 className="mb-10 text-4xl font-semibold">{t('skills')}</h2>
-        <SlideUp delay={0.1}>
-          <FlexRow className="mb-4 gap-x-4">
-            {/* Frontend */}
-            <FlexCol className="border-border bg-background/70 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-              <FlexCol>
-                <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
-                <p className="text-muted text-base">{t('frontendDescription1')}</p>
+        <FlexCol className="w-full">
+          <SlideUp delay={0.1}>
+            <FlexRow className="mb-4 gap-x-4">
+              {/* Frontend */}
+              <FlexCol className="border-border bg-background/70 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol>
+                  <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
+                  <p className="text-muted text-base">{t('frontendDescription1')}</p>
+                </FlexCol>
+                <FlexRow className="mt-2 gap-4">
+                  {renderSkillIcons([
+                    { name: 'nextjs.webp', hover: 'Next.js' },
+                    { name: 'typescript.webp', hover: 'TypeScript' },
+                    { name: 'javascript.svg', hover: 'JavaScript' },
+                    { name: 'csharp.svg', hover: 'C#' },
+                    { name: 'tailwind.svg', hover: 'Tailwind' },
+                    { name: 'html.webp', hover: 'HTML' },
+                    { name: 'unity.webp', hover: 'Unity' },
+                    { name: 'figma.svg', hover: 'Figma' },
+                    { name: 'aseprite.svg', hover: 'Aseprite' },
+                  ])}
+                </FlexRow>
               </FlexCol>
-              <FlexRow className="mt-2 gap-4">
-                {renderSkillIcons([
-                  { name: 'nextjs.webp', hover: 'Next.js' },
-                  { name: 'typescript.webp', hover: 'TypeScript' },
-                  { name: 'javascript.svg', hover: 'JavaScript' },
-                  { name: 'csharp.svg', hover: 'C#' },
-                  { name: 'tailwind.svg', hover: 'Tailwind' },
-                  { name: 'html.webp', hover: 'HTML' },
-                  { name: 'unity.webp', hover: 'Unity' },
-                  { name: 'figma.svg', hover: 'Figma' },
-                  { name: 'aseprite.svg', hover: 'Aseprite' },
-                ])}
-              </FlexRow>
-            </FlexCol>
-            {/* Backend */}
-            <FlexCol className="border-border bg-background/70 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-              <FlexCol>
-                <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
-                <p className="text-muted text-base">{t('backendDescription1')}</p>
-                <p className="text-muted text-base">{t('backendDescription2')}</p>
+              {/* Backend */}
+              <FlexCol className="border-border bg-background/70 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol>
+                  <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
+                  <p className="text-muted text-base">{t('backendDescription1')}</p>
+                  <p className="text-muted text-base">{t('backendDescription2')}</p>
+                </FlexCol>
+                <FlexRow className="mt-2 gap-4">
+                  {renderSkillIcons([
+                    { name: 'nodejs.webp', hover: 'NodeJS' },
+                    { name: 'fastify.webp', hover: 'Fastify' },
+                    { name: 'postgresql.webp', hover: 'PostgreSQL' },
+                    { name: 'puppeteer.webp', hover: 'Puppeteer' },
+                  ])}
+                </FlexRow>
               </FlexCol>
-              <FlexRow className="mt-2 gap-4">
-                {renderSkillIcons([
-                  { name: 'nodejs.webp', hover: 'NodeJS' },
-                  { name: 'fastify.webp', hover: 'Fastify' },
-                  { name: 'postgresql.webp', hover: 'PostgreSQL' },
-                  { name: 'puppeteer.webp', hover: 'Puppeteer' },
-                ])}
-              </FlexRow>
-            </FlexCol>
-          </FlexRow>
-        </SlideUp>
-        <SlideUp delay={0.2}>
-          <FlexRow className="gap-x-4">
-            {/* DevOps */}
-            <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-              <FlexCol>
-                <h3 className="mb-2 text-xl font-semibold">{t('devOps')}</h3>
-                <p className="text-muted text-base">{t('devOpsDescription1')}</p>
+            </FlexRow>
+          </SlideUp>
+          <SlideUp delay={0.2}>
+            <FlexRow className="w-full gap-x-4">
+              {/* DevOps */}
+              <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol>
+                  <h3 className="mb-2 text-xl font-semibold">{t('devOps')}</h3>
+                  <p className="text-muted text-base">{t('devOpsDescription1')}</p>
+                </FlexCol>
+                <FlexRow className="mt-2 gap-4">
+                  {renderSkillIcons([
+                    { name: 'vercel.svg', hover: 'Vercel' },
+                    { name: 'railway.svg', hover: 'Railway' },
+                    { name: 'docker.svg', hover: 'Docker' },
+                    { name: 'cloudflare.svg', hover: 'Cloudflare' },
+                    { name: 'github.svg', hover: 'Github' },
+                    { name: 'git.svg', hover: 'Git' },
+                  ])}
+                </FlexRow>
               </FlexCol>
-              <FlexRow className="mt-2 gap-4">
-                {renderSkillIcons([
-                  { name: 'vercel.svg', hover: 'Vercel' },
-                  { name: 'railway.svg', hover: 'Railway' },
-                  { name: 'docker.svg', hover: 'Docker' },
-                  { name: 'cloudflare.svg', hover: 'Cloudflare' },
-                  { name: 'github.svg', hover: 'Github' },
-                  { name: 'git.svg', hover: 'Git' },
-                ])}
-              </FlexRow>
-            </FlexCol>
-            {/* Managment */}
-            <FlexCol className="border-border bg-background/70 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
-              <FlexCol>
-                <h3 className="mb-2 text-xl font-semibold">{t('managment')}</h3>
-                <p className="text-muted text-base">{t('managmentDescription1')}</p>
+              {/* Managment */}
+              <FlexCol className="border-border bg-background/70 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <FlexCol>
+                  <h3 className="mb-2 text-xl font-semibold">{t('managment')}</h3>
+                  <p className="text-muted text-base">{t('managmentDescription1')}</p>
+                </FlexCol>
+                <FlexRow className="mt-2 gap-4">
+                  {['Agile', 'Scrum', 'Jira'].map((name) => (
+                    <span
+                      key={name}
+                      className="bg-accent text-secondary cursor-default rounded-xl px-3 py-1 text-sm font-medium transition hover:scale-110"
+                    >
+                      {name}
+                    </span>
+                  ))}
+                </FlexRow>
               </FlexCol>
-              <FlexRow className="mt-2 gap-4">
-                {['Agile', 'Scrum', 'Jira'].map((name) => (
-                  <span
-                    key={name}
-                    className="bg-accent text-secondary cursor-default rounded-xl px-3 py-1 text-sm font-medium transition hover:scale-110"
-                  >
-                    {name}
-                  </span>
-                ))}
-              </FlexRow>
-            </FlexCol>
-          </FlexRow>
-        </SlideUp>
+            </FlexRow>
+          </SlideUp>
+        </FlexCol>
       </section>
 
       {/* Experience & Education */}
