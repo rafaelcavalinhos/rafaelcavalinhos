@@ -286,7 +286,7 @@ const Index = () => {
                 window.open('https://www.linkedin.com/in/rafael-cavalinhos-39937624a', '_blank'),
             },
             {
-              hover: t('Email'),
+              hover: t('email'),
               icon: faEnvelope,
               onClick: () => (window.location.href = 'mailto:rafaelcavalinhos2002@gmail.com'),
             },
@@ -715,7 +715,7 @@ const Index = () => {
                   window.open('https://www.linkedin.com/in/rafael-cavalinhos-39937624a', '_blank'),
               },
               {
-                hover: t('Email'),
+                hover: t('email'),
                 icon: faEnvelope,
                 onClick: () => (window.location.href = 'mailto:rafaelcavalinhos2002@gmail.com'),
               },
