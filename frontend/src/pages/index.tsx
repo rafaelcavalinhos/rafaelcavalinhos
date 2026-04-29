@@ -762,7 +762,7 @@ const Index = () => {
                 {
                   hover: t('resume'),
                   icon: faFileLines,
-                  onClick: () => window.open('/cv.pdf', '_blank'),
+                  onClick: () => window.open(locale === 'pt' ? '/cv.pdf' : '/cv-en.pdf', '_blank'),
                 },
               ].map((b, i) => (
                 <FlexCol
