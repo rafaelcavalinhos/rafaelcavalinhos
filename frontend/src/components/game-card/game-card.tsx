@@ -52,7 +52,7 @@ function renderSkillIcons(icons: SkillIconProps[]) {
           </div>
         )}
         <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100">
-          <span className="bg-accent text-secondary relative block rounded-md px-2 py-1 text-sm whitespace-nowrap shadow-md">
+          <span className="bg-accent relative block rounded-md px-2 py-1 text-sm whitespace-nowrap text-white shadow-md">
             {displayName}
             <span className="bg-accent absolute -bottom-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 shadow-md" />
           </span>
