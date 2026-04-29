@@ -38,18 +38,6 @@ body {
   --color-rim: #3f4250;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --color-primary: #e5e5e5;
-    --color-secondary: #121212;
-    --color-muted: #888888;
-    --color-accent: #4da3ff;
-    --color-background: #0d0d0d;
-    --color-surface: #1a1a1a;
-    --color-border: #a6ccf7;
-  }
-}
-
 @layer utilities {
   .text-gradient {
     background: linear-gradient(90deg, #6366f1, #8b5cf6, #46a3ef);

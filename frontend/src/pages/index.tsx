@@ -196,6 +196,10 @@ const Index = () => {
         <meta name="description" content={t('metaDescription')} />
         <meta name="author" content="Rafael Cavalinhos" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="google-site-verification"
+          content="Y9BahKKxFlbONlcfbHGizRvJiJuETVbGsi2BxRSPgIs"
+        />
         <link rel="canonical" href={canonicalUrl} />
         <link rel="alternate" hrefLang="pt" href={baseUrl} />
         <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
@@ -336,7 +340,11 @@ const Index = () => {
               {
                 hover: t('resume'),
                 icon: faFileLines,
-                onClick: () => window.open(locale === 'pt' ? '/cv.pdf' : '/cv-en.pdf', '_blank'),
+                onClick: () =>
+                  window.open(
+                    locale === 'pt' ? '/cv-rafaelcavalinhos.pdf' : '/cv-rafaelcavalinhos-en.pdf',
+                    '_blank',
+                  ),
               },
             ].map((b, i) => (
               <SlideUp key={`social-${i}`} delay={(i + 1) * 0.1 + 0.3}>
@@ -778,7 +786,11 @@ const Index = () => {
                 {
                   hover: t('resume'),
                   icon: faFileLines,
-                  onClick: () => window.open(locale === 'pt' ? '/cv.pdf' : '/cv-en.pdf', '_blank'),
+                  onClick: () =>
+                    window.open(
+                      locale === 'pt' ? '/cv-rafaelcavalinhos.pdf' : '/cv-rafaelcavalinhos-en.pdf',
+                      '_blank',
+                    ),
                 },
               ].map((b, i) => (
                 <FlexCol
