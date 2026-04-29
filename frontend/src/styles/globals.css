@@ -19,7 +19,7 @@ body {
 @theme {
   --color-primary: #2e2e2e;
   --color-secondary: #ffffff;
-  --color-muted: #aaaaaa;
+  --color-muted: #7a7a7a;
   --color-accent: #4da3ff;
   --color-background: #f5f5f5;
   --color-surface: #f5f5f5;
@@ -30,7 +30,7 @@ body {
 .dark {
   --color-primary: #e5e5e5;
   --color-secondary: #121212;
-  --color-muted: #b1afaf;
+  --color-muted: #c4b8b8;
   --color-accent: #4597ee;
   --color-background: #33374b;
   --color-surface: #454a5f;
