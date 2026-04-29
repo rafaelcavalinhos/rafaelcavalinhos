@@ -7,6 +7,7 @@ import { faGithub, faItchIo, faLinkedin } from '@fortawesome/free-brands-svg-ico
 import {
   faArrowUpRightFromSquare,
   faCalendar,
+  faGraduationCap,
   faLocationDot,
   faMoon,
   faSun,
@@ -91,41 +92,33 @@ const Index = () => {
     });
   }
 
-  const GAMES = [
+  const COLLEGE_PROJECTS = [
+    {
+      title: 'WattSwap',
+      description: t('wattSwapDescription'),
+      images: ['/projects/watt-swap1.png', '/projects/watt-swap2.png', '/projects/watt-swap3.png'],
+    },
     {
       title: "Press 'em",
       description: t('pressEmDescription'),
       url: 'https://rafael-cavalinhos.itch.io/press-em',
-      tags: ['college'],
       images: ['/projects/press-em1.png', '/projects/press-em2.png', '/projects/press-em3.png'],
     },
     {
       title: 'Castaway',
       description: t('castawayDescription'),
       url: 'https://rafael-cavalinhos.itch.io/castaway',
-      tags: ['college'],
       images: ['/projects/castaway1.png', '/projects/castaway2.png', '/projects/castaway3.png'],
     },
     {
       title: 'Factory Dealings',
       description: t('factoryDealingsDescription'),
       url: 'https://rafael-cavalinhos.itch.io/factory-dealings',
-      tags: ['college', 'gameJam'],
+      tags: ['gameJam'],
       images: [
         '/projects/factory-dealings1.png',
         '/projects/factory-dealings2.png',
         '/projects/factory-dealings3.png',
-      ],
-    },
-    {
-      title: 'Snake Game',
-      description: t('snakeGameDescription'),
-      url: 'https://rafael-cavalinhos.itch.io/snake-game',
-      tags: ['hobby'],
-      images: [
-        '/projects/snake-game1.png',
-        '/projects/snake-game2.png',
-        '/projects/snake-game3.png',
       ],
     },
   ];
@@ -320,7 +313,7 @@ const Index = () => {
               {
                 hover: t('resume'),
                 icon: faFileLines,
-                onClick: () => window.open('/cv.pdf', '_blank'),
+                onClick: () => window.open(locale === 'pt' ? '/cv.pdf' : '/cv-en.pdf', '_blank'),
               },
             ].map((b, i) => (
               <SlideUp key={`social-${i}`} delay={(i + 1) * 0.1 + 0.3}>
@@ -502,16 +495,15 @@ const Index = () => {
                 </div>
               </SlideUp>
 
-              {/* Games */}
+              {/* College Projects */}
               <SlideUp>
                 <FlexRow className="text-accent/50 mt-10 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
-                  <FontAwesomeIcon icon={faGamepad} />
-                  <div className="whitespace-nowrap">{t('games')}</div>
+                  <FontAwesomeIcon icon={faGraduationCap} />
+                  <div className="whitespace-nowrap">{t('collegeProjects')}</div>
                   <div className="h-min w-full border-b" />
                 </FlexRow>
-                {/* 1 col → 2 col → 4 col */}
                 <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                  {GAMES.map((g, i) => (
+                  {COLLEGE_PROJECTS.map((g, i) => (
                     <GameCard key={g.title} seeOn={t('seeOn')} project={g} delay={0.05 * (i + 1)} />
                   ))}
                 </div>
@@ -564,6 +556,7 @@ const Index = () => {
                       { name: 'fastify.webp', hover: 'Fastify' },
                       { name: 'postgresql.webp', hover: 'PostgreSQL' },
                       { name: 'puppeteer.webp', hover: 'Puppeteer' },
+                      { name: 'dotnet.svg', hover: '.NET Core' },
                     ])}
                   </FlexRow>
                 </FlexCol>

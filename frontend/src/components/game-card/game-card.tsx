@@ -10,8 +10,8 @@ type Project = {
   title: string;
   subtitle?: string;
   description: string;
-  url: string;
-  tags: string[];
+  url?: string;
+  tags?: string[];
   image?: string;
   images?: string[];
   videos?: string[];
@@ -80,13 +80,13 @@ export function GameCard({
   const t = useTranslations();
   return (
     <SlideUp delay={delay}>
-      <div className="border-rim bg-background text-primary flex h-full flex-col overflow-hidden rounded-xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+      <div className="border-rim bg-background text-primary flex h-full flex-col rounded-xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
         <div className="shrink-0">
-          <MediaCarousel images={project.images} />
+          <MediaCarousel images={project.images || project.videos} videos={!!project.videos} />
         </div>
 
         <FlexRow className="gap-1 px-2 pt-4">
-          {project.tags.map((tag, i) => (
+          {project.tags?.map((tag, i) => (
             <FlexRow
               key={`tag-${i}`}
               className={`items-center rounded-full border px-2 text-xs text-white ${tagColors[tag as keyof typeof tagColors]}`}
@@ -106,24 +106,31 @@ export function GameCard({
           {/* push bottom section down */}
           <FlexCol className="mt-auto">
             <FlexRow className="gap-1">
-              {renderSkillIcons([
-                { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
-                { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
-                { width: 25, height: 25, name: 'aseprite.svg', hover: 'Aseprite' },
-              ])}
+              {project.url
+                ? renderSkillIcons([
+                    { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
+                    { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
+                    { width: 25, height: 25, name: 'aseprite.svg', hover: 'Aseprite' },
+                  ])
+                : renderSkillIcons([
+                    { width: 25, height: 25, name: 'dotnet.svg', hover: '.NET Core' },
+                    { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
+                  ])}
             </FlexRow>
 
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-border group bg-accent mt-2 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
-            >
-              <FlexRow className="items-center transition group-hover:scale-115">
-                <FontAwesomeIcon icon={faItchIo} className="text-xs" />
-                &nbsp;{`${seeOn} itch.io`}
-              </FlexRow>
-            </a>
+            {project.url && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-border group bg-accent mt-2 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
+              >
+                <FlexRow className="items-center transition group-hover:scale-115">
+                  <FontAwesomeIcon icon={faItchIo} className="text-xs" />
+                  &nbsp;{`${seeOn} itch.io`}
+                </FlexRow>
+              </a>
+            )}
           </FlexCol>
         </div>
       </div>
