@@ -34,7 +34,6 @@ export async function getStaticProps({ locale }: { locale: string }) {
 const Index = () => {
   const t = useTranslations();
 
-  // 'running' → character is animating in; 'idle' → swapped to idle sprite
   const [charState, setCharState] = useState<'running' | 'idle'>('running');
 
   useEffect(() => {
@@ -121,7 +120,6 @@ const Index = () => {
     {
       title: 'Snake Game',
       description: t('snakeGameDescription'),
-
       url: 'https://rafael-cavalinhos.itch.io/snake-game',
       tags: ['hobby'],
       images: [
@@ -146,7 +144,6 @@ const Index = () => {
       setTheme('light');
     } else {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
       if (prefersDark) {
         root.classList.add('dark');
         setTheme('dark');
@@ -159,7 +156,6 @@ const Index = () => {
   const toggleTheme = () => {
     const root = document.documentElement;
     const isDark = root.classList.toggle('dark');
-
     const newTheme = isDark ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
@@ -180,18 +176,13 @@ const Index = () => {
   return (
     <>
       <Head>
-        {/* Primary */}
         <title>{t('metaTitle')}</title>
         <meta name="description" content={t('metaDescription')} />
         <meta name="author" content="Rafael Cavalinhos" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href={canonicalUrl} />
-
-        {/* Alternate locales — helps Google understand both versions */}
         <link rel="alternate" hrefLang="pt" href={baseUrl} />
         <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
-
-        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:title" content={t('metaTitle')} />
@@ -200,14 +191,10 @@ const Index = () => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content={ogLocale} />
-
-        {/* Twitter / X */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={t('metaTitle')} />
         <meta name="twitter:description" content={t('metaDescription')} />
         <meta name="twitter:image" content={`${baseUrl}/og-image.png`} />
-
-        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -219,34 +206,35 @@ const Index = () => {
           style={{ backgroundSize: '2000px', filter: 'blur(2px)' }}
         />
 
-        <FlexRow className="mt-6 justify-between px-10 md:px-20 xl:px-30">
+        {/* ── Navbar ── */}
+        <FlexRow className="mt-6 justify-between px-6 sm:px-10 md:px-20 xl:px-30">
           <p className="text-xl font-semibold">Rafael Cavalinhos.</p>
           <FlexRow className="items-center gap-x-2">
             <img
               src={locale === 'pt' ? '/en.svg' : '/pt.svg'}
-              alt={locale === 'pt' ? 'Portugal flag' : 'UK flag'}
+              alt={locale === 'pt' ? 'UK flag' : 'Portugal flag'}
               className="h-8 w-8 cursor-pointer rounded-md transition hover:scale-115"
               onClick={toggleLocale}
             />
             <FontAwesomeIcon
               onClick={toggleTheme}
               icon={theme === 'dark' ? faSun : faMoon}
-              className="top-10 right-50 cursor-pointer text-2xl transition hover:scale-120"
+              className="cursor-pointer text-2xl transition hover:scale-120"
             />
           </FlexRow>
         </FlexRow>
 
-        {/* Home */}
+        {/* ── Hero ── */}
         <div
           id="home"
-          className="top-40 left-0 z-0 flex h-[85vh] w-full flex-col items-center justify-center bg-transparent px-100"
-          //style={{ transform: `scale(${heroScale})`, transformOrigin: 'top' }}
+          className="z-0 flex min-h-[85vh] w-full flex-col items-center justify-center bg-transparent px-6 sm:px-10 md:px-20 xl:px-30"
         >
-          <FlexRow className="gap-x-4 pb-10">
-            {/* Character wrapper — slides in from the left, then swaps to idle */}
+          {/* Character + text — stack on mobile, row on md+ */}
+          <FlexRow className="w-full max-w-4xl flex-wrap items-center justify-center gap-6 pb-10 md:flex-nowrap md:justify-start">
+            {/* Character sprite */}
             <div
-              className="character-run"
-              style={{ position: 'relative', width: 128, height: 148, flexShrink: 0 }}
+              className="character-run shrink-0"
+              style={{ position: 'relative', width: 128, height: 148 }}
             >
               <Image
                 src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDQmOmyEYpNsKptcm4WTiRGVl7DfL6AqSgr9XY"
@@ -254,15 +242,9 @@ const Index = () => {
                 width={128}
                 height={148}
                 priority
-                style={{
-                  position: 'absolute',
-                  top: 20,
-                  left: 0,
-                }}
+                style={{ position: 'absolute', top: 20, left: 0 }}
                 unoptimized
               />
-
-              {/* Running sprite — visible while animating in */}
               <Image
                 src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDHONKPLtDCunkeJMUlW08VPREZGx6ch1qiaLN"
                 alt="character running"
@@ -277,7 +259,6 @@ const Index = () => {
                 }}
                 unoptimized
               />
-              {/* Idle sprite — fades in once the character arrives */}
               <Image
                 src="https://2wcolulh7c.ufs.sh/f/lQW7uGAXRWdDlW2ExSAXRWdDiz15U6jTKhoQt87aA3OMuIHL"
                 alt="character idle"
@@ -294,27 +275,31 @@ const Index = () => {
               />
             </div>
 
-            <FlexCol className="h-full items-start justify-between text-2xl font-semibold whitespace-nowrap">
+            {/* Hero text — centered on mobile, left-aligned on md+ */}
+            <FlexCol className="items-center gap-y-2 text-center md:items-start md:text-left">
               <SlideUp delay={0}>
-                <p className="mb-2">
+                <p className="text-lg font-semibold sm:text-xl md:text-2xl">
                   {t('heroTitle1')}{' '}
                   <span className="text-gradient font-bold">Rafael Cavalinhos</span>
                   {t('heroTitle2')}
                 </p>
               </SlideUp>
               <SlideUp delay={0.1}>
-                <p className="text-5xl font-semibold">{t('heroTitle3')}</p>
+                <p className="text-3xl font-semibold sm:text-4xl md:text-5xl lg:whitespace-nowrap">
+                  {t('heroTitle3')}
+                </p>
               </SlideUp>
               <SlideUp delay={0.2}>
-                <p className="text-5xl font-semibold">{t('heroTitle4')}</p>
+                <p className="text-3xl font-semibold sm:text-4xl md:text-5xl">{t('heroTitle4')}</p>
               </SlideUp>
-              <SlideUp className="" delay={0.3}>
-                <p className="mt-4">{t('heroTitle5')}</p>
+              <SlideUp delay={0.3}>
+                <p className="mt-2 text-base sm:text-lg md:text-xl">{t('heroTitle5')}</p>
               </SlideUp>
             </FlexCol>
           </FlexRow>
 
-          <FlexRow className="gap-x-8">
+          {/* Social buttons */}
+          <FlexRow className="gap-x-6 sm:gap-x-8">
             {[
               {
                 hover: 'Github',
@@ -338,10 +323,9 @@ const Index = () => {
                 onClick: () => window.open('/cv.pdf', '_blank'),
               },
             ].map((b, i) => (
-              <SlideUp delay={(i + 1) * 0.1 + 0.3}>
+              <SlideUp key={`social-${i}`} delay={(i + 1) * 0.1 + 0.3}>
                 <FlexCol
-                  key={`social-button-${i}`}
-                  className="group bg-accent border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl text-white transition hover:scale-115"
+                  className="group bg-accent border-border relative h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl text-white transition hover:scale-115"
                   onClick={b.onClick}
                 >
                   <FontAwesomeIcon
@@ -360,46 +344,112 @@ const Index = () => {
           </FlexRow>
         </div>
 
-        {/* Projects */}
+        {/* ── Projects ── */}
         <section
           id="projects"
           className="slide-up-in border-primary bg-surface relative z-10 flex w-full justify-center border-y-2 py-10 pb-20 text-2xl"
         >
-          <FlexCol className="w-full items-center px-10 md:px-20 xl:px-30">
+          <FlexCol className="w-full items-center px-6 sm:px-10 md:px-20 xl:px-30">
             <h2 className="mb-10 text-4xl font-semibold">{t('projects')}</h2>
 
             <FlexCol className="w-full">
               {/* Solo */}
               <SlideUp>
                 <FlexRow className="text-accent/50 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
-                  <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faUser} />
                   <div className="whitespace-nowrap">{t('soloProjects')}</div>
-                  <div className="h-min w-full border-b"></div>
+                  <div className="h-min w-full border-b" />
                 </FlexRow>
-                <FlexRow className="border-rim bg-background mt-4 mb-10 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
-                  <FlexCol className="flex-1 justify-center">
-                    <h3 className="text-3xl font-bold">Axon</h3>
-                    <p className="text-accent text-lg">{t('axonSubtitle')}</p>
+
+                {/* Axon card — stacks on mobile, row on lg+ */}
+                <div className="border-rim bg-background mt-4 mb-10 w-full overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+                  <div className="flex flex-col gap-6 lg:flex-row lg:items-stretch">
+                    <FlexCol className="flex-1 justify-center">
+                      <h3 className="text-3xl font-bold">Axon</h3>
+                      <p className="text-accent text-lg">{t('axonSubtitle')}</p>
+                      <p className="text-muted mt-6 text-base leading-relaxed">
+                        {t('axonDescription')}
+                      </p>
+                      <FlexRow className="mt-4 w-full flex-wrap gap-2">
+                        {renderSkillIcons([
+                          { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
+                          { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
+                          { width: 25, height: 25, name: 'tailwind.svg', hover: 'Tailwind' },
+                          { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
+                          { width: 25, height: 25, name: 'postgresql.webp', hover: 'PostgreSQL' },
+                          { width: 25, height: 25, name: 'fastify.webp', hover: 'Fastify' },
+                          { width: 25, height: 25, name: 'docker.svg', hover: 'Docker' },
+                          { width: 25, height: 25, name: 'cloudflare.svg', hover: 'Cloudflare' },
+                          { width: 25, height: 25, name: 'vercel.svg', hover: 'Vercel' },
+                          { width: 25, height: 25, name: 'railway.svg', hover: 'Railway' },
+                          { width: 25, height: 25, name: 'github.svg', hover: 'Github' },
+                        ])}
+                      </FlexRow>
+                      <a
+                        href="https://getaxon.pt"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
+                      >
+                        <FlexRow className="items-center gap-1 transition group-hover:scale-115">
+                          {t('visit')}{' '}
+                          <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" />
+                        </FlexRow>
+                      </a>
+                    </FlexCol>
+
+                    <div className="relative min-h-[220px] flex-1 sm:min-h-[280px] lg:min-h-[300px]">
+                      <Image
+                        alt="axon"
+                        src="/projects/saas1.png"
+                        fill
+                        className="rounded-lg object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </SlideUp>
+
+              {/* Professional */}
+              <SlideUp>
+                <FlexRow className="text-accent/50 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
+                  <FontAwesomeIcon icon={faUsers} />
+                  <div className="whitespace-nowrap">{t('professionalProjects')}</div>
+                  <div className="h-min w-full border-b" />
+                </FlexRow>
+
+                {/* Stacks on mobile, row on lg+ */}
+                <div className="mt-4 flex flex-col gap-4 lg:flex-row">
+                  {/* Território Participado */}
+                  <FlexCol className="border-rim bg-background w-full overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+                    <div className="relative mb-4 min-h-[200px] w-full sm:min-h-[260px] lg:min-h-[300px]">
+                      <Image
+                        alt="território participado"
+                        src="/projects/tp.png"
+                        fill
+                        className="rounded-lg object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </div>
+                    <h3 className="text-2xl font-bold">Território Participado</h3>
+                    <p className="text-accent text-lg">{t('tpSubtitle')}</p>
                     <p className="text-muted mt-6 text-base leading-relaxed">
-                      {t('axonDescription')}
+                      {t('tpDescription')}
                     </p>
-                    <FlexRow className="mt-4 w-full gap-x-2">
+                    <FlexRow className="mt-4 flex-wrap gap-2">
                       {renderSkillIcons([
+                        { width: 25, height: 25, name: 'figma.svg', hover: 'Figma' },
                         { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
                         { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
-                        { width: 25, height: 25, name: 'tailwind.svg', hover: 'Tailwind' },
                         { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
                         { width: 25, height: 25, name: 'postgresql.webp', hover: 'PostgreSQL' },
                         { width: 25, height: 25, name: 'fastify.webp', hover: 'Fastify' },
-                        { width: 25, height: 25, name: 'docker.svg', hover: 'Docker' },
-                        { width: 25, height: 25, name: 'cloudflare.svg', hover: 'Cloudflare' },
-                        { width: 25, height: 25, name: 'vercel.svg', hover: 'Vercel' },
-                        { width: 25, height: 25, name: 'railway.svg', hover: 'Railway' },
                         { width: 25, height: 25, name: 'github.svg', hover: 'Github' },
                       ])}
                     </FlexRow>
                     <a
-                      href="https://getaxon.pt"
+                      href="https://territorioparticipado.pt"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
@@ -411,118 +461,56 @@ const Index = () => {
                     </a>
                   </FlexCol>
 
-                  <FlexCol className="relative min-h-[300px] flex-1">
-                    <Image
-                      alt="axon"
-                      src="/projects/saas1.png"
-                      fill
-                      className="rounded-lg object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </FlexCol>
-                </FlexRow>
-              </SlideUp>
-
-              {/* Professional */}
-              <SlideUp>
-                <FlexRow className="text-accent/50 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
-                  <FontAwesomeIcon icon={faUsers}></FontAwesomeIcon>
-                  <div className="whitespace-nowrap">{t('professionalProjects')}</div>
-                  <div className="h-min w-full border-b"></div>
-                </FlexRow>
-                <FlexRow className="w-full gap-x-4">
-                  {/* Território Participado */}
-                  <FlexCol className="border-rim bg-background mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
-                    <FlexCol className="flex-1 justify-center">
-                      <FlexCol className="relative mb-4 min-h-[300px] flex-1">
-                        <Image
-                          alt="axon"
-                          src="/projects/tp.png"
-                          fill
-                          className="rounded-lg object-cover"
-                          sizes="(max-width: 500px) 100vw, 50vw"
-                        />
-                      </FlexCol>
-                      <h3 className="text-2xl font-bold">Território Participado</h3>
-                      <p className="text-accent text-lg">{t('tpSubtitle')}</p>
-                      <p className="text-muted mt-6 text-base leading-relaxed">
-                        {t('tpDescription')}
-                      </p>
-                      <FlexRow className="mt-4 gap-x-2">
-                        {renderSkillIcons([
-                          { width: 25, height: 25, name: 'figma.svg', hover: 'Figma' },
-                          { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
-                          { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
-                          { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
-                          { width: 25, height: 25, name: 'postgresql.webp', hover: 'PostgreSQL' },
-                          { width: 25, height: 25, name: 'fastify.webp', hover: 'Fastify' },
-                          { width: 25, height: 25, name: 'github.svg', hover: 'Github' },
-                        ])}
-                      </FlexRow>
-                      <a
-                        href="https://territorioparticipado.pt"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
-                      >
-                        <FlexRow className="items-center gap-1 transition group-hover:scale-115">
-                          {t('visit')}{' '}
-                          <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" />
-                        </FlexRow>
-                      </a>
-                    </FlexCol>
-                  </FlexCol>
                   {/* Estágio Bee Engineering */}
-                  <FlexCol className="bg-background border-rim mt-4 w-full items-stretch gap-x-6 overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
-                    <FlexCol className="flex-1 justify-center">
-                      <FlexCol className="relative mb-4 flex-1">
-                        <MediaCarousel
-                          images={[
-                            '/projects/beach-rolling.mp4',
-                            '/projects/spooky-hunt.mp4',
-                            '/projects/brawl-fighters.mp4',
-                            '/projects/wave-racer.mp4',
-                            '/projects/feng-shui.mp4',
-                            '/projects/flames-out.mp4',
-                          ]}
-                          videos={true}
-                        ></MediaCarousel>
-                      </FlexCol>
-                      <h3 className="text-2xl font-bold">{t('internshipTitle')}</h3>
-                      <p className="text-accent text-lg">{t('internshipSubtitle')}</p>
-                      <p className="text-muted mt-6 text-base leading-relaxed">
-                        {t('internshipDescription')}
-                      </p>
-                      <FlexRow className="mt-4 gap-x-2">
-                        {renderSkillIcons([
-                          { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
-                          { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
-                        ])}
+                  <FlexCol className="bg-background border-rim w-full overflow-hidden rounded-xl border p-6 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+                    <div className="mb-4">
+                      <MediaCarousel
+                        images={[
+                          '/projects/beach-rolling.mp4',
+                          '/projects/spooky-hunt.mp4',
+                          '/projects/brawl-fighters.mp4',
+                          '/projects/wave-racer.mp4',
+                          '/projects/feng-shui.mp4',
+                          '/projects/flames-out.mp4',
+                        ]}
+                        videos={true}
+                      />
+                    </div>
+                    <h3 className="text-2xl font-bold">{t('internshipTitle')}</h3>
+                    <p className="text-accent text-lg">{t('internshipSubtitle')}</p>
+                    <p className="text-muted mt-6 text-base leading-relaxed">
+                      {t('internshipDescription')}
+                    </p>
+                    <FlexRow className="mt-4 flex-wrap gap-2">
+                      {renderSkillIcons([
+                        { width: 25, height: 25, name: 'unity.webp', hover: 'Unity' },
+                        { width: 25, height: 25, name: 'csharp.svg', hover: 'C#' },
+                      ])}
+                    </FlexRow>
+                    <a
+                      href="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
+                    >
+                      <FlexRow className="items-center transition group-hover:scale-115">
+                        <FontAwesomeIcon icon={faItchIo} className="text-xs" />
+                        &nbsp;{`${t('seeOn')} itch.io`}
                       </FlexRow>
-                      <a
-                        href="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border-border group bg-accent mt-4 w-min rounded-lg border-2 px-2 text-base font-semibold whitespace-nowrap text-white transition hover:scale-110 focus:outline-none"
-                      >
-                        <FlexRow className="items-center transition group-hover:scale-115">
-                          <FontAwesomeIcon icon={faItchIo} className="text-xs" />
-                          &nbsp;{`${t('seeOn')} itch.io`}
-                        </FlexRow>
-                      </a>
-                    </FlexCol>
+                    </a>
                   </FlexCol>
-                </FlexRow>
+                </div>
               </SlideUp>
 
               {/* Games */}
               <SlideUp>
                 <FlexRow className="text-accent/50 mt-10 w-full items-center gap-x-2 text-sm tracking-wider uppercase">
-                  <FontAwesomeIcon icon={faGamepad}></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faGamepad} />
                   <div className="whitespace-nowrap">{t('games')}</div>
-                  <div className="h-min w-full border-b"></div>
+                  <div className="h-min w-full border-b" />
                 </FlexRow>
-                <div className="mt-4 grid grid-cols-4 gap-4">
+                {/* 1 col → 2 col → 4 col */}
+                <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                   {GAMES.map((g, i) => (
                     <GameCard key={g.title} seeOn={t('seeOn')} project={g} delay={0.05 * (i + 1)} />
                   ))}
@@ -532,22 +520,23 @@ const Index = () => {
           </FlexCol>
         </section>
 
-        {/* Skills */}
+        {/* ── Skills ── */}
         <section
           id="skills"
-          className="relative mb-20 flex flex-col items-center px-10 py-10 text-2xl md:px-20 xl:px-30"
+          className="relative mb-20 flex flex-col items-center px-6 py-10 text-2xl sm:px-10 md:px-20 xl:px-30"
         >
           <h2 className="mb-10 text-4xl font-semibold">{t('skills')}</h2>
-          <FlexCol className="w-full">
+          <FlexCol className="w-full gap-y-4">
             <SlideUp delay={0.1}>
-              <FlexRow className="mb-4 gap-x-4">
+              {/* Frontend + Backend — stack on mobile, row on md+ */}
+              <div className="flex flex-col gap-4 md:flex-row">
                 {/* Frontend */}
-                <FlexCol className="border-border bg-background/70 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+                <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                   <FlexCol>
                     <h3 className="mb-2 text-xl font-semibold">{t('frontend')}</h3>
                     <p className="text-muted text-base">{t('frontendDescription1')}</p>
                   </FlexCol>
-                  <FlexRow className="mt-2 gap-4">
+                  <FlexRow className="mt-2 flex-wrap gap-4">
                     {renderSkillIcons([
                       { name: 'nextjs.webp', hover: 'Next.js' },
                       { name: 'typescript.webp', hover: 'TypeScript' },
@@ -561,14 +550,15 @@ const Index = () => {
                     ])}
                   </FlexRow>
                 </FlexCol>
-                {/* Backend */}
-                <FlexCol className="border-border bg-background/70 dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]] translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)]">
+
+                {/* Backend — removed the broken translate-y-10 on mobile */}
+                <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] md:translate-y-10 dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                   <FlexCol>
                     <h3 className="mb-2 text-xl font-semibold">{t('backend')}</h3>
                     <p className="text-muted text-base">{t('backendDescription1')}</p>
                     <p className="text-muted text-base">{t('backendDescription2')}</p>
                   </FlexCol>
-                  <FlexRow className="mt-2 gap-4">
+                  <FlexRow className="mt-2 flex-wrap gap-4">
                     {renderSkillIcons([
                       { name: 'nodejs.webp', hover: 'NodeJS' },
                       { name: 'fastify.webp', hover: 'Fastify' },
@@ -577,17 +567,19 @@ const Index = () => {
                     ])}
                   </FlexRow>
                 </FlexCol>
-              </FlexRow>
+              </div>
             </SlideUp>
+
             <SlideUp delay={0.2}>
-              <FlexRow className="w-full gap-x-4">
+              {/* DevOps + Management — stack on mobile, row on md+ */}
+              <div className="flex flex-col gap-4 md:flex-row">
                 {/* DevOps */}
                 <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                   <FlexCol>
                     <h3 className="mb-2 text-xl font-semibold">{t('devOps')}</h3>
                     <p className="text-muted text-base">{t('devOpsDescription1')}</p>
                   </FlexCol>
-                  <FlexRow className="mt-2 gap-4">
+                  <FlexRow className="mt-2 flex-wrap gap-4">
                     {renderSkillIcons([
                       { name: 'vercel.svg', hover: 'Vercel' },
                       { name: 'railway.svg', hover: 'Railway' },
@@ -598,13 +590,14 @@ const Index = () => {
                     ])}
                   </FlexRow>
                 </FlexCol>
-                {/* Managment */}
-                <FlexCol className="border-border bg-background/70 flex-1 translate-y-10 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+
+                {/* Management — removed translate-y-10 on mobile */}
+                <FlexCol className="border-border bg-background/70 flex-1 justify-between gap-y-4 rounded-2xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] md:translate-y-10 dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
                   <FlexCol>
                     <h3 className="mb-2 text-xl font-semibold">{t('managment')}</h3>
                     <p className="text-muted text-base">{t('managmentDescription1')}</p>
                   </FlexCol>
-                  <FlexRow className="mt-2 gap-4">
+                  <FlexRow className="mt-2 flex-wrap gap-3">
                     {['Agile', 'Scrum', 'Jira'].map((name) => (
                       <span
                         key={name}
@@ -615,19 +608,20 @@ const Index = () => {
                     ))}
                   </FlexRow>
                 </FlexCol>
-              </FlexRow>
+              </div>
             </SlideUp>
           </FlexCol>
         </section>
 
-        {/* Experience & Education */}
+        {/* ── Experience & Education ── */}
         <section
           id="experience"
-          className="relative flex flex-col items-center px-10 py-10 pb-20 text-2xl md:px-20 xl:px-30"
+          className="relative flex flex-col items-center px-6 py-10 pb-20 text-2xl sm:px-10 md:px-20 xl:px-30"
         >
-          <FlexRow className="w-full items-start gap-x-4">
+          {/* Stack on mobile, side-by-side on lg+ */}
+          <div className="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-4">
             {/* Experience column */}
-            <FlexCol className="flex-1 translate-y-1/4 items-center gap-y-4">
+            <FlexCol className="flex-1 items-center gap-y-4 lg:translate-y-1/4">
               <h2 className="mb-6 text-4xl font-semibold">{t('experience')}</h2>
 
               <SlideUp delay={0.2}>
@@ -635,7 +629,7 @@ const Index = () => {
                   <FlexCol className="flex-1 gap-y-1">
                     <p className="text-primary text-xl font-bold">{t('exp1Title')}</p>
                     <p className="text-accent text-base font-semibold">{t('exp1Company')}</p>
-                    <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <FlexRow className="text-muted mt-1 mb-3 flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium">
                       <span>
                         <FontAwesomeIcon icon={faCalendar} className="mr-1" />
                         {t('exp1Date')}
@@ -655,7 +649,7 @@ const Index = () => {
                   <FlexCol className="flex-1 gap-y-1">
                     <p className="text-primary text-xl font-bold">{t('exp2Title')}</p>
                     <p className="text-accent text-base font-semibold">{t('exp2Company')}</p>
-                    <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <FlexRow className="text-muted mt-1 mb-3 flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium">
                       <span>
                         <FontAwesomeIcon icon={faCalendar} className="mr-1" />
                         {t('exp2Date')}
@@ -680,7 +674,7 @@ const Index = () => {
                   <FlexCol className="flex-1 gap-y-1">
                     <p className="text-primary text-xl font-bold">{t('edu3Title')}</p>
                     <p className="text-accent text-base font-semibold">{t('edu3School')}</p>
-                    <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <FlexRow className="text-muted mt-1 mb-3 flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium">
                       <span>
                         <FontAwesomeIcon icon={faCalendar} className="mr-1" />
                         {t('edu3Date')}
@@ -700,7 +694,7 @@ const Index = () => {
                   <FlexCol className="flex-1 gap-y-1">
                     <p className="text-primary text-xl font-bold">{t('edu2Title')}</p>
                     <p className="text-accent text-base font-semibold">{t('edu2School')}</p>
-                    <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <FlexRow className="text-muted mt-1 mb-3 flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium">
                       <span>
                         <FontAwesomeIcon icon={faCalendar} className="mr-1" />
                         {t('edu2Date')}
@@ -720,7 +714,7 @@ const Index = () => {
                   <FlexCol className="flex-1 gap-y-1">
                     <p className="text-primary text-xl font-bold">{t('edu1Title')}</p>
                     <p className="text-accent text-base font-semibold">{t('edu1School')}</p>
-                    <FlexRow className="text-muted mt-1 mb-3 items-center gap-x-4 text-sm font-medium">
+                    <FlexRow className="text-muted mt-1 mb-3 flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium">
                       <span>
                         <FontAwesomeIcon icon={faCalendar} className="mr-1" />
                         {t('edu1Date')}
@@ -735,9 +729,10 @@ const Index = () => {
                 </FlexRow>
               </SlideUp>
             </FlexCol>
-          </FlexRow>
+          </div>
         </section>
 
+        {/* ── Footer ── */}
         <section className="bg-background border-primary border-t-2">
           <FlexCol className="w-full items-center gap-y-6 p-10">
             <p className="text-xl font-semibold">
@@ -771,8 +766,8 @@ const Index = () => {
                 },
               ].map((b, i) => (
                 <FlexCol
-                  key={`social-button-${i}`}
-                  className="group bg-accent border-border h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl text-white transition hover:scale-115"
+                  key={`footer-social-${i}`}
+                  className="group bg-accent border-border relative h-10 w-10 cursor-pointer items-center justify-center rounded-full border-3 text-xl text-white transition hover:scale-115"
                   onClick={b.onClick}
                 >
                   <FontAwesomeIcon

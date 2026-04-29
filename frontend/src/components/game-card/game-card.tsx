@@ -80,7 +80,7 @@ export function GameCard({
   const t = useTranslations();
   return (
     <SlideUp delay={delay}>
-      <div className="border-rim bg-background text-primary flex h-full flex-col overflow-hidden rounded-xl border p-2 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
+      <div className="border-rim bg-background text-primary flex h-full flex-col overflow-hidden rounded-xl border p-4 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(255,255,255,0.05)]">
         <div className="shrink-0">
           <MediaCarousel images={project.images} />
         </div>
