@@ -42,11 +42,12 @@ function renderSkillIcons(icons: SkillIconProps[]) {
             style={{ width: size, height: size }}
           />
         ) : (
-          <div style={{ width: size, height: size }}>
+          <div style={{ width: size, height: size }} className="relative">
             <Image
               src={`/skills/${o.name}`}
               alt={displayName}
               fill
+              sizes={`${size}px`}
               style={{ objectFit: 'contain' }}
             />
           </div>

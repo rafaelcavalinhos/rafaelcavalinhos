@@ -37,14 +37,36 @@ const Index = () => {
 
   const [charState, setCharState] = useState<'running' | 'idle'>('running');
 
-  useEffect(() => {
-    const t = setTimeout(() => {
-      setCharState('idle');
-    }, 3000);
-    return () => clearTimeout(t);
-  }, []);
+  const hasPlayed = useRef(false);
 
-  const ticking = useRef(false);
+  useEffect(() => {
+    const start = () => {
+      if (hasPlayed.current) return;
+      if (document.visibilityState !== 'visible') return;
+
+      const timer = setTimeout(() => {
+        setCharState('idle');
+        hasPlayed.current = true;
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    };
+
+    // run immediately in case already visible
+    const cleanup = start();
+
+    // handle coming back to tab
+    const handleVisibility = () => {
+      start();
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+      cleanup?.();
+    };
+  }, []);
 
   const ICON_SIZE = 30;
 
@@ -72,11 +94,12 @@ const Index = () => {
               style={{ width: size, height: size }}
             />
           ) : (
-            <div style={{ width: size, height: size }}>
+            <div style={{ width: size, height: size }} className="relative">
               <Image
                 src={`/skills/${o.name}`}
                 alt={displayName}
                 fill
+                sizes={`${size}px`}
                 style={{ objectFit: 'contain' }}
               />
             </div>
