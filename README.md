@@ -4,7 +4,7 @@ I'm a developer focused on building clean and modern web experiences.
 
 ---
 
-## 🛠️ Technologies & Tools
+## 🛠️ Stack
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
@@ -18,13 +18,10 @@ I'm a developer focused on building clean and modern web experiences.
 
 ## 📊 GitHub Stats
 
-<p align="left">
-  <img height="160" src="https://github-readme-stats.vercel.app/api?username=rafaelcavalinhos&show_icons=true&theme=default&hide_border=true&count_private=true" />
-  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=rafaelcavalinhos&layout=compact&theme=default&hide_border=true" />
-</p>
+![GitHub Streak](https://streak-stats.demolab.com?user=rafaelcavalinhos&theme=dark&hide_border=false)
 
 ---
 
 ## 📬 Get in touch
 
-[![GitHub](https://img.shields.io/badge/GitHub-rafaelcavalinhos-181717?style=flat-square&logo=github)](https://github.com/rafaelcavalinhos)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-rafael--cavalinhos-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafael-cavalinhos-39937624a/)
