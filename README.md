@@ -16,12 +16,6 @@ I'm a developer focused on building clean and modern web experiences.
 
 ---
 
-## 📊 GitHub Stats
-
-![GitHub Streak](https://streak-stats.demolab.com?user=rafaelcavalinhos&theme=dark&hide_border=false)
-
----
-
 ## 📬 Get in touch
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-rafael--cavalinhos-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rafael-cavalinhos-39937624a/)
