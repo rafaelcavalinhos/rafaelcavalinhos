@@ -397,6 +397,7 @@ const Index = () => {
                       <FlexRow className="mt-4 w-full flex-wrap gap-2">
                         {renderSkillIcons([
                           { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
+                          { width: 25, height: 25, name: 'react.svg', hover: 'React' },
                           { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
                           { width: 25, height: 25, name: 'tailwind.svg', hover: 'Tailwind' },
                           { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
@@ -465,6 +466,7 @@ const Index = () => {
                       {renderSkillIcons([
                         { width: 25, height: 25, name: 'figma.svg', hover: 'Figma' },
                         { width: 25, height: 25, name: 'nextjs.webp', hover: 'Next.js' },
+                        { width: 25, height: 25, name: 'react.svg', hover: 'React' },
                         { width: 25, height: 25, name: 'typescript.webp', hover: 'TypeScript' },
                         { width: 25, height: 25, name: 'nodejs.webp', hover: 'NodeJS' },
                         { width: 25, height: 25, name: 'postgresql.webp', hover: 'PostgreSQL' },
@@ -562,6 +564,7 @@ const Index = () => {
                   <FlexRow className="mt-2 flex-wrap gap-4">
                     {renderSkillIcons([
                       { name: 'nextjs.webp', hover: 'Next.js' },
+                      { name: 'react.svg', hover: 'React' },
                       { name: 'typescript.webp', hover: 'TypeScript' },
                       { name: 'javascript.svg', hover: 'JavaScript' },
                       { name: 'csharp.svg', hover: 'C#' },
