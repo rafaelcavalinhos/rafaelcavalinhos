@@ -128,6 +128,7 @@
         font-size: 8.2pt;
         color: var(--ink-soft);
         line-height: 1.65;
+        text-align: justify;
       }
 
       /* ══ LAYOUT ══ */
@@ -284,14 +285,26 @@
       }
 
       .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+
         font-size: 6.2pt;
         font-weight: 500;
         letter-spacing: 0.5px;
+
         background: var(--accent-bg);
         color: var(--accent);
+
         border: 1px solid #e8c4bb;
-        padding: 1px 5px;
+        padding: 2px 6px;
         border-radius: 2px;
+      }
+
+      .tag img {
+        width: 10px;
+        height: 10px;
+        object-fit: contain;
       }
 
       /* ══ SIDEBAR ══ */
@@ -323,6 +336,16 @@
         color: var(--ink-soft);
         padding: 2px 6px;
         border-radius: 2px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .skill-tag img {
+        width: 12px;
+        height: 12px;
+        object-fit: contain;
+        flex-shrink: 0;
       }
 
       .divider {
@@ -356,6 +379,25 @@
         size: A4;
         margin: 0;
       }
+
+      .website-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+
+        color: var(--accent) !important;
+        background: var(--accent-bg);
+
+        border: 1px solid #dbeafe;
+        border-radius: 3px;
+
+        padding: 2px 6px;
+
+        font-weight: 500;
+        text-decoration: none;
+
+        transition: all 0.2s ease;
+      }
     </style>
   </head>
   <body>
@@ -383,8 +425,27 @@
           >
         </div>
         <div class="contact-row">
-          <span class="contact-dot"></span>
-          <a href="https://rafaelcavalinhos.com/" target="_blank">rafaelcavalinhos.com</a>
+          <a class="website-link" href="https://rafaelcavalinhos.com/" target="_blank">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="11"
+              height="11"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              ></path>
+            </svg>
+
+            rafaelcavalinhos.com
+          </a>
         </div>
         <!-- <div class="contact-row">
           <span class="contact-dot"></span>
@@ -395,11 +456,11 @@
 
     <!-- ══ SUMMARY ══ -->
     <div class="summary">
-      Programador full-stack que desenvolve aplicações web e jogos do início ao fim - desde o
-      esquema de base de dados até à interface final. Lancei uma plataforma SaaS a solo, participei
-      no desenvolvimento de uma plataforma cívica usada por organizações reais, e seis protótipos de
-      jogos móveis em contexto profissional. Sou capaz de assumir funcionalidades completas de forma
-      autónoma em qualquer camada da stack.
+      Programador full-stack capaz de desenvolver aplicações completas de forma autónoma em qualquer
+      camada da stack - desde o esquema de base de dados e lógica de backend até à interface final.
+      Lancei uma plataforma SaaS a solo, participei no desenvolvimento de uma plataforma cívica
+      usada por organizações reais e desenvolvi seis protótipos de jogos móveis em contexto
+      profissional. Experiência prática em frontend, backend, bases de dados, APIs e deployment.
     </div>
 
     <!-- ══ BODY GRID ══ -->
@@ -533,46 +594,125 @@
         <div class="skill-group">
           <div class="skill-group-title">Frontend</div>
           <div class="skill-list">
-            <span class="skill-tag">Next.js</span>
-            <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Tailwind</span>
-            <span class="skill-tag">HTML / CSS</span>
-            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">
+              <img src="/skills/nextjs.webp" alt="" />
+              Next.js
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/typescript.webp" alt="" />
+              TypeScript
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/javascript.svg" alt="" />
+              JavaScript
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/react.svg" alt="" />
+              React
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/tailwind.svg" alt="" />
+              Tailwind
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/html.webp" alt="" />
+              HTML / CSS
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/figma.svg" alt="" />
+              Figma
+            </span>
           </div>
         </div>
 
         <div class="skill-group">
           <div class="skill-group-title">Backend</div>
           <div class="skill-list">
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Fastify</span>
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">Puppeteer</span>
-            <span class="skill-tag">ASP .NET Core</span>
+            <span class="skill-tag">
+              <img src="/skills/nodejs.webp" alt="" />
+              Node.js
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/fastify.webp" alt="" />
+              Fastify
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/postgresql.webp" alt="" />
+              PostgreSQL
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/puppeteer.webp" alt="" />
+              Puppeteer
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/dotnet.svg" alt="" />
+              ASP .NET Core
+            </span>
           </div>
         </div>
 
         <div class="skill-group">
           <div class="skill-group-title">Cloud e DevOps</div>
           <div class="skill-list">
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">Vercel</span>
-            <span class="skill-tag">Railway</span>
-            <span class="skill-tag">Cloudflare</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">
+              <img src="/skills/docker.svg" alt="" />
+              Docker
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/vercel.svg" alt="" />
+              Vercel
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/railway.svg" alt="" />
+              Railway
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/cloudflare.svg" alt="" />
+              Cloudflare
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/git.svg" alt="" />
+              Git
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/github.svg" alt="" />
+              GitHub
+            </span>
           </div>
         </div>
 
         <div class="skill-group">
           <div class="skill-group-title">Desenvolvimento de Jogos</div>
           <div class="skill-list">
-            <span class="skill-tag">Unity</span>
-            <span class="skill-tag">C#</span>
-            <span class="skill-tag">Aseprite</span>
+            <span class="skill-tag">
+              <img src="/skills/unity.webp" alt="" />
+              Unity
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/csharp.svg" alt="" />
+              C#
+            </span>
+
+            <span class="skill-tag">
+              <img src="/skills/aseprite.svg" alt="" />
+              Aseprite
+            </span>
           </div>
         </div>
 
