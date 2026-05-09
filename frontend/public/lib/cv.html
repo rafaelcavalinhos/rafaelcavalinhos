@@ -1,14 +1,15 @@
 <!doctype html>
-<!-- saved from url=(0043)file:///C:/Users/rafae/Downloads/cv-pt.html -->
 <html lang="pt">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rafael Cavalinhos - CV</title>
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link href="./cv_files/css2" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --ink: #0f0e0d;
@@ -138,6 +139,11 @@
         gap: 0 18px;
       }
 
+      /* ══ EXPERIENCE FULL WIDTH ══ */
+      .experience-row {
+        margin-top: 0px;
+      }
+
       /* ══ SECTION ══ */
       .section {
         margin-bottom: 14px;
@@ -156,7 +162,7 @@
 
       /* ══ ENTRY ══ */
       .entry {
-        margin-bottom: 10px;
+        margin-bottom: 2px;
         position: relative;
         padding-left: 10px;
       }
@@ -220,7 +226,7 @@
       }
 
       .entry-bullets li {
-        font-size: 7.8pt;
+        font-size: 7pt;
         color: var(--ink-soft);
         line-height: 1.6;
         padding-left: 10px;
@@ -233,6 +239,13 @@
         left: 0;
         color: var(--accent);
         font-size: 7pt;
+      }
+
+      /* ══ EXPERIENCE GRID (2 cols for side-by-side entries) ══ */
+      .experience-entries {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 18px;
       }
 
       /* ══ PROJECT ══ */
@@ -272,7 +285,7 @@
       }
 
       .project-desc {
-        font-size: 7.6pt;
+        font-size: 7pt;
         color: var(--ink-soft);
         line-height: 1.6;
         margin-bottom: 5px;
@@ -342,8 +355,8 @@
       }
 
       .skill-tag img {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         object-fit: contain;
         flex-shrink: 0;
       }
@@ -373,6 +386,27 @@
         .entry {
           break-inside: avoid;
         }
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+
+        color: var(--accent);
+        background: var(--accent-bg);
+
+        border: 1px solid #dbeafe;
+        border-radius: 3px;
+
+        padding: 1px 5px;
+
+        font-size: 6.5pt;
+        font-weight: 500;
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+        line-height: 1.6;
       }
 
       @page {
@@ -443,24 +477,18 @@
                 d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
               ></path>
             </svg>
-
             rafaelcavalinhos.com
           </a>
         </div>
-        <!-- <div class="contact-row">
-          <span class="contact-dot"></span>
-          <span>Santiago do Cacém / Almada, Portugal</span>
-        </div> -->
       </div>
     </header>
 
     <!-- ══ SUMMARY ══ -->
     <div class="summary">
       Programador full-stack capaz de desenvolver aplicações completas de forma autónoma em qualquer
-      camada da stack - desde o esquema de base de dados e lógica de backend até à interface final.
-      Lancei uma plataforma SaaS a solo, participei no desenvolvimento de uma plataforma cívica
-      usada por organizações reais e desenvolvi seis protótipos de jogos móveis em contexto
-      profissional. Experiência prática em frontend, backend, bases de dados, APIs e deployment.
+      camada da stack. Lancei uma plataforma SaaS a solo, participei no desenvolvimento de uma
+      plataforma cívica usada por organizações reais e desenvolvi protótipos de videojogos móveis em
+      contexto profissional. Experiência prática em frontend, backend, bases de dados, e deployment.
     </div>
 
     <!-- ══ BODY GRID ══ -->
@@ -475,7 +503,26 @@
           <div class="project">
             <div class="project-header">
               <div class="project-title">Axon</div>
-              <a class="project-url" href="https://getaxon.pt/" target="_blank">getaxon.pt</a>
+              <a class="project-link" href="https://getaxon.pt/" target="_blank">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="9"
+                  height="9"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  ></path>
+                </svg>
+                getaxon.pt
+              </a>
             </div>
             <div class="project-subtitle">Plataforma ERP SaaS - Projeto Individual</div>
             <div class="project-desc">
@@ -484,16 +531,16 @@
               fluxos de trabalho. Em produção e ativa.
             </div>
             <div class="project-stack">
-              <span class="tag">Next.js</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Tailwind</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Fastify</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Docker</span>
-              <span class="tag">Cloudflare</span>
-              <span class="tag">Vercel</span>
-              <span class="tag">Railway</span>
+              <span class="tag"><img src="/skills/nextjs.webp" alt="" />Next.js</span>
+              <span class="tag"><img src="/skills/typescript.webp" alt="" />TypeScript</span>
+              <span class="tag"><img src="/skills/tailwind.svg" alt="" />Tailwind</span>
+              <span class="tag"><img src="/skills/nodejs.webp" alt="" />Node.js</span>
+              <span class="tag"><img src="/skills/fastify.webp" alt="" />Fastify</span>
+              <span class="tag"><img src="/skills/postgresql.webp" alt="" />PostgreSQL</span>
+              <span class="tag"><img src="/skills/docker.svg" alt="" />Docker</span>
+              <span class="tag"><img src="/skills/cloudflare.svg" alt="" />Cloudflare</span>
+              <span class="tag"><img src="/skills/vercel.svg" alt="" />Vercel</span>
+              <span class="tag"><img src="/skills/railway.svg" alt="" />Railway</span>
             </div>
           </div>
 
@@ -501,9 +548,26 @@
           <div class="project">
             <div class="project-header">
               <div class="project-title">Território Participado</div>
-              <a class="project-url" href="https://territorioparticipado.pt/" target="_blank"
-                >territorioparticipado.pt</a
-              >
+              <a class="project-link" href="https://territorioparticipado.pt/" target="_blank">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="9"
+                  height="9"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  ></path>
+                </svg>
+                territorioparticipado.pt
+              </a>
             </div>
             <div class="project-subtitle">Plataforma de Participação Cívica - Albatroz Digital</div>
             <div class="project-desc">
@@ -512,20 +576,19 @@
               lógica de base de dados até aos componentes reutilizáveis de frontend.
             </div>
             <div class="project-stack">
-              <span class="tag">Next.js</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Fastify</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Figma</span>
+              <span class="tag"><img src="/skills/nextjs.webp" alt="" />Next.js</span>
+              <span class="tag"><img src="/skills/typescript.webp" alt="" />TypeScript</span>
+              <span class="tag"><img src="/skills/nodejs.webp" alt="" />Node.js</span>
+              <span class="tag"><img src="/skills/fastify.webp" alt="" />Fastify</span>
+              <span class="tag"><img src="/skills/postgresql.webp" alt="" />PostgreSQL</span>
+              <span class="tag"><img src="/skills/figma.svg" alt="" />Figma</span>
             </div>
           </div>
 
+          <!-- WattSwap -->
           <div class="project">
             <div class="project-header">
               <div class="project-title">WattSwap</div>
-              <!-- se tiveres link mete aqui -->
-              <!-- <a class="project-url" href="https://..." target="_blank">link</a> -->
             </div>
             <div class="project-subtitle">Projeto Final de Licenciatura</div>
             <div class="project-desc">
@@ -534,8 +597,8 @@
               criação de contratos energéticos personalizados e análise detalhada de consumo.
             </div>
             <div class="project-stack">
-              <span class="tag">ASP.NET Core MVC</span>
-              <span class="tag">C#</span>
+              <span class="tag"><img src="/skills/dotnet.svg" alt="" />ASP.NET Core MVC</span>
+              <span class="tag"><img src="/skills/csharp.svg" alt="" />C#</span>
               <span class="tag">OAuth 2.0</span>
             </div>
           </div>
@@ -545,11 +608,29 @@
             <div class="project-header">
               <div class="project-title">Protótipos de Jogos Móveis</div>
               <a
-                class="project-url"
+                class="project-link"
                 href="https://rafael-cavalinhos.itch.io/estgio-bee-engeneering"
                 target="_blank"
-                >itch.io</a
               >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="9"
+                  height="9"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  ></path>
+                </svg>
+                itch.io
+              </a>
             </div>
             <div class="project-subtitle">6 Protótipos - Estágio na Bee Engineering</div>
             <div class="project-desc">
@@ -558,33 +639,9 @@
               de áudio e design de níveis.
             </div>
             <div class="project-stack">
-              <span class="tag">Unity</span>
-              <span class="tag">C#</span>
+              <span class="tag"><img src="/skills/unity.webp" alt="" />Unity</span>
+              <span class="tag"><img src="/skills/csharp.svg" alt="" />C#</span>
             </div>
-          </div>
-        </section>
-
-        <!-- EXPERIÊNCIA -->
-        <section class="section">
-          <div class="section-label">Experiência</div>
-
-          <div class="entry">
-            <div class="entry-header">
-              <div class="entry-title">Estágio - Bee Engineering</div>
-              <div class="entry-date">04/2022 – 08/2022</div>
-            </div>
-            <div class="entry-company">Bee Engineering</div>
-            <div class="entry-location">Remoto (Lisboa, Portugal)</div>
-            <ul class="entry-bullets">
-              <li>
-                Desenvolvi seis protótipos de jogos móveis em Unity - lógica de gameplay, fluxo de
-                UI e estrutura de níveis.
-              </li>
-              <li>
-                Integrei animações, áudio e feedback de gameplay em sprints de prototipagem rápida.
-              </li>
-              <li>Iterei rapidamente com base em sessões internas de playtesting.</li>
-            </ul>
           </div>
         </section>
       </main>
@@ -594,125 +651,45 @@
         <div class="skill-group">
           <div class="skill-group-title">Frontend</div>
           <div class="skill-list">
-            <span class="skill-tag">
-              <img src="/skills/nextjs.webp" alt="" />
-              Next.js
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/typescript.webp" alt="" />
-              TypeScript
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/javascript.svg" alt="" />
-              JavaScript
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/react.svg" alt="" />
-              React
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/tailwind.svg" alt="" />
-              Tailwind
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/html.webp" alt="" />
-              HTML / CSS
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/figma.svg" alt="" />
-              Figma
-            </span>
+            <span class="skill-tag"><img src="/skills/nextjs.webp" alt="" />Next.js</span>
+            <span class="skill-tag"><img src="/skills/typescript.webp" alt="" />TypeScript</span>
+            <span class="skill-tag"><img src="/skills/javascript.svg" alt="" />JavaScript</span>
+            <span class="skill-tag"><img src="/skills/react.svg" alt="" />React</span>
+            <span class="skill-tag"><img src="/skills/tailwind.svg" alt="" />Tailwind</span>
+            <span class="skill-tag"><img src="/skills/html.webp" alt="" />HTML / CSS</span>
+            <span class="skill-tag"><img src="/skills/figma.svg" alt="" />Figma</span>
           </div>
         </div>
 
         <div class="skill-group">
           <div class="skill-group-title">Backend</div>
           <div class="skill-list">
-            <span class="skill-tag">
-              <img src="/skills/nodejs.webp" alt="" />
-              Node.js
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/fastify.webp" alt="" />
-              Fastify
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/postgresql.webp" alt="" />
-              PostgreSQL
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/puppeteer.webp" alt="" />
-              Puppeteer
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/dotnet.svg" alt="" />
-              ASP .NET Core
-            </span>
+            <span class="skill-tag"><img src="/skills/nodejs.webp" alt="" />Node.js</span>
+            <span class="skill-tag"><img src="/skills/fastify.webp" alt="" />Fastify</span>
+            <span class="skill-tag"><img src="/skills/postgresql.webp" alt="" />PostgreSQL</span>
+            <span class="skill-tag"><img src="/skills/puppeteer.webp" alt="" />Puppeteer</span>
+            <span class="skill-tag"><img src="/skills/dotnet.svg" alt="" />ASP .NET Core</span>
           </div>
         </div>
 
         <div class="skill-group">
           <div class="skill-group-title">Cloud e DevOps</div>
           <div class="skill-list">
-            <span class="skill-tag">
-              <img src="/skills/docker.svg" alt="" />
-              Docker
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/vercel.svg" alt="" />
-              Vercel
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/railway.svg" alt="" />
-              Railway
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/cloudflare.svg" alt="" />
-              Cloudflare
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/git.svg" alt="" />
-              Git
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/github.svg" alt="" />
-              GitHub
-            </span>
+            <span class="skill-tag"><img src="/skills/docker.svg" alt="" />Docker</span>
+            <span class="skill-tag"><img src="/skills/vercel.svg" alt="" />Vercel</span>
+            <span class="skill-tag"><img src="/skills/railway.svg" alt="" />Railway</span>
+            <span class="skill-tag"><img src="/skills/cloudflare.svg" alt="" />Cloudflare</span>
+            <span class="skill-tag"><img src="/skills/git.svg" alt="" />Git</span>
+            <span class="skill-tag"><img src="/skills/github.svg" alt="" />GitHub</span>
           </div>
         </div>
 
         <div class="skill-group">
           <div class="skill-group-title">Desenvolvimento de Jogos</div>
           <div class="skill-list">
-            <span class="skill-tag">
-              <img src="/skills/unity.webp" alt="" />
-              Unity
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/csharp.svg" alt="" />
-              C#
-            </span>
-
-            <span class="skill-tag">
-              <img src="/skills/aseprite.svg" alt="" />
-              Aseprite
-            </span>
+            <span class="skill-tag"><img src="/skills/unity.webp" alt="" />Unity</span>
+            <span class="skill-tag"><img src="/skills/csharp.svg" alt="" />C#</span>
+            <span class="skill-tag"><img src="/skills/aseprite.svg" alt="" />Aseprite</span>
           </div>
         </div>
 
@@ -767,16 +744,21 @@
             empresarial.
           </div>
         </div>
+      </aside>
+    </div>
 
-        <div class="divider" style="margin-top: 33px"></div>
-
+    <!-- ══ EXPERIÊNCIA — full-width row ══ -->
+    <section class="section experience-row">
+      <div class="section-label">Experiência</div>
+      <div class="experience-entries">
         <div class="entry">
           <div class="entry-header">
             <div class="entry-title">Estágio - Albatroz Digital</div>
             <div class="entry-date">07/2025 – 09/2025</div>
           </div>
-          <div class="entry-company">Albatroz Digital</div>
-          <div class="entry-location">Almada, Portugal</div>
+          <div class="entry-company">
+            Albatroz Digital <span class="entry-location">- Almada, Portugal</span>
+          </div>
           <ul class="entry-bullets">
             <li>
               Concebi e implementei uma interface completa para criação e gestão de entidades de
@@ -792,7 +774,28 @@
             </li>
           </ul>
         </div>
-      </aside>
-    </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <div class="entry-title">Estágio - Bee Engineering</div>
+            <div class="entry-date">04/2022 – 08/2022</div>
+          </div>
+          <div class="entry-company">
+            Bee Engineering <span class="entry-location">- Remoto (Lisboa, Portugal)</span>
+          </div>
+          <div class="entry-location"></div>
+          <ul class="entry-bullets">
+            <li>
+              Desenvolvi seis protótipos de jogos móveis em Unity - lógica de gameplay, fluxo de UI
+              e estrutura de níveis.
+            </li>
+            <li>
+              Integrei animações, áudio e feedback de gameplay em sprints de prototipagem rápida.
+            </li>
+            <li>Iterei rapidamente com base em sessões internas de playtesting.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
